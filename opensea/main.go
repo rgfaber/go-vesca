@@ -14,7 +14,7 @@ func getAssets() GetAssetsRsp {
 	req, _ := http.NewRequest("GET", url, nil)
 
 	req.Header.Add("X-RapidAPI-Host", "opensea-data-query.p.rapidapi.com")
-	req.Header.Add("X-RapidAPI-Key", "a90252195amsh7385cc8c5a70e4fp1e5a18jsn4b80044d5e0c")
+	req.Header.Add("X-RapidAPI-Key", "<REDACTED>")
 
 	res, _ := http.DefaultClient.Do(req)
 
