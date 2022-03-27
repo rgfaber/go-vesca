@@ -16,22 +16,23 @@ type IHandler interface {
 type Actor struct {
 	State    *model.Root
 	Handlers []IHandler
-	Kill     *kill.Handler
+	Killer   *kill.Handler
 }
 
 func NewActor(sensorId string) *Actor {
 	return &Actor{
 		State:    model.NewRoot(sensorId),
 		Handlers: make([]IHandler, 10),
-		Kill:     kill.NewHandler(),
+		Killer:   kill.NewHandler(),
 	}
 }
 
 func (*Actor) Register(handler IHandler) {
 }
 
-func (a *Actor) Exec(cmd kill.Cmd) {
-
+func (a *Actor) Kill() {
+	cmd := kill.NewCnd()
+	a.Killer.Commands <- *cmd
 }
 
 func (*Actor) Apply(evt initialize.Evt) {
@@ -41,8 +42,10 @@ func (*Actor) Exec(cmd initialize.Cmd) {
 }
 
 func (a *Actor) Run() {
+	fmt.Println("Sensor with Id", a.State.Id.Id(), "is Up!")
+	a.Killer.Run()
 
-	for evt := range a.Kill.Events {
+	for evt := range a.Killer.Events {
 		go func(kill kill.Evt) {
 			fmt.Println("Received Kill event, terminating in 5 seconds")
 			time.Sleep(5 * time.Second)
