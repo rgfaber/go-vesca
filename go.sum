@@ -2,3 +2,5 @@ github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220327123044-4eaf3d2da068 h1:+CvGVnGqCJJhoMurMBNGFoqWByd7OhIRNr0Aq46wb4I=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220327123044-4eaf3d2da068/go.mod h1:SluRaWOQMYcf2jfiMvgDapafAVQxwJYuG8qAuQvS718=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220327163643-2aeb955b2113 h1:y8OqS8zhQ2Me2DXoKdqrS0XnzgNG1Osj+/Nw1Yu5o/s=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220327163643-2aeb955b2113/go.mod h1:SluRaWOQMYcf2jfiMvgDapafAVQxwJYuG8qAuQvS718=

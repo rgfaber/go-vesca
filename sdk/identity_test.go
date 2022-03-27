@@ -25,6 +25,22 @@ func TestThatDefaultIdStartsWithid(t *testing.T) {
 	}
 }
 
+func TestNewIdentityFrom(t *testing.T) {
+	seed := "73577357-7357-7357-7357-735773577357"
+	prefix := "test"
+	id := NewIdentityFrom(prefix, seed)
+	if id == nil {
+		t.Errorf("No Identity was created")
+	}
+	if id.Prefix != prefix {
+		t.Errorf("Identity has an incorrect Prefix. Expected [%+v] Got [%+v]", prefix, id.Prefix)
+	}
+	seed = strings.Replace(seed, "-", "", -1)
+	if id.Value != seed {
+		t.Errorf("Identity has an incorrect Value. Expected [%+v] Got [%+v]", seed, id.Value)
+	}
+}
+
 func TestIdentity_Id(t *testing.T) {
 	testPrefix := "my"
 	id := NewIdentity(testPrefix).Id()
