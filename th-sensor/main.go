@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/th-sensor/domain"
+	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"os"
 )
 
 func main() {
-	sensorId := os.Getenv(TH_SENSOR_ID)
+	sensorId := os.Getenv(model.TH_SENSOR_ID)
 	act := domain.NewActor(sensorId)
 	if act == nil {
 		err := fmt.Errorf("Could not create actor.")
