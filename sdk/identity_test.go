@@ -15,6 +15,16 @@ func TestNewIdentity(t *testing.T) {
 	}
 }
 
+func TestThatDefaultIdStartsWithid(t *testing.T) {
+	id := NewIdentity("")
+	if id == nil {
+		t.Errorf("id was not created")
+	}
+	if id.Prefix != "id" {
+		t.Errorf("Identity has wrong prefix. Expected 'id' got %+v", id.Prefix)
+	}
+}
+
 func TestIdentity_Id(t *testing.T) {
 	testPrefix := "my"
 	id := NewIdentity(testPrefix).Id()
