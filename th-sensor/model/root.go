@@ -1,7 +1,12 @@
 package model
 
-import "../sdk"
+import "github.com/rgfaber/go-vesca/sdk"
 
 type Root struct {
-	id sdk.Identity `json:"id" bson:"id"`
+	Id sdk.Identity `json:"id" bson:"id"`
+}
+
+func NewRoot() *Root {
+	id := sdk.NewIdentity("th_sensor")
+	return &Root{Id: *id}
 }

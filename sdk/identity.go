@@ -20,10 +20,10 @@ func NewIdentity(prefix string) *Identity {
 	if prefix == "" {
 		prefix = "id"
 	}
-	regex := regexp.MustCompile("^[a-z]+$")
+	regex := regexp.MustCompile("^[a-z_]+$")
 	match := regex.Match([]byte(prefix))
 	if !match {
-		err := fmt.Errorf("Prefix should only contain characters a-z (lowercase) ")
+		err := fmt.Errorf("Prefix should only contain characters a-z (lowercase) and underscores")
 		panic(err)
 	}
 	val, err := cleanUuid()
