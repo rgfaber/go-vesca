@@ -1,7 +1,11 @@
 package domain
 
-type Actor struct{}
+import "github.com/rgfaber/go-vesca/sdk"
 
-func NewActor() *Actor {
-	return &Actor{}
+type Actor struct {
+	Id *sdk.Identity
+}
+
+func NewActor(sensorId string) *Actor {
+	return &Actor{Id: sdk.NewIdentityFrom()}
 }
