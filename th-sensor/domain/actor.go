@@ -7,5 +7,6 @@ type Actor struct {
 }
 
 func NewActor(sensorId string) *Actor {
-	return &Actor{Id: sdk.NewIdentityFrom()}
+	id := sdk.NewIdentityFrom("th_sensor", sensorId)
+	return &Actor{Id: id}
 }
