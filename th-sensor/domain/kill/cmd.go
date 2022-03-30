@@ -1,7 +1,15 @@
 package kill
 
-type Cmd struct{}
+type Cmd struct {
+	SessionId string `json:"session_id"`
+}
 
-func NewCnd() *Cmd {
-	return &Cmd{}
+func NewCnd(sessionId string) *Cmd {
+	return &Cmd{
+		SessionId: sessionId,
+	}
+}
+
+func (c *Cmd) ToEvt() *Evt {
+	return &Evt{SessionId: c.SessionId}
 }

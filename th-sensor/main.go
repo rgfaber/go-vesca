@@ -2,23 +2,18 @@ package main
 
 import (
 	"fmt"
-	"github.com/rgfaber/go-vesca/th-sensor/domain"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
+	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"os"
 )
 
 func main() {
-	err := os.Setenv(model.TH_SENSOR_ID, "fc6e30ed-2194-42b8-9d80-1ac8718e9655")
-	if err != nil {
-		panic(err)
-	}
-	sensorId := os.Getenv(model.TH_SENSOR_ID)
-	act := domain.NewActor(sensorId)
-	if act == nil {
-		err := fmt.Errorf("Could not create actor.")
+	cfg := config.NewConfig()
+	supervisor := NewSupervisor(cfg, Features)
+	if supervisor == nil {
+		err := fmt.Errorf("Could not create Supervisor.")
 		fmt.Println("Error:", err)
 		os.Exit(-1)
 	}
-	act.Run()
+	supervisor.Supervise()
 	select {}
 }

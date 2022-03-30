@@ -9,4 +9,5 @@ const (
 	Initialized
 	Activated
 	Deactivated
+	Killed
 )

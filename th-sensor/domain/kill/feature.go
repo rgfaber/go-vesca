@@ -5,20 +5,20 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
-type Actor struct {
+type Feature struct {
 	State    *model.Root
 	Commands chan *Cmd
 	Events   chan *Evt
 }
 
-func NewActor(state *model.Root) *Actor {
-	return &Actor{
+func NewFeature(state *model.Root) *Feature {
+	return &Feature{
 		State:    state,
 		Commands: make(chan *Cmd, 100),
 		Events:   make(chan *Evt, 100)}
 }
 
-func (a *Actor) Exec(cmd *Cmd) {
+func (a *Feature) Exec(cmd *Cmd) {
 	if cmd == nil {
 		err := fmt.Errorf("Command cannot be nil!")
 		panic(err)
@@ -26,15 +26,13 @@ func (a *Actor) Exec(cmd *Cmd) {
 	a.Raise(cmd.ToEvt())
 }
 
-func (a *Actor) Raise(evt *Evt) {
+func (a *Feature) Raise(evt *Evt) {
 	a.Events <- evt
 }
 
-func (a *Actor) Handle(evt *Evt) {
+func (a *Feature) Handle(evt *Evt) {}
 
-}
-
-func (a *Actor) Listen() {
+func (a *Feature) Listen() {
 	for evt := range a.Events {
 		go func(e *Evt) {
 			a.Handle(e)
@@ -42,17 +40,17 @@ func (a *Actor) Listen() {
 	}
 }
 
-func (a *Actor) Respond() {
+func (a *Feature) Respond() {
 	for cmd := range a.Commands {
-		go func(c Cmd) {
+		go func(c *Cmd) {
 			a.Exec(c)
 		}(cmd)
 	}
 }
 
-func (a *Actor) Run() {
-	fmt.Println("kill.Actor is Up!")
+func (a *Feature) Run() {
+	fmt.Println("kill.Feature is Up!")
 	go a.Listen()
 	go a.Respond()
+	select {}
 }
-
