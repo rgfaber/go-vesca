@@ -6,16 +6,17 @@ import (
 )
 
 type Feature struct {
-	State    *model.Root
-	Commands chan *Cmd
-	Events   chan *Evt
+	State *model.Root
+	chCmd chan *Cmd
+	chEvt chan *Evt
 }
 
-func NewFeature(state *model.Root) *Feature {
+func NewFeature(state *model.Root, chCmd ChCmd, chEvt ChEvt) *Feature {
 	return &Feature{
-		State:    state,
-		Commands: make(chan *Cmd, 100),
-		Events:   make(chan *Evt, 100)}
+		State: state,
+		chCmd: chCmd,
+		chEvt: chEvt,
+	}
 }
 
 func (a *Feature) Exec(cmd *Cmd) {

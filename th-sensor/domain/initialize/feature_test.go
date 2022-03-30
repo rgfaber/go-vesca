@@ -14,8 +14,8 @@ func TestNewFeature(t *testing.T) {
 	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
 	assert.Nil(t, err)
 	cfg := config.NewConfig()
-	chIn := NewCommands(10)
-	chOut := NewEvents(10)
+	chIn := NewChCmd(10)
+	chOut := NewChEvt(10)
 
 	state := model.NewRoot(cfg)
 	assert.NotNil(t, state, "model.Root could not be created for", cfg.SensorId())

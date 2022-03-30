@@ -7,13 +7,13 @@ import (
 
 type Feature struct {
 	state    *model.Root
-	commands Commands
-	events   Events
+	commands ChCmd
+	events   ChEvt
 }
 
 func NewFeature(r *model.Root,
-	chC Commands,
-	chE Events,
+	chC ChCmd,
+	chE ChEvt,
 ) *Feature {
 	return &Feature{
 		commands: chC,

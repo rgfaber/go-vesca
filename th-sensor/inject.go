@@ -5,16 +5,15 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/kill"
+	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 var (
-	Cfg                = config.NewConfig()
-	Root               = model.NewRoot(Cfg)
-	InitializeCommands = initialize.NewCommands(10)
-	InitializeEvents   = initialize.NewEvents(10)
-	Features           = []domain.IFeature{
-		initialize.NewFeature(Root, InitializeCommands, InitializeEvents),
-		kill.NewFeature(Root),
+	Root     = model.NewRoot(config.Cfg)
+	Features = []domain.IFeature{
+		initialize.NewFeature(Root, initialize.ChCmds, initialize.ChEvts),
+		kill.NewFeature(Root, kill.ChCmds, kill.ChEvts),
+		measure.NewFeature(Root, measure.ChCmds, measure.ChEvts),
 	}
 )
