@@ -3,17 +3,19 @@ package kill
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
+	"log"
+	"os"
 )
 
 type Feature struct {
-	State *model.Root
+	state *model.Root
 	chCmd chan *Cmd
 	chEvt chan *Evt
 }
 
 func NewFeature(state *model.Root, chCmd ChCmd, chEvt ChEvt) *Feature {
 	return &Feature{
-		State: state,
+		state: state,
 		chCmd: chCmd,
 		chEvt: chEvt,
 	}
@@ -24,25 +26,33 @@ func (a *Feature) Exec(cmd *Cmd) {
 		err := fmt.Errorf("Command cannot be nil!")
 		panic(err)
 	}
-	a.Raise(cmd.ToEvt())
+	if a.state.Status.HasFlag(model.Created) {
+		a.Raise(cmd.ToEvt())
+	}
 }
 
 func (a *Feature) Raise(evt *Evt) {
-	a.Events <- evt
+	a.chEvt <- evt
 }
 
-func (a *Feature) Handle(evt *Evt) {}
+func (a *Feature) Apply(evt *Evt) {
+	if evt == nil {
+		log.Fatalf("Received NIL kill.Evt")
+	}
+	a.state.Status.Set(model.Killed)
+	os.Exit(0)
+}
 
 func (a *Feature) Listen() {
-	for evt := range a.Events {
+	for evt := range a.chEvt {
 		go func(e *Evt) {
-			a.Handle(e)
+			a.Apply(e)
 		}(evt)
 	}
 }
 
 func (a *Feature) Respond() {
-	for cmd := range a.Commands {
+	for cmd := range a.chCmd {
 		go func(c *Cmd) {
 			a.Exec(c)
 		}(cmd)

@@ -10,6 +10,7 @@ type Root struct {
 	Greenhouse  Greenhouse   `json:"greenhouse"`
 	Details     Details      `json:"details"`
 	Measurement Measurement  `json:"measurement"`
+	Status      SensorStatus `json:"status"`
 }
 
 func NewRoot(cfg *config.Config) *Root {
