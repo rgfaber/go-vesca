@@ -1,4 +1,4 @@
-package config
+package envars
 
 const (
 	GO_VESCA_NATS_URL        = "GO_VESCA_NATS_URL"

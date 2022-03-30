@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/nats-io/nats.go"
 	"github.com/rgfaber/go-vesca/sdk"
+	"github.com/rgfaber/go-vesca/th-sensor/envars"
 	"os"
 )
 
@@ -18,7 +19,7 @@ func NewConfig() *Config {
 }
 
 func (c *Config) NATSUrl() string {
-	url := os.Getenv(GO_VESCA_NATS_URL)
+	url := os.Getenv(envars.GO_VESCA_NATS_URL)
 	if url == "" {
 		return nats.DefaultURL
 	}
@@ -26,7 +27,7 @@ func (c *Config) NATSUrl() string {
 }
 
 func (c *Config) NATSSUser() string {
-	usr := os.Getenv(GO_VESCA_NATS_USER)
+	usr := os.Getenv(envars.GO_VESCA_NATS_USER)
 	if usr == "" {
 		return "a"
 	}
@@ -34,7 +35,7 @@ func (c *Config) NATSSUser() string {
 }
 
 func (c *Config) NATSPwd() string {
-	pwd := os.Getenv(GO_VESCA_NATS_PWD)
+	pwd := os.Getenv(envars.GO_VESCA_NATS_PWD)
 	if pwd == "" {
 		return "a"
 	}
@@ -42,7 +43,7 @@ func (c *Config) NATSPwd() string {
 }
 
 func (c *Config) SensorId() string {
-	id := os.Getenv(GO_VESCA_TH_SENSOR_ID)
+	id := os.Getenv(envars.GO_VESCA_TH_SENSOR_ID)
 	if id == "" {
 		return sdk.TEST_UUID
 	}
@@ -50,7 +51,7 @@ func (c *Config) SensorId() string {
 }
 
 func (c *Config) SensorName() string {
-	name := os.Getenv(GO_VESCA_TH_SENSOR_NAME)
+	name := os.Getenv(envars.GO_VESCA_TH_SENSOR_NAME)
 	if name == "" {
 		return "Sensor 0"
 	}
@@ -58,7 +59,7 @@ func (c *Config) SensorName() string {
 }
 
 func (c *Config) GreenhouseName() string {
-	name := os.Getenv(GO_VESCA_GREENHOUSE_NAME)
+	name := os.Getenv(envars.GO_VESCA_GREENHOUSE_NAME)
 	if name == "" {
 		return "Greenhouse 0 - Tomatoes"
 	}
@@ -66,7 +67,7 @@ func (c *Config) GreenhouseName() string {
 }
 
 func (c *Config) GreenhouseId() string {
-	id := os.Getenv(GO_VESCA_GREENHOUSE_ID)
+	id := os.Getenv(envars.GO_VESCA_GREENHOUSE_ID)
 	if id == "" {
 		return sdk.TEST_UUID
 	}
