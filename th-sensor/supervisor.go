@@ -8,8 +8,6 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
-type Mediator chan ITopic
-
 type ISupervisor interface {
 }
 

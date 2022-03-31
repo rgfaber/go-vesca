@@ -10,7 +10,8 @@ import (
 )
 
 var (
-	Root     = model.NewRoot(config.Cfg)
+	Root = model.NewRoot(config.Cfg)
+	//	Mediator = sdk.NewMediator
 	Features = []domain.IFeature{
 		initialize.NewFeature(Root, initialize.ChCmds, initialize.ChEvts),
 		kill.NewFeature(Root, kill.ChCmds, kill.ChEvts),
