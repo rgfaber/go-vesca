@@ -8,21 +8,27 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
+type Mediator chan ITopic
+
 type ISupervisor interface {
 }
 
 type Supervisor struct {
 	sensorId *sdk.Identity
 	state    *model.Root
+	mediator Mediator
 	features []domain.IFeature
 }
 
-func NewSupervisor(cfg *config.Config, features []domain.IFeature) *Supervisor {
+func NewSupervisor(cfg *config.Config,
+	mediator Mediator,
+	features []domain.IFeature) *Supervisor {
 	state := model.NewRoot(cfg)
 	return &Supervisor{
 		sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.SensorId()),
 		state:    state,
 		features: features,
+		mediator: mediator,
 	}
 }
 
