@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/sdk"
+	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
@@ -14,19 +15,19 @@ type ISupervisor interface {
 type Supervisor struct {
 	sensorId *sdk.Identity
 	state    *model.Root
-	mediator Mediator
+	bus      *dec.DECBus
 	features []domain.IFeature
 }
 
 func NewSupervisor(cfg *config.Config,
-	mediator Mediator,
+	bus *dec.DECBus,
 	features []domain.IFeature) *Supervisor {
 	state := model.NewRoot(cfg)
 	return &Supervisor{
 		sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.SensorId()),
 		state:    state,
 		features: features,
-		mediator: mediator,
+		bus:      bus,
 	}
 }
 
