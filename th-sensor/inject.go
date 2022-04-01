@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
@@ -11,10 +12,10 @@ import (
 
 var (
 	Root     = model.NewRoot(config.Cfg)
-	Mediator = sdk
+	Mediator = sdk.NewMediator(10)
 	Features = []domain.IFeature{
-		initialize.NewFeature(Root, initialize.ChCmds, initialize.ChEvts),
-		kill.NewFeature(Root, kill.ChCmds, kill.ChEvts),
-		measure.NewFeature(Root, measure.ChCmds, measure.ChEvts),
+		initialize.NewFeature(Root, Mediator),
+		kill.NewFeature(Root, Mediator),
+		measure.NewFeature(Root, Mediator),
 	}
 )

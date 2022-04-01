@@ -2,22 +2,20 @@ package initialize
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type Feature struct {
 	state    *model.Root
-	commands ChCmd
-	events   ChEvt
+	mediator sdk.Mediator
 }
 
 func NewFeature(r *model.Root,
-	chC ChCmd,
-	chE ChEvt,
+	mediator sdk.Mediator,
 ) *Feature {
 	return &Feature{
-		commands: chC,
-		events:   chE,
+		mediator: mediator,
 		state:    r,
 	}
 }
