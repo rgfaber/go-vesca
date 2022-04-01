@@ -7,5 +7,5 @@ import (
 
 func TestNewCmd(t *testing.T) {
 	c := NewCmd()
-	assert.NotNil(t, c, "Could not create initialize.Cmd")
+	assert.NotNil(t, c)
 }

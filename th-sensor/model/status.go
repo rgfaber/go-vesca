@@ -8,16 +8,17 @@ const (
 	Created     SensorStatus = 2
 	Initialized SensorStatus = 4
 	Killed      SensorStatus = 8
+	Measuring   SensorStatus = 16
 )
 
-func (this SensorStatus) HasFlag(flag SensorStatus) bool {
-	return this|flag == this
+func (s SensorStatus) HasFlag(flag SensorStatus) bool {
+	return s|flag == s
 }
 
-func (this SensorStatus) Unset(flag SensorStatus) SensorStatus {
-	return this &^ flag
+func (s SensorStatus) Unset(flag SensorStatus) SensorStatus {
+	return s &^ flag
 }
 
-func (this SensorStatus) Set(flag SensorStatus) SensorStatus {
-	return this | flag
+func (s SensorStatus) Set(flag SensorStatus) SensorStatus {
+	return s | flag
 }

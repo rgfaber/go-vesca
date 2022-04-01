@@ -1,9 +1,11 @@
 package kill
 
+const EVT_TOPIC = "th_sensor:killed"
+
 type Evt struct {
 	SessionId string
 }
 
-func NewEvt(sessionId string) *Evt {
-	return &Evt{SessionId: sessionId}
+func NewEvt() *Evt {
+	return &Evt{}
 }

@@ -1,7 +1,15 @@
 package measure
 
-type Evt struct{}
+import "github.com/rgfaber/go-vesca/th-sensor/model"
 
-func NewEvt() *Evt {
-	return &Evt{}
+const EVT_TOPIC = "th_sensor:measured"
+
+type Evt struct {
+	Measurement *model.Measurement
+}
+
+func NewEvt(m *model.Measurement) *Evt {
+	return &Evt{
+		Measurement: m,
+	}
 }

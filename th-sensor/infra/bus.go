@@ -18,7 +18,7 @@ type Bus struct {
 func NewBus(cfg *config2.Config) *Bus {
 	conn, err := nats.Connect(
 		cfg.NATSUrl(),
-		nats.UserInfo(cfg.NATSSUser(), cfg.NATSPwd()))
+		nats.UserInfo(cfg.NATSUser(), cfg.NATSPwd()))
 	if err != nil {
 		log.Fatal(err)
 	}

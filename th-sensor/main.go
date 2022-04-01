@@ -8,7 +8,7 @@ import (
 
 func main() {
 	cfg := config.NewConfig()
-	supervisor := NewSupervisor(cfg, Features)
+	supervisor := NewSupervisor(cfg, MemBus, Features)
 	if supervisor == nil {
 		err := fmt.Errorf("Could not create Supervisor.")
 		fmt.Println("Error:", err)

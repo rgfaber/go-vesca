@@ -26,7 +26,7 @@ func (c *Config) NATSUrl() string {
 	return url
 }
 
-func (c *Config) NATSSUser() string {
+func (c *Config) NATSUser() string {
 	usr := os.Getenv(envars.GO_VESCA_NATS_USER)
 	if usr == "" {
 		return "a"

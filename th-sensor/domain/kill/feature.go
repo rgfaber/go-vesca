@@ -2,6 +2,7 @@ package kill
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"log"
 	"os"
@@ -9,33 +10,32 @@ import (
 
 type Feature struct {
 	state *model.Root
-	chCmd chan *Cmd
-	chEvt chan *Evt
+	bus   dec.IDECBus
 }
 
-func NewFeature(state *model.Root, chCmd ChCmd, chEvt ChEvt) *Feature {
+func NewFeature(state *model.Root, bus dec.IDECBus) *Feature {
 	return &Feature{
 		state: state,
-		chCmd: chCmd,
-		chEvt: chEvt,
+		bus:   bus,
 	}
 }
 
-func (a *Feature) Exec(cmd *Cmd) {
+func (a *Feature) exec(cmd *Cmd) {
 	if cmd == nil {
 		err := fmt.Errorf("Command cannot be nil!")
 		panic(err)
 	}
 	if a.state.Status.HasFlag(model.Created) {
-		a.Raise(cmd.ToEvt())
+		a.raise(cmd.ToEvt())
 	}
 }
 
-func (a *Feature) Raise(evt *Evt) {
-	a.chEvt <- evt
+func (a *Feature) raise(evt *Evt) {
+	fmt.Printf("kill.Feature -> Raising [%+v] on [%+v]\n", evt, EVT_TOPIC)
+	a.bus.Publish(EVT_TOPIC, NewEvt())
 }
 
-func (a *Feature) Apply(evt *Evt) {
+func (a *Feature) apply(evt *Evt) {
 	if evt == nil {
 		log.Fatalf("Received NIL kill.Evt")
 	}
@@ -44,24 +44,30 @@ func (a *Feature) Apply(evt *Evt) {
 }
 
 func (a *Feature) Listen() {
-	for evt := range a.chEvt {
-		go func(e *Evt) {
-			a.Apply(e)
-		}(evt)
+	err := a.bus.Subscribe(EVT_TOPIC, func(evt *Evt) {
+		a.apply(evt)
+	})
+	if err != nil {
+		log.Fatal(err)
+		return
 	}
+	fmt.Printf("kill.Feature -> Listening for [%+v]\n", EVT_TOPIC)
 }
 
 func (a *Feature) Respond() {
-	for cmd := range a.chCmd {
-		go func(c *Cmd) {
-			a.Exec(c)
-		}(cmd)
+	err := a.bus.Subscribe(CMD_TOPIC, func(cmd *Cmd) {
+		a.exec(cmd)
+	})
+	if err != nil {
+		log.Fatal(err)
+		return
 	}
+	fmt.Printf("kill.Feature -> Responding to [%+v]\n", CMD_TOPIC)
 }
 
 func (a *Feature) Run() {
+	a.Listen()
+	a.Respond()
 	fmt.Println("kill.Feature is Up!")
-	go a.Listen()
-	go a.Respond()
 	select {}
 }

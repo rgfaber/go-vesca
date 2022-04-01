@@ -1,5 +1,7 @@
 package kill
 
+const CMD_TOPIC = "th_sensor:kill"
+
 type Cmd struct {
 	SessionId string `json:"session_id"`
 }

@@ -14,7 +14,7 @@ func TestNewSupervisor(t *testing.T) {
 	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
 	assert.Nil(t, err, "Error setting Environment Variable [%+v]", envars.GO_VESCA_TH_SENSOR_ID)
 	cfg := config.NewConfig()
-	supervisor := NewSupervisor(cfg, Features)
+	supervisor := NewSupervisor(cfg, MemBus, Features)
 	assert.NotNil(t, supervisor)
 	assert.NotNil(t, supervisor.state)
 	assert.NotNil(t, supervisor.state.ID)

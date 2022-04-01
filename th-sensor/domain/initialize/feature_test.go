@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"github.com/rgfaber/go-vesca/sdk"
+	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"github.com/rgfaber/go-vesca/th-sensor/envars"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
@@ -14,11 +15,8 @@ func TestNewFeature(t *testing.T) {
 	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
 	assert.Nil(t, err)
 	cfg := config.NewConfig()
-	chIn := NewChCmd(10)
-	chOut := NewChEvt(10)
-
 	state := model.NewRoot(cfg)
 	assert.NotNil(t, state, "model.Root could not be created for", cfg.SensorId())
-	f := NewFeature(state, chIn, chOut)
+	f := NewFeature(state, dec.NewDECBus())
 	assert.NotNil(t, f, "Feature domain.Kill could not be created.")
 }

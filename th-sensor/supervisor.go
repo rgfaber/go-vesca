@@ -15,12 +15,12 @@ type ISupervisor interface {
 type Supervisor struct {
 	sensorId *sdk.Identity
 	state    *model.Root
-	bus      *dec.DECBus
+	bus      dec.IDECBus
 	features []domain.IFeature
 }
 
 func NewSupervisor(cfg *config.Config,
-	bus *dec.DECBus,
+	bus dec.IDECBus,
 	features []domain.IFeature) *Supervisor {
 	state := model.NewRoot(cfg)
 	return &Supervisor{

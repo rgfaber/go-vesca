@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -16,6 +17,9 @@ func TestSensorStatus_Set(t *testing.T) {
 	assert.True(t, s.HasFlag(Created))
 	s = s.Set(Initialized)
 	assert.True(t, s.HasFlag(Initialized))
+	s = s.Set(Measuring)
+	assert.True(t, s.HasFlag(Measuring))
+	fmt.Println(s)
 }
 
 func TestSensorStatus_Unset(t *testing.T) {
