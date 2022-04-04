@@ -13,7 +13,7 @@ type IDECBus interface {
 	SubscribeOnce(topic string, fn interface{}) error
 	HasCallback(topic string) bool
 	Unsubscribe(topic string, fn interface{}) error
-	Publish(topic string, msg interface{})
+	Publish(topic string, msg ...interface{})
 	SubscribeAsync(topic string, fn interface{}, transactional bool) interface{}
 	SubscribeOnceAsync(topic string, fn interface{}) error
 	WaitAsync()
@@ -39,8 +39,8 @@ func (b DECBus) Unsubscribe(topic string, fn interface{}) error {
 	return b.bus.Unsubscribe(topic, fn)
 }
 
-func (b DECBus) Publish(topic string, msg interface{}) {
-	b.bus.Publish(topic, msg)
+func (b DECBus) Publish(topic string, msg ...interface{}) {
+	b.bus.Publish(topic, msg...)
 }
 
 func (b DECBus) SubscribeAsync(topic string, fn interface{}, transactional bool) interface{} {
