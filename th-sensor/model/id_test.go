@@ -7,12 +7,9 @@ import (
 	"testing"
 )
 
-func NewTHSensorTestID() *sdk.Identity {
-	return sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, sdk.TEST_UUID)
-}
-
 func TestNewTHSensorTestID(t *testing.T) {
 	id := NewTHSensorTestID()
 	assert.NotNil(t, id)
-
+	assert.Equal(t, id.Prefix, config.GO_VESCA_TH_SENSOR_PREFIX)
+	assert.Equal(t, id.Value, sdk.CLEAN_TEST_UUID)
 }

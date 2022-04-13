@@ -15,7 +15,7 @@ type Root struct {
 
 func NewRoot(cfg *config.Config) *Root {
 	return &Root{
-		ID:          *sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.SensorId()),
+		ID:          *NewTHSensorId(cfg),
 		Greenhouse:  *NewGreenhouse(cfg.GreenhouseId()),
 		Details:     *NewDetails(cfg.SensorName()),
 		Measurement: *NewMeasurement(15, 23),

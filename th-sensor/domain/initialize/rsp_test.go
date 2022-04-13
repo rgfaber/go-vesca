@@ -6,6 +6,7 @@ import (
 )
 
 func TestRsp(t *testing.T) {
+	id := NewTHSensorTestId
 	r := NewRsp("", "")
 	assert.NotNil(t, r)
 }

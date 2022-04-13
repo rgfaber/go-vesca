@@ -1,15 +1,16 @@
 package infra
 
 import (
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type Store struct {
-	Model model.Root
+	Model []model.Root
 }
 
-func (s *Store) Load() model.Root {
+func (s *Store) Load(id sdk.IIdentity) model.Root {
 	return s.Model
 }
 
