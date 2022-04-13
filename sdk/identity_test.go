@@ -22,16 +22,6 @@ func TestNewDefaultIdentity(t *testing.T) {
 	assert.Equal(t, "id", id.Prefix)
 }
 
-func TestThatDefaultIdStartsWithid(t *testing.T) {
-	id := NewIdentity("")
-	if id == nil {
-		t.Errorf("id was not created")
-	}
-	if id.Prefix != "id" {
-		t.Errorf("Identity has wrong prefix. Expected 'id' got %+v", id.Prefix)
-	}
-}
-
 func TestNewIdentityFrom(t *testing.T) {
 	id := NewIdentityFrom(TEST_PREFIX, TEST_UUID)
 	if id == nil {
