@@ -15,7 +15,7 @@ type Aggregate struct {
 	state model.Root
 }
 
-func (a *Aggregate) Execute(cmd Cmd) (domain.IRsp, error) {
+func (a *Aggregate) Execute(cmd domain.ICmd) (domain.IRsp, error) {
 	if &cmd == nil {
 		return nil, fmt.Errorf("initialize.Execute requires an initialize.Cmd")
 	}
@@ -32,12 +32,14 @@ func (a *Aggregate) Raise(evt *Evt) {
 	a.bus.Publish(EVT_TOPIC, *evt)
 }
 
-func (a *Aggregate) Apply(evt Evt) {
+func (a *Aggregate) Apply(evt domain.IEvt) {
+	e := evt.(Evt)
+	m := a.store.Load(e.aggregateId)
 	a.state.Status = model.Initialized
 	a.store.Save(a.state)
 }
 
-func NewAggregate(identity *sdk.Identity, store domain.IStore, bus dec.IDECBus) *Aggregate {
+func NewAggregate(store domain.IStore, bus dec.IDECBus) *Aggregate {
 	return &Aggregate{
 		ID:    identity,
 		bus:   bus,

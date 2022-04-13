@@ -1,4 +1,4 @@
-package domain
+package features
 
 type IFeature interface {
 	Run()
