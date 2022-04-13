@@ -12,7 +12,7 @@ type Identity struct {
 	Value  string `json:"value"`
 }
 
-func (i *Identity) Id() (string string) {
+func (i *Identity) Id() string {
 	return fmt.Sprintf("%+v-%+v", i.Prefix, i.Value)
 }
 

@@ -74,5 +74,4 @@ func TestNewUuid(t *testing.T) {
 	if len(uid) != 36 {
 		t.Errorf("%+v is not 36 characters long. Length is: %+v", uid, len(uid))
 	}
-
 }

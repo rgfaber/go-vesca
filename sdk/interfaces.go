@@ -1,7 +1,7 @@
 package sdk
 
 type IIdentity interface {
-	Id() (string string)
+	Id() string
 }
 
 type ITopic interface {

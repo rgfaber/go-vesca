@@ -1,11 +1,12 @@
 package domain
 
 import (
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type IStore interface {
-	Load(id IIdentity) model.Root
+	Load(id sdk.IIdentity) model.Root
 	Save(model model.Root)
 }
 

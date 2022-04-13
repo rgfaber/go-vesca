@@ -2,14 +2,12 @@ package initialize
 
 import (
 	"fmt"
-	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type Aggregate struct {
-	ID    sdk.IIdentity
 	store domain.IStore
 	bus   dec.IDECBus
 	state model.Root
@@ -19,11 +17,12 @@ func (a *Aggregate) Execute(cmd domain.ICmd) (domain.IRsp, error) {
 	if &cmd == nil {
 		return nil, fmt.Errorf("initialize.Execute requires an initialize.Cmd")
 	}
-	a.state = a.store.Load()
+	c := cmd.(Cmd)
+	a.state = a.store.Load(c.aggregateId)
 	if !a.state.Status.HasFlag(model.Initialized) {
-		evt := NewEvt(cmd.traceId, cmd.measurement)
+		evt := NewEvt(c.aggregateId, c.traceId, c.measurement)
 		a.Raise(evt)
-		return NewRsp(a.state.ID.Id(), cmd.traceId), nil
+		return NewRsp(a.state.ID, cmd.traceId), nil
 	}
 	return nil, fmt.Errorf("Aggregate [%+v] has already been initialized", a.state.ID.Id())
 }
@@ -41,7 +40,6 @@ func (a *Aggregate) Apply(evt domain.IEvt) {
 
 func NewAggregate(store domain.IStore, bus dec.IDECBus) *Aggregate {
 	return &Aggregate{
-		ID:    identity,
 		bus:   bus,
 		store: store,
 	}
