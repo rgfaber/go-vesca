@@ -9,7 +9,7 @@ import (
 )
 
 type Aggregate struct {
-	ID    sdk.Identity
+	ID    sdk.IIdentity
 	store domain.IStore
 	bus   dec.IDECBus
 	state model.Root
