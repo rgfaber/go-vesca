@@ -6,6 +6,7 @@ import (
 )
 
 func TestNewCmd(t *testing.T) {
+
 	c := NewCmd(10.0, 10.0)
 	assert.NotNil(t, c)
 	assert.Equal(t, 10.0, c.measurement.Temperature)

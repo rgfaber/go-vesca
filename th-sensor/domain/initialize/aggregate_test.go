@@ -1,14 +1,19 @@
 package initialize
 
 import (
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
+	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"github.com/rgfaber/go-vesca/th-sensor/infra"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewAggregate(t *testing.T) {
-	a := NewAggregate()
+	bus := dec.NewDECBus()
+	store := infra.NewStore()
+	id := sdk.NewIdentity(config.GO_VESCA_TH_SENSOR_PREFIX)
+	a := NewAggregate(id, store, bus)
 	assert.NotNil(t, a)
 	assert.Nil(t, a.state)
 }
@@ -16,7 +21,8 @@ func TestNewAggregate(t *testing.T) {
 func TestAggregate_Execute(t *testing.T) {
 	bus := dec.NewDECBus()
 	store := infra.NewStore()
-	a := NewAggregate(store, bus)
-	cmd := NewCmd(16.0, 50.0)
+	id := sdk.NewIdentity(config.GO_VESCA_TH_SENSOR_PREFIX)
+	a := NewAggregate(id, store, bus)
+	cmd := NewCmd()
 	rsp, e := a.Execute(cmd)
 }

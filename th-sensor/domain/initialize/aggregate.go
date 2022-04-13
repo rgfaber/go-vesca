@@ -37,10 +37,7 @@ func (a *Aggregate) Apply(evt Evt) {
 	a.store.Save(a.state)
 }
 
-func NewAggregate(
-	identity sdk.Identity,
-	store domain.IStore,
-	bus dec.IDECBus) *Aggregate {
+func NewAggregate(identity *sdk.Identity, store domain.IStore, bus dec.IDECBus) *Aggregate {
 	return &Aggregate{
 		ID:    identity,
 		bus:   bus,
