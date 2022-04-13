@@ -14,6 +14,6 @@ func main() {
 		fmt.Println("Error:", err)
 		os.Exit(-1)
 	}
-	supervisor.Supervise()
+	go supervisor.Supervise()
 	select {}
 }

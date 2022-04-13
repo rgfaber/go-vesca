@@ -5,7 +5,6 @@ import (
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"log"
-	"time"
 )
 
 type Feature struct {
@@ -25,9 +24,9 @@ func (f *Feature) Listen() {
 }
 
 func (f *Feature) Respond() {
-	err := f.bus.Subscribe(CMD_TOPIC, func(cmd *Cmd) {
-		fmt.Printf("Received \n [%+v] \n on [%+v]\n", cmd.Measurement, CMD_TOPIC)
-		f.exec(cmd)
+	err := f.bus.Subscribe(CMD_TOPIC, func(cmd Cmd) {
+		fmt.Printf("Received measure.Cmd on [%+v]", CMD_TOPIC)
+		f.exec()
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -47,8 +46,6 @@ func (f *Feature) Run() {
 	go f.Listen()
 	go f.Respond()
 	fmt.Println("measure.Feature is Up!")
-	go f.measure()
-	//	select {}
 }
 
 func (f *Feature) apply(evt *Evt) {
@@ -58,23 +55,12 @@ func (f *Feature) apply(evt *Evt) {
 	fmt.Println(f.state.Measurement)
 }
 
-func (f *Feature) exec(cmd *Cmd) {
-	if cmd == nil {
-		log.Fatal(cmd)
-		return
-	}
-	f.raise(NewEvt(cmd.Measurement))
+func (f *Feature) exec() {
+	//	if(f.state.Status)
+	nm := model.NewMeasurement(f.state.Measurement.Temperature+.2, f.state.Measurement.Humidity+1)
+	f.raise(NewEvt(*nm))
 }
 
 func (f *Feature) raise(evt *Evt) {
 	f.bus.Publish(EVT_TOPIC, evt)
-}
-
-func (f *Feature) measure() {
-	for {
-		fmt.Println("Triggering Measurement in 2s")
-		time.Sleep(2 * time.Second)
-		nm := model.NewMeasurement(f.state.Measurement.Temperature+.2, f.state.Measurement.Humidity+1)
-		f.bus.Publish(CMD_TOPIC, NewCmd(nm))
-	}
 }

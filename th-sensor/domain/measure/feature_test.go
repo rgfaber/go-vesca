@@ -1,7 +1,6 @@
 package measure
 
 import (
-	"fmt"
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
@@ -21,12 +20,6 @@ func TestMeasure(t *testing.T) {
 	state := model.NewRoot(cfg)
 	ft := NewFeature(state, dec.NewDECBus())
 	assert.NotNil(t, ft)
-	err := ft.bus.Subscribe(CMD_TOPIC, func(cmd *Cmd) {
-		fmt.Println("Received:", *cmd)
-	})
-	if err != nil {
-		return
-	}
-	go ft.measure()
-	select {}
+	go ft.Respond()
+	ft.bus.Publish(CMD_TOPIC, NewCmd())
 }

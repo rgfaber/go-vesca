@@ -8,6 +8,6 @@ import (
 
 func TestNewEvt(t *testing.T) {
 	m := model.NewMeasurement(23, 40)
-	evt := NewEvt(m)
+	evt := NewEvt(*m)
 	assert.NotNil(t, evt)
 }

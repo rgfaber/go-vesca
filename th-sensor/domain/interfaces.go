@@ -1,19 +1,19 @@
 package domain
 
-type ISupervisor interface {
-	Supervise()
+import "github.com/rgfaber/go-vesca/th-sensor/model"
+
+type IStore interface {
+	Load() model.Root
+	Save(model model.Root)
 }
 
-type IFeature interface {
-	Run()
-	Listen()
-	Respond()
-}
+type ICmd interface{}
 
-type IEmitter interface {
-	Emit(evt interface{})
-}
+type IEvt interface{}
 
-type IResponder interface {
-	Respond(cmd interface{})
+type IRsp interface{}
+
+type IAggregate interface {
+	Execute(cmd ICmd) (IRsp, error)
+	Apply(evt IEvt)
 }

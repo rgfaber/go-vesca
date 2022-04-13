@@ -11,7 +11,7 @@ func TestSensorStatus_HasFlag(t *testing.T) {
 }
 
 func TestSensorStatus_Set(t *testing.T) {
-	s := SensorStatus(Unknown)
+	s := Unknown
 	assert.True(t, s.HasFlag(Unknown))
 	s = s.Set(Created)
 	assert.True(t, s.HasFlag(Created))
@@ -23,7 +23,7 @@ func TestSensorStatus_Set(t *testing.T) {
 }
 
 func TestSensorStatus_Unset(t *testing.T) {
-	s := SensorStatus(Created)
+	s := Created
 	assert.True(t, s.HasFlag(Created))
 	s = s.Unset(Created)
 	assert.False(t, s.HasFlag(Created))

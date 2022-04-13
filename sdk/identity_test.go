@@ -1,6 +1,7 @@
 package sdk
 
 import (
+	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
 )
@@ -13,6 +14,12 @@ func TestNewIdentity(t *testing.T) {
 	if id.Prefix != "my" {
 		t.Errorf("Identity has wrong prefix. Expected 'my' got %+v", id.Prefix)
 	}
+}
+
+func TestNewDefaultIdentity(t *testing.T) {
+	id := NewIdentity("")
+	assert.NotNil(t, id)
+	assert.Equal(t, "id", id.Prefix)
 }
 
 func TestThatDefaultIdStartsWithid(t *testing.T) {
