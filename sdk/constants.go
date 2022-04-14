@@ -7,4 +7,5 @@ var (
 	CLEAN_TEST_UUID = "73577357735773577357735773577357"
 	NULL_UUID       = uuid.Nil.String()
 	TEST_PREFIX     = "test"
+	TEST_TRACE_ID   = "test_trace_id"
 )
