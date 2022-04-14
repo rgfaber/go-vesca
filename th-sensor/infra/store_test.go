@@ -18,7 +18,14 @@ func TestIfWeCanSaveAndLoadTheModel(t *testing.T) {
 	mIn := model.NewRoot(cfg)
 	mIn.Status = model.Initialized
 	s.Save(*mIn)
-	m := s.Load()
+	mIn.Status = model.Killed
+	m := s.Load(&mIn.ID)
 	assert.NotNil(t, m)
 	assert.Equal(t, model.Initialized, m.Status)
+	m.Status = model.Measuring
+	s.Save(*m)
+	m = s.Load(&m.ID)
+	assert.NotNil(t, m)
+	assert.Equal(t, model.Measuring, m.Status)
+
 }

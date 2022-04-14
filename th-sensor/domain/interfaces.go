@@ -6,7 +6,7 @@ import (
 )
 
 type IStore interface {
-	Load(id sdk.IIdentity) model.Root
+	Load(id sdk.IIdentity) *model.Root
 	Save(model model.Root)
 }
 

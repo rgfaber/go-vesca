@@ -7,17 +7,19 @@ import (
 )
 
 type Store struct {
-	Model []model.Root
+	Items map[string]*model.Root
 }
 
-func (s *Store) Load(id sdk.IIdentity) model.Root {
-	return s.Model
+func (s *Store) Load(id sdk.IIdentity) *model.Root {
+	return s.Items[id.Id()]
 }
 
-func (s *Store) Save(model model.Root) {
-	s.Model = model
+func (s *Store) Save(item model.Root) {
+	s.Items[item.ID.Id()] = &item
 }
 
 func NewStore() domain.IStore {
-	return &Store{}
+	return &Store{
+		Items: make(map[string]*model.Root),
+	}
 }
