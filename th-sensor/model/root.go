@@ -2,7 +2,6 @@ package model
 
 import (
 	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/th-sensor/config"
 )
 
 type Root struct {
@@ -13,11 +12,11 @@ type Root struct {
 	Status      SensorStatus `json:"status"`
 }
 
-func NewRoot(cfg *config.Config) *Root {
+func NewRoot(sensorId string, sensorName string, greenhouseId string) *Root {
 	return &Root{
-		ID:          *NewTHSensorId(cfg),
-		Greenhouse:  *NewGreenhouse(cfg.GreenhouseId()),
-		Details:     *NewDetails(cfg.SensorName()),
+		ID:          *NewTHSensorId(sensorId),
+		Greenhouse:  *NewGreenhouse(greenhouseId),
+		Details:     *NewDetails(sensorName),
 		Measurement: *NewMeasurement(15, 23),
 		Status:      Created,
 	}

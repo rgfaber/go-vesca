@@ -8,12 +8,12 @@ import (
 const EVT_TOPIC = "th_sensor:initialized"
 
 type Evt struct {
-	aggregateId sdk.Identity
+	aggregateId sdk.IIdentity
 	traceId     string
 	measurement model.Measurement
 }
 
-func NewEvt(aggregateId sdk.Identity, traceId string, measurement model.Measurement) *Evt {
+func NewEvt(aggregateId sdk.IIdentity, traceId string, measurement model.Measurement) *Evt {
 	return &Evt{
 		aggregateId: aggregateId,
 		traceId:     traceId,

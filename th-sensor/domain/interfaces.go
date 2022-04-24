@@ -10,7 +10,9 @@ type IStore interface {
 	Save(model model.Root)
 }
 
-type ICmd interface{}
+type ICmd interface {
+	AggregateId() sdk.IIdentity
+}
 
 type IEvt interface{}
 

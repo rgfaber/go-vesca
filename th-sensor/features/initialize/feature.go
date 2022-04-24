@@ -14,11 +14,16 @@ type Feature struct {
 	aggregate domain.IAggregate
 }
 
-func NewFeature(bus dec.IDECBus) *Feature {
+func NewFeature(bus dec.IDECBus, store domain.IStore) *Feature {
 	return &Feature{
 		bus:       bus,
-		aggregate: initialize.NewAggregate(),
+		aggregate: initialize.NewAggregate(store, bus),
 	}
+}
+
+func (f *Feature) Raise(evt initialize.Evt) {
+	f.aggregate.Apply(evt)
+	f.bus.Publish(initialize.EVT_TOPIC, evt)
 }
 
 func (f *Feature) Listen() {

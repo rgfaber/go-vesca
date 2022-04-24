@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
-	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
+	"github.com/rgfaber/go-vesca/th-sensor/features"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"time"
 )
@@ -20,12 +20,12 @@ type Supervisor struct {
 	//sensorId *sdk.Identity
 	state    *model.Root
 	bus      dec.IDECBus
-	features []domain.IFeature
+	features []features.IFeature
 }
 
 func NewSupervisor(cfg *config.Config,
 	bus dec.IDECBus,
-	features []domain.IFeature) *Supervisor {
+	features []features.IFeature) *Supervisor {
 	state := model.NewRoot(cfg)
 	return &Supervisor{
 		config: cfg,
@@ -36,8 +36,8 @@ func NewSupervisor(cfg *config.Config,
 	}
 }
 
-func (s *Supervisor) spawn(f domain.IFeature, m *model.Root) {
-	go func(feature domain.IFeature, state *model.Root) {
+func (s *Supervisor) spawn(f features.IFeature, m *model.Root) {
+	go func(feature features.IFeature, state *model.Root) {
 		feature.Run()
 	}(f, m)
 }
@@ -52,6 +52,7 @@ func (s *Supervisor) Supervise() {
 }
 
 func (s *Supervisor) Initialize() {
+	cmd := initialize.NewCmd()
 	s.bus.Publish(initialize.CMD_TOPIC, initialize.NewCmd(15.0, 50.0))
 }
 

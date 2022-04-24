@@ -8,7 +8,7 @@ import (
 
 func TestNewRoot(t *testing.T) {
 	cfg := config.NewConfig()
-	r := NewRoot(cfg)
+	r := NewRoot(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
 	assert.NotNil(t, r)
 	assert.NotNil(t, r.ID)
 }

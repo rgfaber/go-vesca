@@ -9,6 +9,6 @@ func NewTHSensorTestID() *sdk.Identity {
 	return sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, sdk.TEST_UUID)
 }
 
-func NewTHSensorId(cfg *config.Config) *sdk.Identity {
-	return sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.SensorId())
+func NewTHSensorId(id string) *sdk.Identity {
+	return sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, id)
 }
