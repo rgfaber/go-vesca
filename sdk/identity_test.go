@@ -1,7 +1,6 @@
 package sdk
 
 import (
-	"github.com/rgfaber/go-vesca/sdk/constants"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
@@ -24,14 +23,14 @@ func TestNewDefaultIdentity(t *testing.T) {
 }
 
 func TestNewIdentityFrom(t *testing.T) {
-	id := NewIdentityFrom(constants.TEST_PREFIX, constants.TEST_UUID)
+	id := NewIdentityFrom(TEST_PREFIX, TEST_UUID)
 	if id == nil {
 		t.Errorf("No Identity was created")
 	}
-	if id.Prefix != constants.TEST_PREFIX {
-		t.Errorf("Identity has an incorrect Prefix. Expected [%+v] Got [%+v]", constants.TEST_PREFIX, id.Prefix)
+	if id.Prefix != TEST_PREFIX {
+		t.Errorf("Identity has an incorrect Prefix. Expected [%+v] Got [%+v]", TEST_PREFIX, id.Prefix)
 	}
-	seed := strings.Replace(constants.TEST_UUID, "-", "", -1)
+	seed := strings.Replace(TEST_UUID, "-", "", -1)
 	if id.Value != seed {
 		t.Errorf("Identity has an incorrect Value. Expected [%+v] Got [%+v]", seed, id.Value)
 	}

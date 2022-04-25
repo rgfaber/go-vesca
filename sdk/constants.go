@@ -1,4 +1,4 @@
-package constants
+package sdk
 
 import "github.com/google/uuid"
 
