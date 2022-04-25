@@ -6,7 +6,7 @@ import (
 )
 
 type IStore interface {
-	Load(id sdk.IIdentity) *model.Root
+	Load(id string) *model.Root
 	Save(model model.Root)
 }
 
@@ -14,11 +14,18 @@ type ICmd interface {
 	AggregateId() sdk.IIdentity
 }
 
-type IEvt interface{}
+type IEvt interface {
+	AggregateId() sdk.IIdentity
+}
 
-type IRsp interface{}
+type IRsp interface {
+	AggregateId() sdk.IIdentity
+	Status() model.SensorStatus
+	IsSuccess() bool
+	TraceId() string
+}
 
 type IAggregate interface {
-	Execute(cmd ICmd) (IRsp, error)
+	Attempt(cmd ICmd) (IRsp, error)
 	Apply(evt IEvt)
 }

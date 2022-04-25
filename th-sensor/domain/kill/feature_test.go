@@ -15,7 +15,7 @@ func TestNewFeature(t *testing.T) {
 	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
 	assert.Nil(t, err)
 	cfg := config.NewConfig()
-	state := model.NewRoot(cfg)
+	state := model.NewRoot(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
 	assert.NotNil(t, state, "model.Root could not be created for", cfg.SensorId)
 	f := NewFeature(state, dec.NewDECBus())
 	assert.NotNil(t, f, "Feature domain.Kill could not be created.")

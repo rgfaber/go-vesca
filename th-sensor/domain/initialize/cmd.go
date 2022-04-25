@@ -25,6 +25,6 @@ func NewCmd(sensorId string, sensorName string, greenhouseId string, traceId str
 	}
 }
 
-func (c *Cmd) ID() sdk.IIdentity {
+func (c *Cmd) AggregateId() sdk.IIdentity {
 	return model.NewTHSensorId(c.SensorId)
 }

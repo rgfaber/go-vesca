@@ -10,14 +10,14 @@ import (
 
 func TestNewFeature(t *testing.T) {
 	cfg := config.NewConfig()
-	state := model.NewRoot(cfg)
+	state := model.NewRoot(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
 	ft := NewFeature(state, dec.NewDECBus())
 	assert.NotNil(t, ft)
 }
 
 func TestMeasure(t *testing.T) {
 	cfg := config.NewConfig()
-	state := model.NewRoot(cfg)
+	state := model.NewRoot(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
 	ft := NewFeature(state, dec.NewDECBus())
 	assert.NotNil(t, ft)
 	go ft.Respond()

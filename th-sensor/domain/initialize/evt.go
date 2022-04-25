@@ -20,3 +20,7 @@ func NewEvt(aggregateId sdk.IIdentity, traceId string, measurement model.Measure
 		measurement: measurement,
 	}
 }
+
+func (e *Evt) AggregateId() sdk.IIdentity {
+	return e.aggregateId
+}

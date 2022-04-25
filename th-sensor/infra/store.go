@@ -1,7 +1,6 @@
 package infra
 
 import (
-	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
@@ -10,12 +9,12 @@ type Store struct {
 	Items map[string]*model.Root
 }
 
-func (s *Store) Load(id sdk.IIdentity) *model.Root {
-	return s.Items[id.Id()]
+func (s *Store) Load(id string) *model.Root {
+	return s.Items[id]
 }
 
 func (s *Store) Save(item model.Root) {
-	s.Items[item.ID.Id()] = &item
+	s.Items[item.SensorId.Id()] = &item
 }
 
 func NewStore() domain.IStore {

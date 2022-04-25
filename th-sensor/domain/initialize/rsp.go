@@ -6,20 +6,36 @@ import (
 )
 
 type Rsp struct {
-	AggregateId sdk.Identity
-	Status      model.SensorStatus
-	IsSuccess   bool
-	TraceId     string
+	aggregateId sdk.IIdentity
+	status      model.SensorStatus
+	isSuccess   bool
+	traceId     string
 }
 
-func NewRsp(id sdk.Identity,
+func NewRsp(id sdk.IIdentity,
 	status model.SensorStatus,
-	isSucces bool,
+	isSuccess bool,
 	traceId string) *Rsp {
 	return &Rsp{
-		AggregateId: id,
-		Status:      status,
-		IsSuccess:   isSucces,
-		TraceId:     traceId,
+		aggregateId: id,
+		status:      status,
+		isSuccess:   isSuccess,
+		traceId:     traceId,
 	}
+}
+
+func (r *Rsp) AggregateId() sdk.IIdentity {
+	return r.aggregateId
+}
+
+func (r *Rsp) Status() model.SensorStatus {
+	return r.status
+}
+
+func (r *Rsp) IsSuccess() bool {
+	return r.isSuccess
+}
+
+func (r *Rsp) TraceId() string {
+	return r.traceId
 }

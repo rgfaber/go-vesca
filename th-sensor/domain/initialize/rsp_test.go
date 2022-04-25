@@ -8,6 +8,6 @@ import (
 
 func TestRsp(t *testing.T) {
 	id := model.NewTHSensorTestID()
-	r := NewRsp(*id, model.Initialized, true, "test")
+	r := NewRsp(id, model.Initialized, true, "test")
 	assert.NotNil(t, r)
 }
