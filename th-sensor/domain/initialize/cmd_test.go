@@ -18,6 +18,5 @@ func TestNewCmd(t *testing.T) {
 func TestCmd_ID(t *testing.T) {
 	id := model.NewTHSensorTestID()
 	c := NewCmd(id.Value, "Test Sensor", "00000", "test_trace_id", 10.0, 10.0)
-	aggregateId := c.ID()
-	fmt.Println(aggregateId)
+	fmt.Println(c.AggregateId().Id())
 }

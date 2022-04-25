@@ -18,7 +18,7 @@ func (a *Aggregate) Attempt(cmd domain.ICmd) (domain.IRsp, error) {
 		return nil, fmt.Errorf("initialize.Attempt requires an initialize.Cmd")
 	}
 	c := cmd.(*Cmd)
-	a.state = a.store.Load(c.SensorId)
+	a.state = a.store.Load(c.AggregateId().Id())
 	if a.state == nil {
 		a.state = model.NewRoot(c.SensorId, c.SensorName, c.GreenhouseId)
 	}
