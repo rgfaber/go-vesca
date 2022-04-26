@@ -21,6 +21,7 @@ func (a *Aggregate) Attempt(cmd domain.ICmd) (domain.IRsp, error) {
 	a.state = a.store.Load(c.AggregateId().Id())
 	if a.state == nil {
 		a.state = model.NewRoot(c.SensorId, c.SensorName, c.GreenhouseId)
+		a.store.Save(*a.state)
 	}
 	if !a.state.Status.HasFlag(model.Initialized) {
 		evt := NewEvt(c.AggregateId(), c.traceId, c.measurement)
@@ -31,6 +32,7 @@ func (a *Aggregate) Attempt(cmd domain.ICmd) (domain.IRsp, error) {
 }
 
 func (a *Aggregate) Raise(evt *Evt) {
+	a.Apply(evt)
 	a.bus.Publish(EVT_TOPIC, *evt)
 }
 

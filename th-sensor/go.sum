@@ -24,6 +24,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220413123231-9e6846bed503 h1:e9nHKjlNhVyGGeh7ckje3evenUsXOnSlGHUOPHuDKVc=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220413123231-9e6846bed503/go.mod h1:+ob7gPtp50fmAWbsSwyzUP0AhgZwaniDVMV5z917DAc=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220425162929-4fd784572924 h1:15eJTY7Xd8iuPjCFuFbTBA8fYeicAtCdCMs7p1/PFxo=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220425162929-4fd784572924/go.mod h1:8WmdZouoXili3FSllVPSzNqJAs6OUMJMzOgGDSKtmqs=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
