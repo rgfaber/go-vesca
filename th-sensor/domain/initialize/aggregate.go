@@ -3,16 +3,17 @@ package initialize
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/sdk/dec"
+	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type Aggregate struct {
-	store dec.IStore
+	store domain.IStore
 	bus   dec.IDECBus
 	state *model.Root
 }
 
-func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
+func (a *Aggregate) Attempt(cmd domain.ICmd) (domain.IFbk, error) {
 	if &cmd == nil {
 		return nil, fmt.Errorf("initialize.Attempt requires an initialize.Cmd")
 	}
@@ -35,14 +36,14 @@ func (a *Aggregate) Raise(evt *Evt) {
 	a.bus.Publish(EVT_TOPIC, *evt)
 }
 
-func (a *Aggregate) Apply(evt dec.IEvt) {
+func (a *Aggregate) Apply(evt domain.IEvt) {
 	e := evt.(*Evt)
 	a.state = a.store.Load(e.AggregateId().Id())
 	a.state.Status = model.Initialized
 	a.store.Save(*a.state)
 }
 
-func NewAggregate(store dec.IStore, bus dec.IDECBus) *Aggregate {
+func NewAggregate(store domain.IStore, bus dec.IDECBus) *Aggregate {
 	return &Aggregate{
 		bus:   bus,
 		store: store,
