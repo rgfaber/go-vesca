@@ -3,17 +3,16 @@ package initialize
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"log"
 )
 
 type Feature struct {
 	bus       dec.IDECBus
-	aggregate domain.IAggregate
+	aggregate dec.IAggregate
 }
 
-func NewFeature(bus dec.IDECBus, store domain.IStore) *Feature {
+func NewFeature(bus dec.IDECBus, store dec.IStore) *Feature {
 	return &Feature{
 		bus:       bus,
 		aggregate: initialize.NewAggregate(store, bus),
