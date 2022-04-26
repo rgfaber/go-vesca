@@ -6,8 +6,8 @@ import (
 	"testing"
 )
 
-func TestRsp(t *testing.T) {
+func TestNewFbk(t *testing.T) {
 	id := model.NewTHSensorTestID()
-	r := NewRsp(id, model.Initialized, true, "test")
+	r := NewFbk(id, model.Initialized, true, "test")
 	assert.NotNil(t, r)
 }

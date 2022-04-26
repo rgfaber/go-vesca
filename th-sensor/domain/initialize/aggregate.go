@@ -13,7 +13,7 @@ type Aggregate struct {
 	state *model.Root
 }
 
-func (a *Aggregate) Attempt(cmd domain.ICmd) (domain.IRsp, error) {
+func (a *Aggregate) Attempt(cmd domain.ICmd) (domain.IFbk, error) {
 	if &cmd == nil {
 		return nil, fmt.Errorf("initialize.Attempt requires an initialize.Cmd")
 	}
@@ -26,7 +26,7 @@ func (a *Aggregate) Attempt(cmd domain.ICmd) (domain.IRsp, error) {
 	if !a.state.Status.HasFlag(model.Initialized) {
 		evt := NewEvt(c.AggregateId(), c.traceId, c.measurement)
 		a.Raise(evt)
-		return NewRsp(c.AggregateId(), a.state.Status, true, c.traceId), nil
+		return NewFbk(c.AggregateId(), a.state.Status, true, c.traceId), nil
 	}
 	return nil, fmt.Errorf("Aggregate [%+v] has already been initialized", a.state.SensorId.Id())
 }

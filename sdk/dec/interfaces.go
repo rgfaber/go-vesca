@@ -1,13 +1,12 @@
-package domain
+package dec
 
 import (
 	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type IStore interface {
-	Load(id string) *model.Root
-	Save(model model.Root)
+	Load(id string) interface{}
+	Save(model interface{})
 }
 
 type ICmd interface {
@@ -20,7 +19,7 @@ type IEvt interface {
 
 type IFbk interface {
 	AggregateId() sdk.IIdentity
-	Status() model.SensorStatus
+	Status() int
 	IsSuccess() bool
 	TraceId() string
 }

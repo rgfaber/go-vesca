@@ -5,18 +5,18 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
-type Rsp struct {
+type Fbk struct {
 	aggregateId sdk.IIdentity
 	status      model.SensorStatus
 	isSuccess   bool
 	traceId     string
 }
 
-func NewRsp(id sdk.IIdentity,
+func NewFbk(id sdk.IIdentity,
 	status model.SensorStatus,
 	isSuccess bool,
-	traceId string) *Rsp {
-	return &Rsp{
+	traceId string) *Fbk {
+	return &Fbk{
 		aggregateId: id,
 		status:      status,
 		isSuccess:   isSuccess,
@@ -24,18 +24,18 @@ func NewRsp(id sdk.IIdentity,
 	}
 }
 
-func (r *Rsp) AggregateId() sdk.IIdentity {
+func (r *Fbk) AggregateId() sdk.IIdentity {
 	return r.aggregateId
 }
 
-func (r *Rsp) Status() model.SensorStatus {
+func (r *Fbk) Status() model.SensorStatus {
 	return r.status
 }
 
-func (r *Rsp) IsSuccess() bool {
+func (r *Fbk) IsSuccess() bool {
 	return r.isSuccess
 }
 
-func (r *Rsp) TraceId() string {
+func (r *Fbk) TraceId() string {
 	return r.traceId
 }
