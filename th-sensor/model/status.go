@@ -1,5 +1,7 @@
 package model
 
+// SensorStatus
+//////////////////////////////////////////////////////////////
 type SensorStatus int
 
 const (
@@ -7,8 +9,7 @@ const (
 	Error       SensorStatus = 1
 	Created     SensorStatus = 2
 	Initialized SensorStatus = 4
-	Killed      SensorStatus = 8
-	Measuring   SensorStatus = 16
+	Measuring   SensorStatus = 8
 )
 
 func (s SensorStatus) HasFlag(flag SensorStatus) bool {

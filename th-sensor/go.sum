@@ -28,6 +28,8 @@ github.com/rgfaber/go-vesca/sdk v0.0.0-20220425162929-4fd784572924 h1:15eJTY7Xd8
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220425162929-4fd784572924/go.mod h1:8WmdZouoXili3FSllVPSzNqJAs6OUMJMzOgGDSKtmqs=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220426085837-676a2fd4ba0f h1:RMD2CXRDFMFQt5lVW9A/nLWNLLGqvQXU4ctD84hiJlE=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220426085837-676a2fd4ba0f/go.mod h1:8WmdZouoXili3FSllVPSzNqJAs6OUMJMzOgGDSKtmqs=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220426104241-277761f132cd h1:NrZt8RYv0wL7ErxAA9q6Vo473doUTfbABvqXKVtBbwg=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220426104241-277761f132cd/go.mod h1:8WmdZouoXili3FSllVPSzNqJAs6OUMJMzOgGDSKtmqs=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=

@@ -31,7 +31,18 @@ func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing
 	assert.Nil(t, e)
 	assert.NotNil(t, rsp)
 	id := model.NewTHSensorId(cfg.SensorId())
-	m := store.Load(id.Id())
+	m := store.Load(id.Id()).(*model.Root)
 	assert.NotNil(t, m)
 	assert.True(t, m.Status.HasFlag(model.Initialized))
+}
+
+func TestAggregateImplementsIAggregate(t *testing.T) {
+	//Given
+	bus := dec.NewDECBus()
+	store := infra.NewStore()
+	a := NewAggregate(store, bus)
+	// When
+	v := (dec.IAggregate)(a)
+	// Then
+	assert.NotNil(t, v)
 }

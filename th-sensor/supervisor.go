@@ -29,7 +29,7 @@ func NewSupervisor(cfg *config.Config,
 	state := model.NewRoot(cfg)
 	return &Supervisor{
 		config: cfg,
-		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.SensorId()),
+		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.sensorId()),
 		state:    state,
 		features: features,
 		bus:      bus,
@@ -58,7 +58,7 @@ func (s *Supervisor) Initialize() {
 
 func (s *Supervisor) measure() {
 	for {
-		fmt.Println("Triggering Measurement in 2s")
+		fmt.Println("Triggering neasurement in 2s")
 		time.Sleep(2 * time.Second)
 		s.bus.Publish(measure.CMD_TOPIC, measure.NewCmd())
 	}

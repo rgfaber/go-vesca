@@ -3,6 +3,7 @@ package measure
 import (
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
+	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -21,5 +22,5 @@ func TestMeasure(t *testing.T) {
 	ft := NewFeature(state, dec.NewDECBus())
 	assert.NotNil(t, ft)
 	go ft.Respond()
-	ft.bus.Publish(CMD_TOPIC, NewCmd())
+	ft.bus.Publish(measure.CMD_TOPIC, measure.NewCmd())
 }

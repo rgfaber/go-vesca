@@ -16,7 +16,7 @@ require (
 	github.com/nats-io/nkeys v0.3.0 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/rgfaber/go-vesca/sdk v0.0.0-20220426085837-676a2fd4ba0f // indirect
+	github.com/rgfaber/go-vesca/sdk v0.0.0-20220426104241-277761f132cd // indirect
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect

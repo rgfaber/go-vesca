@@ -28,8 +28,8 @@ func (r *Fbk) AggregateId() sdk.IIdentity {
 	return r.aggregateId
 }
 
-func (r *Fbk) Status() model.SensorStatus {
-	return r.status
+func (r *Fbk) Status() int {
+	return int(r.status)
 }
 
 func (r *Fbk) IsSuccess() bool {
