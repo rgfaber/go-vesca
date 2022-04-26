@@ -21,7 +21,7 @@ func NewFeature(bus dec.IDECBus, store dec.IStore) *Feature {
 
 func (f *Feature) Listen() {
 	err := f.bus.Subscribe(initialize.EVT_TOPIC, func(evt initialize.Evt) {
-		f.aggregate.
+
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -46,4 +46,6 @@ func (f *Feature) Run() {
 	f.Respond()
 	fmt.Println("initialize.Feature is Up!")
 }
+
+
 
