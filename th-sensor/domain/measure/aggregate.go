@@ -12,8 +12,9 @@ type Aggregate struct {
 }
 
 func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
-	//TODO implement me
-	panic("implement me")
+
+	c := cmd.(*Cmd)
+
 }
 
 func (a *Aggregate) Apply(evt dec.IEvt) {

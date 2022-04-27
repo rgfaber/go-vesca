@@ -36,13 +36,17 @@ func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing
 	assert.True(t, m.Status.HasFlag(model.Initialized))
 }
 
+func verifyIAggregate(a dec.IAggregate) bool {
+	return true
+}
+
 func TestAggregateImplementsIAggregate(t *testing.T) {
 	//Given
 	bus := dec.NewDECBus()
 	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	// When
-	v := (dec.IAggregate)(a)
+	ok := verifyIAggregate(a)
 	// Then
-	assert.NotNil(t, v)
+	assert.True(t, ok)
 }
