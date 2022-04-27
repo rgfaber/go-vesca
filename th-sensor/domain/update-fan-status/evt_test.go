@@ -8,25 +8,22 @@ import (
 	"testing"
 )
 
-func TestNewCmd(t *testing.T) {
+func TestNewEvt(t *testing.T) {
 	// Given
 	id := model.NewTHSensorTestID()
-	c := NewCmd(id.Id(), fan_status.Deactivated)
+	e := NewEvt(id.Id(), fan_status.Activated)
 	// When
 	// Then
-	assert.NotNil(t, c)
+	assert.NotNil(t, e)
 }
 
-func VerifyICmd(c dec.ICmd) bool {
-	return true
-}
-
-func TestIfCmdImplementsICmd(t *testing.T) {
+func TestIfEvtImplementsIEvt(t *testing.T) {
 	// Given
 	id := model.NewTHSensorTestID()
-	c := NewCmd(id.Id(), fan_status.Deactivated)
+	e := NewEvt(id.Id(), fan_status.Activated)
 	// When
-	ok := VerifyICmd(c)
+	v, ok := interface{}(e).(dec.IEvt)
 	// Then
+	assert.NotNil(t, v)
 	assert.True(t, ok)
 }
