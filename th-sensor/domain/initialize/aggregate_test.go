@@ -42,7 +42,7 @@ func TestAggregateImplementsIAggregate(t *testing.T) {
 	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	// When
-	ok := Im
+	b := dec.ImplementsIAggregate(a)
 	// Then
 	assert.True(t, ok)
 }

@@ -1,18 +1,17 @@
 package initialize
 
 import (
-	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type Fbk struct {
-	aggregateId sdk.IIdentity
+	aggregateId string
 	status      model.SensorStatus
 	isSuccess   bool
 	traceId     string
 }
 
-func NewFbk(id sdk.IIdentity,
+func NewFbk(id string,
 	status model.SensorStatus,
 	isSuccess bool,
 	traceId string) *Fbk {
@@ -24,7 +23,7 @@ func NewFbk(id sdk.IIdentity,
 	}
 }
 
-func (r *Fbk) AggregateId() sdk.IIdentity {
+func (r *Fbk) AggregateId() string {
 	return r.aggregateId
 }
 

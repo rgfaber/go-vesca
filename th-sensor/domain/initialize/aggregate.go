@@ -26,7 +26,7 @@ func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
 	if !a.state.Status.HasFlag(model.Initialized) {
 		evt := NewEvt(c.AggregateId(), c.traceId, c.measurement)
 		a.Raise(evt)
-		return NewFbk(c.AggregateId(), a.state.Status, true, c.traceId), nil
+		return NewFbk(c.AggregateId().Id(), a.state.Status, true, c.traceId), nil
 	}
 	return nil, fmt.Errorf("Aggregate [%+v] has already been initialized", a.state.SensorId.Id())
 }

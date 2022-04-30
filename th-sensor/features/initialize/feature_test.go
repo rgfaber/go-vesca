@@ -6,58 +6,55 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"github.com/rgfaber/go-vesca/th-sensor/envars"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
+	"github.com/rgfaber/go-vesca/th-sensor/infra"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
 )
 
+var (
+	TestStore = infra.NewStore()
+	TestBus   = dec.NewDECBus()
+)
+
+func setEnv() {
+	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
 func TestNewFeature(t *testing.T) {
 	// Given
-	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
-	assert.Nil(t, err)
-	cfg := config.NewConfig()
-	state := model.NewRoot(cfg)
-	assert.NotNil(t, state, "model.Root could not be created for", cfg.SensorId())
-	f := NewFeature(state, dec.NewDECBus())
+	setEnv()
+	// When
+	f := NewFeature(TestBus, TestStore)
+	// Then
 	assert.NotNil(t, f, "Feature domain.Initialize could not be created.")
 }
 
 func TestFeature_Respond(t *testing.T) {
-	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
-	assert.Nil(t, err)
+	// Given
+	setEnv()
+	f := NewFeature(TestBus, TestStore)
 	cfg := config.NewConfig()
-	state := model.NewRoot(cfg)
-	assert.NotNil(t, state, "model.Root could not be created for", cfg.SensorId())
-	f := NewFeature(state, dec.NewDECBus())
-	assert.NotNil(t, f, "Feature domain.Initialize could not be created.")
-	err = f.bus.Subscribe(initialize.CMD_TOPIC, func(cmd *initialize.Cmd) {
-		assert.NotNil(t, cmd)
-		assert.Equal(t, 15.0, cmd.measurement.Temperature)
-		assert.Equal(t, 20.0, cmd.measurement.Humidity)
+	sensorId := cfg.SensorId()
+	sensorName := cfg.SensorName()
+	greenhouseId := cfg.GreenhouseId()
+	temp := 15.0
+	hum := 20.6
+	traceId := sdk.TEST_TRACE_ID
+	receivedEvent := false
+	// When
+	f.Respond()
+	// And
+	TestBus.Subscribe(initialize.EVT_TOPIC, func(evt dec.IEvt) {
+		e := evt.(*initialize.Evt)
+		receivedEvent = e != nil
 	})
-	assert.Nil(t, err)
-	f.bus.Publish(initialize.CMD_TOPIC, initialize.NewCmd(15, 20))
-}
-
-func TestThatTheCallbackCannotMutateTheMessageContent(t *testing.T) {
-	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
-	assert.Nil(t, err)
-	cfg := config.NewConfig()
-	state := model.NewRoot(cfg)
-	assert.NotNil(t, state, "model.Root could not be created for", cfg.SensorId())
-	f := NewFeature(state, dec.NewDECBus())
-	assert.NotNil(t, f, "Feature domain.Initialize could not be created.")
-	err = f.bus.Subscribe(initialize.CMD_TOPIC, func(c initialize.Cmd) {
-		assert.NotNil(t, c)
-		assert.Equal(t, 15.0, c.measurement.Temperature)
-		assert.Equal(t, 20.0, c.measurement.Humidity)
-		c.measurement.Temperature = 22.0
-		c.measurement.Humidity = 30.0
-	})
-	assert.Nil(t, err)
-	cmd := initialize.NewCmd(15, 20)
-	f.bus.Publish(initialize.CMD_TOPIC, *cmd)
-	assert.NotEqual(t, 22.0, cmd.measurement.Temperature)
-	assert.NotEqual(t, 30.0, cmd.measurement.Humidity)
+	// And
+	TestBus.Publish(initialize.CMD_TOPIC, initialize.NewCmd(sensorId, sensorName, greenhouseId, traceId, temp, hum))
+	// Then
+	assert.True(t, receivedEvent)
 }

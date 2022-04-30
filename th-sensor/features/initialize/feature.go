@@ -31,8 +31,8 @@ func (f *Feature) Listen() {
 }
 
 func (f *Feature) Respond() {
-	err := f.bus.Subscribe(initialize.CMD_TOPIC, func(cmd initialize.Cmd) {
-		f.aggregate.Attempt(&cmd)
+	err := f.bus.Subscribe(initialize.CMD_TOPIC, func(cmd *initialize.Cmd) {
+		f.aggregate.Attempt(cmd)
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -46,6 +46,3 @@ func (f *Feature) Run() {
 	f.Respond()
 	fmt.Println("initialize.Feature is Up!")
 }
-
-
-
