@@ -17,7 +17,7 @@ type ICmd interface {
 	AggregateId() sdk.IIdentity
 }
 
-func ImplementesICmd(cmd ICmd) bool {
+func ImplementsICmd(cmd ICmd) bool {
 	return true
 }
 
@@ -25,7 +25,7 @@ type IEvt interface {
 	AggregateId() sdk.IIdentity
 }
 
-func ImplementesIEvt(evt IEvt) bool {
+func ImplementsIEvt(evt IEvt) bool {
 	return true
 }
 
@@ -36,7 +36,7 @@ type IFbk interface {
 	TraceId() string
 }
 
-func ImplementesIFbk(fbk IFbk) bool {
+func ImplementsIFbk(fbk IFbk) bool {
 	return true
 }
 

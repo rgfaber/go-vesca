@@ -39,10 +39,10 @@ func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing
 func TestAggregateImplementsIAggregate(t *testing.T) {
 	//Given
 	bus := dec.NewDECBus()
-	store := dec.NewStore()
+	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	// When
-	ok := dec.ImplementsIAggregate(a)
+	ok := Im
 	// Then
 	assert.True(t, ok)
 }
