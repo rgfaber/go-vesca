@@ -13,6 +13,7 @@ import (
 )
 
 func TestNewFeature(t *testing.T) {
+	// Given
 	err := os.Setenv(envars.GO_VESCA_TH_SENSOR_ID, sdk.TEST_UUID)
 	assert.Nil(t, err)
 	cfg := config.NewConfig()

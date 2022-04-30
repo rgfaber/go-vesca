@@ -4,6 +4,7 @@ import (
 	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
+	"github.com/rgfaber/go-vesca/th-sensor/infra"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -11,7 +12,7 @@ import (
 
 func TestNewAggregate(t *testing.T) {
 	bus := dec.NewDECBus()
-	store := dec.NewStore()
+	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	assert.NotNil(t, a)
 	assert.Nil(t, a.state)
@@ -20,7 +21,7 @@ func TestNewAggregate(t *testing.T) {
 func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing.T) {
 	// Given
 	bus := dec.NewDECBus()
-	store := dec.NewStore()
+	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	cfg := config.NewConfig()
 	cmd := NewCmd(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId(), sdk.TEST_TRACE_ID, 15.0, 50.0)
@@ -35,17 +36,13 @@ func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing
 	assert.True(t, m.Status.HasFlag(model.Initialized))
 }
 
-func verifyIAggregate(a dec.IAggregate) bool {
-	return true
-}
-
 func TestAggregateImplementsIAggregate(t *testing.T) {
 	//Given
 	bus := dec.NewDECBus()
 	store := dec.NewStore()
 	a := NewAggregate(store, bus)
 	// When
-	ok := verifyIAggregate(a)
+	ok := dec.ImplementsIAggregate(a)
 	// Then
 	assert.True(t, ok)
 }

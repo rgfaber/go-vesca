@@ -45,7 +45,7 @@ type IAggregate interface {
 	Apply(evt IEvt)
 }
 
-func ImplementesIAggregate(aggregate IAggregate) bool {
+func ImplementsIAggregate(aggregate IAggregate) bool {
 	return true
 }
 
