@@ -3,6 +3,7 @@ package update_fan_status
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/sdk/dec"
+	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
@@ -18,7 +19,7 @@ func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
 	}
 	c := cmd.(*Cmd)
 	id := cmd.AggregateId().Id()
-	a.state = a.store.Load(id).(*model.Root)
+	a.state = domain.LoadState(a.store, id)
 	if a.state == nil {
 		return nil, fmt.Errorf("[%+v] not found!", id)
 	}
@@ -31,7 +32,7 @@ func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
 
 func (a *Aggregate) raise(evt *Evt) {
 	a.Apply(evt)
-	a.bus.Publish(EVT_TOPIC, *evt)
+	domain.Publish(a.bus, EVT_TOPIC, evt)
 }
 
 func (a *Aggregate) Apply(evt dec.IEvt) {
@@ -40,12 +41,12 @@ func (a *Aggregate) Apply(evt dec.IEvt) {
 	}
 	e := evt.(*Evt)
 	id := evt.AggregateId().Id()
-	a.state = a.store.Load(id).(*model.Root)
+	a.state = domain.LoadState(a.store, id)
 	if a.state == nil {
 		panic(fmt.Errorf("could not find [%+v] in store", id))
 	}
 	a.state.FanStatus = e.newStatus
-	a.store.Save(a.state)
+	domain.SaveState(a.store, a.state)
 }
 
 func NewAggregate(store dec.IStore, bus dec.IDECBus) *Aggregate {

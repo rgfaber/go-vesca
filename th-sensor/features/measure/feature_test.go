@@ -17,6 +17,7 @@ func TestNewFeature(t *testing.T) {
 }
 
 func TestMeasure(t *testing.T) {
+
 	cfg := config.NewConfig()
 	state := model.NewRoot(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
 	ft := NewFeature(state, dec.NewDECBus())

@@ -3,6 +3,7 @@ package initialize
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/sdk/dec"
+	"github.com/rgfaber/go-vesca/th-sensor/domain"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
@@ -17,7 +18,7 @@ func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
 		return nil, fmt.Errorf("initialize.Attempt requires an initialize.Cmd")
 	}
 	c := cmd.(*Cmd)
-	a.state = a.store.Load(c.AggregateId().Id()).(*model.Root)
+	a.state = domain.LoadState(a.store, c.AggregateId().Id())
 	if a.state == nil {
 		a.state = model.NewRoot(c.SensorId, c.SensorName, c.GreenhouseId)
 		a.store.Save(*a.state)
@@ -32,13 +33,14 @@ func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
 
 func (a *Aggregate) Raise(evt *Evt) {
 	a.Apply(evt)
-	a.bus.Publish(EVT_TOPIC, *evt)
+	domain.Publish(a.bus, EVT_TOPIC, evt)
 }
 
 func (a *Aggregate) Apply(evt dec.IEvt) {
 	e := evt.(*Evt)
-	a.state = a.store.Load(e.AggregateId().Id()).(*model.Root)
+	a.state = domain.LoadState(a.store, e.AggregateId().Id())
 	a.state.Status = model.Initialized
+	domain.SaveState(a.store, a.state)
 	a.store.Save(*a.state)
 }
 

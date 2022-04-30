@@ -6,16 +6,16 @@ import (
 	"log"
 )
 
-type IBus interface {
+type INatsBus interface {
 	Close()
 }
 
-type Bus struct {
+type NatsBus struct {
 	cfg  *config2.Config
 	conn *nats.Conn
 }
 
-func NewBus(cfg *config2.Config) *Bus {
+func NewNatsBus(cfg *config2.Config) *NatsBus {
 	conn, err := nats.Connect(
 		cfg.NATSUrl(),
 		nats.UserInfo(cfg.NATSUser(), cfg.NATSPwd()))
@@ -26,12 +26,12 @@ func NewBus(cfg *config2.Config) *Bus {
 	if conn == nil {
 		panic(err)
 	}
-	return &Bus{
+	return &NatsBus{
 		cfg:  cfg,
 		conn: conn,
 	}
 }
 
-func (b *Bus) Close() {
+func (b *NatsBus) Close() {
 	b.conn.Close()
 }

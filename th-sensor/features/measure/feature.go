@@ -4,30 +4,24 @@ import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"log"
 )
 
 type Feature struct {
-	state *model.Root
-	bus   dec.IDECBus
+	bus       dec.IDECBus
+	store     dec.IStore
+	aggregate dec.IAggregate
 }
 
 func (f *Feature) Listen() {
-	err := f.bus.Subscribe(measure.EVT_TOPIC, func(evt *measure.Evt) {
-		f.apply(evt)
-	})
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-	fmt.Printf("measure.Feature -> Listening for [%+v]\n", measure.EVT_TOPIC)
+	fmt.Printf("measure.Feature -> Does not listen for any domain events")
 }
 
 func (f *Feature) Respond() {
-	err := f.bus.Subscribe(measure.CMD_TOPIC, func(cmd measure.Cmd) {
-		fmt.Printf("Received measure.Cmd on [%+v]", measure.CMD_TOPIC)
-		f.exec()
+	err := f.bus.Subscribe(measure.CMD_TOPIC, func(cmd dec.ICmd) {
+		fmt.Printf("measure.Cmd  => responds to [%+v]", measure.CMD_TOPIC)
+		f.aggregate = measure.NewAggregate(f.store, f.bus)
+		f.aggregate.Attempt(cmd)
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -36,9 +30,9 @@ func (f *Feature) Respond() {
 	fmt.Printf("measure.Feature -> Responding to [%+v]\n", measure.CMD_TOPIC)
 }
 
-func NewFeature(state *model.Root, bus dec.IDECBus) *Feature {
+func NewFeature(bus dec.IDECBus, store dec.IStore) *Feature {
 	return &Feature{
-		state: state,
+		store: store,
 		bus:   bus,
 	}
 }

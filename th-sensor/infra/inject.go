@@ -1,5 +1,8 @@
 package infra
 
+import "github.com/rgfaber/go-vesca/th-sensor/config"
+
 var (
-//	NatsEmitter = NewEmitter(nats.Connect(config.NATSUrl))
+	Nats = NewNatsBus(config.NewConfig())
+	//	NatsEmitter = NewEmitter(nats.Connect(config.NATSUrl))
 )

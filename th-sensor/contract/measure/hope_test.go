@@ -1,10 +1,11 @@
 package measure
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestNewHope(t *testing.T) {
 	h := NewHope()
-	if h == nil {
-		t.Error("Could not create kill.Hope!")
-	}
+	assert.NotNil(t, h)
 }

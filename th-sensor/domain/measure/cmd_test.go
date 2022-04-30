@@ -11,6 +11,15 @@ func TestNewCmd(t *testing.T) {
 	assert.NotNil(t, cmd)
 }
 
+func verifyICmd(c dec.ICmd) bool {
+	return true
+}
+
 func TestCmdImplementsICmd(t *testing.T) {
-	var c dec.ICmd = NewCmd()
+	// Given
+	cmd := NewCmd()
+	// When
+	b := verifyICmd(cmd)
+	// Then
+	assert.True(t, b)
 }

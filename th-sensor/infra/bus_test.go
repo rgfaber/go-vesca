@@ -9,6 +9,6 @@ import (
 func TestNewBus(t *testing.T) {
 	// Given
 	cfg := config2.NewConfig()
-	b := NewBus(cfg)
-	assert.NotNil(t, b, "Could not create initialize.Bus")
+	b := NewNatsBus(cfg)
+	assert.NotNil(t, b, "Could not create initialize.NatsBus")
 }

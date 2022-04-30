@@ -8,13 +8,20 @@ import (
 const EVT_TOPIC = "th_sensor:measured"
 
 type Evt struct {
-	sensorId    sdk.Identity
-	neasurement model.Measurement
+	sensorId    string
+	temperature float64
+	humidity    float64
 }
 
-func NewEvt(sensorId sdk.Identity, m model.Measurement) *Evt {
+func (e Evt) AggregateId() sdk.IIdentity {
+	return model.NewTHSensorId(e.sensorId)
+
+}
+
+func NewEvt(sensorId string, temperature float64, humidity float64) *Evt {
 	return &Evt{
 		sensorId:    sensorId,
-		neasurement: m,
+		temperature: temperature,
+		humidity:    humidity,
 	}
 }

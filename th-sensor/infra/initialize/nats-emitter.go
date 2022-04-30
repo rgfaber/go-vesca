@@ -9,10 +9,10 @@ type IEmitter interface {
 }
 
 type Emitter struct {
-	bus infra.IBus
+	bus infra.INatsBus
 }
 
-func NewEmitter(bus infra.IBus) *Emitter {
+func NewEmitter(bus infra.INatsBus) *Emitter {
 	return &Emitter{
 		bus: bus,
 	}

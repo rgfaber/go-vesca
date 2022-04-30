@@ -7,7 +7,6 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
 	"github.com/rgfaber/go-vesca/th-sensor/features"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"time"
 )
 
@@ -15,40 +14,41 @@ type ISupervisor interface {
 	Supervise()
 }
 
+func ImplementsISuperviser(sup ISupervisor) bool {
+	return true
+}
+
 type Supervisor struct {
 	config *config.Config
 	//sensorId *sdk.Identity
-	state    *model.Root
 	bus      dec.IDECBus
 	features []features.IFeature
 }
 
 func NewSupervisor(cfg *config.Config,
 	bus dec.IDECBus,
-	features []features.IFeature) *Supervisor {
-	state := model.NewRoot(cfg)
+	features []features.IFeature) ISupervisor {
 	return &Supervisor{
 		config: cfg,
 		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.sensorId()),
-		state:    state,
 		features: features,
 		bus:      bus,
 	}
 }
 
-func (s *Supervisor) spawn(f features.IFeature, m *model.Root) {
-	go func(feature features.IFeature, state *model.Root) {
+func (s *Supervisor) spawn(f features.IFeature) {
+	go func(feature features.IFeature) {
 		feature.Run()
-	}(f, m)
+	}(f)
 }
 
 func (s *Supervisor) Supervise() {
 	for _, f := range s.features {
-		s.spawn(f, s.state)
+		s.spawn(f)
 		time.Sleep(1 * time.Second)
 	}
 	//	s.Initialize()
-	fmt.Printf("Sensor [%+v] is up!\n", s.state.ID.Id())
+	fmt.Printf("Sensor [%+v] is up!\n", s.Id())
 }
 
 func (s *Supervisor) Initialize() {

@@ -14,8 +14,8 @@ func (s *Store) Load(id string) interface{} {
 }
 
 func (s *Store) Save(item interface{}) {
-	i := item.(model.Root)
-	s.Items[i.SensorId.Id()] = &i
+	i := item.(*model.Root)
+	s.Items[i.SensorId.Id()] = i
 }
 
 func NewStore() dec.IStore {
