@@ -2,25 +2,24 @@ package measure
 
 import (
 	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 const EVT_TOPIC = "th_sensor:measured"
 
 type Evt struct {
-	sensorId    string
+	aggregateId sdk.IIdentity
 	temperature float64
 	humidity    float64
 }
 
-func (e Evt) AggregateId() sdk.IIdentity {
-	return model.NewTHSensorId(e.sensorId)
+func (e *Evt) AggregateId() sdk.IIdentity {
+	return e.aggregateId
 
 }
 
-func NewEvt(sensorId string, temperature float64, humidity float64) *Evt {
+func NewEvt(aggregateId sdk.IIdentity, temperature float64, humidity float64) *Evt {
 	return &Evt{
-		sensorId:    sensorId,
+		aggregateId: aggregateId,
 		temperature: temperature,
 		humidity:    humidity,
 	}

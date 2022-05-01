@@ -7,6 +7,7 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
 	"github.com/rgfaber/go-vesca/th-sensor/features"
+	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"time"
 )
 
@@ -20,14 +21,13 @@ func ImplementsISuperviser(sup ISupervisor) bool {
 
 type Supervisor struct {
 	config *config.Config
-	//sensorId *sdk.Identity
 	bus      dec.IDECBus
 	features []features.IFeature
 }
 
 func NewSupervisor(cfg *config.Config,
 	bus dec.IDECBus,
-	features []features.IFeature) ISupervisor {
+	features []features.IFeature) *Supervisor {
 	return &Supervisor{
 		config: cfg,
 		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.sensorId()),
@@ -52,7 +52,8 @@ func (s *Supervisor) Supervise() {
 }
 
 func (s *Supervisor) Initialize() {
-	cmd := initialize.NewCmd()
+	id := model.NewTHSensorId(s.config.SensorId())
+	cmd := initialize.NewCmd(id, s.config.SensorName(), s.config.GreenhouseId(), sdk. )
 	s.bus.Publish(initialize.CMD_TOPIC, initialize.NewCmd(15.0, 50.0))
 }
 

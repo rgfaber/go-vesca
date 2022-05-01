@@ -47,7 +47,7 @@ func TestIdentity_Id(t *testing.T) {
 }
 
 func TestCleanUuid(t *testing.T) {
-	uid, _ := cleanUuid()
+	uid, _ := CleanUuid()
 	if strings.Contains(uid, "-") {
 		t.Errorf("%+v contains '-'", uid)
 	}
@@ -57,7 +57,7 @@ func TestCleanUuid(t *testing.T) {
 }
 
 func TestNullUuid(t *testing.T) {
-	uid := cleanNullUuid()
+	uid := CleanNullId()
 	if strings.Contains(uid, "-") {
 		t.Errorf("%+v contains '-'", uid)
 	}
@@ -67,7 +67,7 @@ func TestNullUuid(t *testing.T) {
 }
 
 func TestNewUuid(t *testing.T) {
-	uid, _ := newUuid()
+	uid, _ := NewUuid()
 	if !strings.Contains(uid, "-") {
 		t.Errorf("%+v  does not contain '-'", uid)
 	}
