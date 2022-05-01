@@ -30,5 +30,4 @@ func TestIfFactImplementsIFact(t *testing.T) {
 	ok := dec.ImplementsIFact(f)
 	// Then
 	assert.True(t, ok)
-
 }
