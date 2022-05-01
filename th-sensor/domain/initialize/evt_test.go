@@ -21,5 +21,7 @@ func TestEvt_ImplementsIEvt(t *testing.T) {
 	e := NewEvt(aggregateId, sdk.TEST_TRACE_ID, *model.NewMeasurement(15.0, 42.0))
 	// When
 	b := dec.ImplementsIEvt(e)
+	// Then
+	assert.True(t, b)
 
 }

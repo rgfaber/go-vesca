@@ -14,7 +14,8 @@ func TestSaveState(t *testing.T) {
 	sensorName := cfg.SensorName()
 	greenhouseId := cfg.GreenhouseId()
 	store := infra.NewStore()
-	state := model.NewRoot(sensorId, sensorName, greenhouseId)
+	id := model.NewTHSensorId(sensorId)
+	state := model.NewRoot(*id, sensorName, greenhouseId)
 	// When
 	SaveState(store, state)
 }

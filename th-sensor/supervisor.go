@@ -53,8 +53,8 @@ func (s *Supervisor) Supervise() {
 
 func (s *Supervisor) Initialize() {
 	id := model.NewTHSensorId(s.config.SensorId())
-	traceId := sdk.NewUuid()
-	cmd := initialize.NewCmd(id, s.config.SensorName(), s.config.GreenhouseId(), traceId, 15.0, 42.0)
+	traceId, _ := sdk.NewUuid()
+	cmd := initialize.NewCmd(*id, s.config.SensorName(), s.config.GreenhouseId(), traceId, 15.0, 42.0)
 	s.bus.Publish(initialize.CMD_TOPIC, cmd)
 }
 
@@ -62,6 +62,9 @@ func (s *Supervisor) measure() {
 	for {
 		fmt.Println("Triggering neasurement in 2s")
 		time.Sleep(2 * time.Second)
-		s.bus.Publish(measure.CMD_TOPIC, measure.NewCmd())
+		id := model.NewTHSensorId(s.config.SensorId())
+		traceId, _ := sdk.NewUuid()
+		cmd := measure.NewCmd(*id, traceId)
+		s.bus.Publish(measure.CMD_TOPIC, cmd)
 	}
 }

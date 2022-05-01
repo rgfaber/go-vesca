@@ -10,6 +10,7 @@ import (
 type Feature struct {
 	bus       dec.IDECBus
 	aggregate dec.IAggregate
+	emitter   dec.IEmitter
 }
 
 func (f *Feature) Bus() dec.IDECBus {
@@ -24,15 +25,25 @@ func (f *Feature) Aggregate() dec.IAggregate {
 	return f.aggregate
 }
 
-func NewFeature(bus dec.IDECBus, store dec.IStore) *Feature {
+func NewFeature(bus dec.IDECBus,
+	store dec.IStore,
+	emitter dec.IEmitter) *Feature {
 	return &Feature{
 		bus:       bus,
 		aggregate: initialize.NewAggregate(store, bus),
+		emitter:   emitter,
 	}
 }
 
 func (f *Feature) StartListening() {
-	fmt.Printf("initialize.Feature -> not listening for any domain events")
+	err := f.bus.Subscribe(initialize.EVT_TOPIC, func(evt *initialize.Evt) {
+		//		fact := initialize.NewFact(evt.AggregateId().Id(), evt.)
+	})
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+	fmt.Printf("initialize.Feature -> listening on [%+v]", initialize.EVT_TOPIC)
 }
 
 func (f *Feature) StartResponding() {

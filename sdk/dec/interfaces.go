@@ -23,6 +23,7 @@ func ImplementsICmd(cmd ICmd) bool {
 
 type IEvt interface {
 	AggregateId() sdk.IIdentity
+	TraceId() string
 }
 
 func ImplementsIEvt(evt IEvt) bool {

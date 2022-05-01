@@ -9,14 +9,14 @@ import (
 
 func TestNewFbk(t *testing.T) {
 	id := model.NewTHSensorTestID()
-	r := NewFbk(id, model.Initialized, true, "test")
+	r := NewFbk(id.Id(), model.Initialized, true, "test")
 	assert.NotNil(t, r)
 }
 
 func TestIfFbkImplementsIFbk(t *testing.T) {
 	// Given
 	id := model.NewTHSensorTestID()
-	fbk := NewFbk(id, model.Initialized, true, "test")
+	fbk := NewFbk(id.Id(), model.Initialized, true, "test")
 	// When
 	c, ok := interface{}(fbk).(dec.IFbk)
 	// Then
