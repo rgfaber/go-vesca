@@ -58,3 +58,15 @@ func TestFeature_Respond(t *testing.T) {
 	// Then
 	assert.True(t, receivedEvent)
 }
+
+func TestImplementsIFeature(t *testing.T) {
+	// Given
+	b := dec.NewDECBus()
+	s := infra.NewStore()
+	f := NewFeature(b, s)
+	// When
+	b := dec.ImplemmentsIFeature(f)
+	// Then
+	assert.True(t, b)
+
+}c
