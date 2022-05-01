@@ -20,7 +20,7 @@ func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
 	c := cmd.(*Cmd)
 	a.state = domain.LoadState(a.store, c.AggregateId().Id())
 	if a.state == nil {
-		a.state = model.NewRoot(c.SensorId, c.SensorName, c.GreenhouseId)
+		a.state = model.NewRoot(c.AggregateId().Id(), c.sensorName, c.greenhouseId)
 		a.store.Save(*a.state)
 	}
 	if !a.state.Status.HasFlag(model.Initialized) {

@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
-	"github.com/rgfaber/go-vesca/th-sensor/features"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"time"
 )
@@ -20,14 +20,14 @@ func ImplementsISuperviser(sup ISupervisor) bool {
 }
 
 type Supervisor struct {
-	config *config.Config
+	config   *config.Config
 	bus      dec.IDECBus
-	features []features.IFeature
+	features []dec.IFeature
 }
 
 func NewSupervisor(cfg *config.Config,
 	bus dec.IDECBus,
-	features []features.IFeature) *Supervisor {
+	features []dec.IFeature) *Supervisor {
 	return &Supervisor{
 		config: cfg,
 		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, cfg.sensorId()),
@@ -36,8 +36,8 @@ func NewSupervisor(cfg *config.Config,
 	}
 }
 
-func (s *Supervisor) spawn(f features.IFeature) {
-	go func(feature features.IFeature) {
+func (s *Supervisor) spawn(f dec.IFeature) {
+	go func(feature dec.IFeature) {
 		feature.Run()
 	}(f)
 }
@@ -48,13 +48,14 @@ func (s *Supervisor) Supervise() {
 		time.Sleep(1 * time.Second)
 	}
 	//	s.Initialize()
-	fmt.Printf("Sensor [%+v] is up!\n", s.Id())
+	fmt.Printf("Supervisor is up!")
 }
 
 func (s *Supervisor) Initialize() {
 	id := model.NewTHSensorId(s.config.SensorId())
-	cmd := initialize.NewCmd(id, s.config.SensorName(), s.config.GreenhouseId(), sdk. )
-	s.bus.Publish(initialize.CMD_TOPIC, initialize.NewCmd(15.0, 50.0))
+	traceId := sdk.NewUuid()
+	cmd := initialize.NewCmd(id, s.config.SensorName(), s.config.GreenhouseId(), traceId, 15.0, 42.0)
+	s.bus.Publish(initialize.CMD_TOPIC, cmd)
 }
 
 func (s *Supervisor) measure() {

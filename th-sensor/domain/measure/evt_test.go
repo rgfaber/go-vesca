@@ -1,23 +1,27 @@
 package measure
 
 import (
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
+	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewEvt(t *testing.T) {
 	// Given
-	cfg := config.NewConfig()
-	sensorId := cfg.SensorId()
+	id := model.NewTHSensorTestID()
+	sensorId := id.Value
+	traceId := sdk.TEST_TRACE_ID
 	temperature := 15.0
 	humidity := 30.0
+
 	// When
-	evt := NewEvt(sensorId, temperature, humidity)
+	evt := NewEvt(id, traceId, temperature, humidity)
 	// Then
 	assert.NotNil(t, evt)
-	assert.Equal(t, sensorId, evt.sensorId)
+	assert.Equal(t, sensorId, evt.aggregateId.Id())
 	assert.Equal(t, temperature, evt.temperature)
 	assert.Equal(t, humidity, evt.humidity)
 }
@@ -37,4 +41,3 @@ func TestIfEvtImplementsIEvt(t *testing.T) {
 	// Then
 	assert.True(t, b)
 }
-

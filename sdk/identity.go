@@ -8,22 +8,30 @@ import (
 )
 
 type Identity struct {
-	Prefix string `json:"prefix"`
-	Value  string `json:"value"`
+	prefix string `json:"prefix"`
+	value  string `json:"value"`
+}
+
+func (i *Identity) Value() string {
+	return i.value
+}
+
+func (i *Identity) Prefix() string {
+	return i.prefix
 }
 
 func (i *Identity) Id() string {
-	return fmt.Sprintf("%+v-%+v", i.Prefix, i.Value)
+	return fmt.Sprintf("%+v-%+v", i.prefix, i.value)
 }
 
 func checkPrefix(prefix string) string {
 	if prefix == "" {
-		prefix = "id"
+		prefix = DEFAULT_PREFIX
 	}
-	regex := regexp.MustCompile("^[a-z_]+$")
+	regex := regexp.MustCompile("^[a-z]+$")
 	match := regex.Match([]byte(prefix))
 	if !match {
-		err := fmt.Errorf("Prefix should only contain characters a-z (lowercase) and underscores")
+		err := fmt.Errorf("prefix should only contain characters a-z (lowercase)")
 		panic(err)
 	}
 	return prefix
@@ -37,7 +45,7 @@ func NewIdentityFrom(prefix string, id string) *Identity {
 	}
 	prefix = checkPrefix(prefix)
 	cleanId := strings.Replace(uid.String(), "-", "", -1)
-	return &Identity{Prefix: prefix, Value: cleanId}
+	return &Identity{prefix: prefix, value: cleanId}
 }
 
 func NewIdentity(prefix string) *Identity {
@@ -47,12 +55,12 @@ func NewIdentity(prefix string) *Identity {
 	regex := regexp.MustCompile("^[a-z_]+$")
 	match := regex.Match([]byte(prefix))
 	if !match {
-		err := fmt.Errorf("Prefix should only contain characters a-z (lowercase) and underscores")
+		err := fmt.Errorf("prefix should only contain characters a-z (lowercase) and underscores")
 		panic(err)
 	}
 	val, err := CleanUuid()
 	if err != nil {
 		panic(err)
 	}
-	return &Identity{Prefix: prefix, Value: val}
+	return &Identity{prefix: prefix, value: val}
 }

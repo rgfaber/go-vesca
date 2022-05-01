@@ -9,22 +9,22 @@ const CMD_TOPIC = "th_sensor:initialize"
 
 type Cmd struct {
 	measurement  model.Measurement
+	aggregateId  sdk.IIdentity
 	traceId      string
-	SensorId     string
-	SensorName   string
-	GreenhouseId string
+	sensorName   string
+	greenhouseId string
 }
 
-func NewCmd(sensorId string, sensorName string, greenhouseId string, traceId string, t, h float64) *Cmd {
+func NewCmd(aggregateId sdk.IIdentity, sensorName string, greenhouseId string, traceId string, t, h float64) *Cmd {
 	return &Cmd{
-		SensorId:     sensorId,
-		SensorName:   sensorName,
-		GreenhouseId: greenhouseId,
+		aggregateId:  aggregateId,
+		sensorName:   sensorName,
+		greenhouseId: greenhouseId,
 		traceId:      traceId,
 		measurement:  *model.NewMeasurement(t, h),
 	}
 }
 
 func (c *Cmd) AggregateId() sdk.IIdentity {
-	return model.NewTHSensorId(c.SensorId)
+	return c.aggregateId
 }

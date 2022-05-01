@@ -9,10 +9,6 @@ import (
 	"testing"
 )
 
-func verifyIFbk(f dec.IFbk) bool {
-	return true
-}
-
 func TestNewFbk(t *testing.T) {
 	// Given
 	cfg := config.NewConfig()
@@ -43,7 +39,7 @@ func TestIfFbkImplementsIFbk(t *testing.T) {
 	// Given
 	f := newTestFbk()
 	// When
-	b := verifyIFbk(f)
+	b := dec.ImplementsIFbk(f)
 	// Then
 	assert.True(t, b)
 }

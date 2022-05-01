@@ -7,19 +7,19 @@ import (
 )
 
 func TestNewIdentity(t *testing.T) {
-	id := NewIdentity("my")
+	id := NewIdentity(TEST_PREFIX)
 	if id == nil {
 		t.Errorf("id was not created")
 	}
-	if id.Prefix != "my" {
-		t.Errorf("Identity has wrong prefix. Expected 'my' got %+v", id.Prefix)
+	if id.prefix != TEST_PREFIX {
+		t.Errorf("Identity has wrong prefix. Expected 'my' got %+v", id.prefix)
 	}
 }
 
 func TestNewDefaultIdentity(t *testing.T) {
 	id := NewIdentity("")
 	assert.NotNil(t, id)
-	assert.Equal(t, "id", id.Prefix)
+	assert.Equal(t, "id", id.prefix)
 }
 
 func TestNewIdentityFrom(t *testing.T) {
@@ -27,51 +27,31 @@ func TestNewIdentityFrom(t *testing.T) {
 	if id == nil {
 		t.Errorf("No Identity was created")
 	}
-	if id.Prefix != TEST_PREFIX {
-		t.Errorf("Identity has an incorrect Prefix. Expected [%+v] Got [%+v]", TEST_PREFIX, id.Prefix)
+	if id.prefix != TEST_PREFIX {
+		t.Errorf("Identity has an incorrect prefix. Expected [%+v] Got [%+v]", TEST_PREFIX, id.prefix)
 	}
 	seed := strings.Replace(TEST_UUID, "-", "", -1)
-	if id.Value != seed {
-		t.Errorf("Identity has an incorrect Value. Expected [%+v] Got [%+v]", seed, id.Value)
+	if id.value != seed {
+		t.Errorf("Identity has an incorrect value. Expected [%+v] Got [%+v]", seed, id.value)
 	}
 }
 
 func TestIdentity_Id(t *testing.T) {
-	testPrefix := "my"
+	// Given
+	testPrefix := TEST_PREFIX
+	// When
 	id := NewIdentity(testPrefix).Id()
+	// Then
 	if !strings.HasPrefix(id, testPrefix) {
 		t.Errorf("%+v does not start with %+v", id, testPrefix)
 	}
-	//	parts :=
-
 }
 
-func TestCleanUuid(t *testing.T) {
-	uid, _ := CleanUuid()
-	if strings.Contains(uid, "-") {
-		t.Errorf("%+v contains '-'", uid)
-	}
-	if len(uid) != 32 {
-		t.Errorf("%+v is not 32 characters long", uid)
-	}
-}
-
-func TestNullUuid(t *testing.T) {
-	uid := CleanNullId()
-	if strings.Contains(uid, "-") {
-		t.Errorf("%+v contains '-'", uid)
-	}
-	if len(uid) != 32 {
-		t.Errorf("%+v is not 32 characters long", uid)
-	}
-}
-
-func TestNewUuid(t *testing.T) {
-	uid, _ := NewUuid()
-	if !strings.Contains(uid, "-") {
-		t.Errorf("%+v  does not contain '-'", uid)
-	}
-	if len(uid) != 36 {
-		t.Errorf("%+v is not 36 characters long. Length is: %+v", uid, len(uid))
-	}
+func TestImplementsIIdentity(t *testing.T) {
+	// Given
+	testId := NewIdentity(TEST_PREFIX)
+	// When
+	b := ImplementsIIdentity(testId)
+	// Then
+	assert.True(t, b)
 }

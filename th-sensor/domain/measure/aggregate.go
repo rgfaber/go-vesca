@@ -39,12 +39,22 @@ func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
 	} else {
 		hum -= 3.0
 	}
-	evt := NewEvt(a.state.SensorId.Value, temp, hum)
+	evt := NewEvt(c.AggregateId(), c.traceId, temp, hum)
+	raise(a, evt)
+	return NewFbk(c.AggregateId().Id(), c.traceId, true, a.state.Status), nil
+}
 
+func raise(a *Aggregate, e *Evt) {
+	a.Apply(e)
+	a.bus.Publish(EVT_TOPIC, e)
 }
 
 func (a *Aggregate) Apply(evt dec.IEvt) {
 	e := evt.(*Evt)
+	a.state = domain.LoadState(a.store, e.aggregateId.Id())
+	a.state.Measurement.Temperature = e.temperature
+	a.state.Measurement.Humidity = e.humidity
+	domain.SaveState(a.store, a.state)
 
 }
 

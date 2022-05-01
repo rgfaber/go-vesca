@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	GO_VESCA_TH_SENSOR_PREFIX  = "vesca_th_sensor"
-	GO_VESCA_GREENHOUSE_PREFIX = "vesca_greenhouse"
+	GO_VESCA_TH_SENSOR_PREFIX  = "thsensor"
+	GO_VESCA_GREENHOUSE_PREFIX = "greenhouse"
 )
 
 type Config struct{}

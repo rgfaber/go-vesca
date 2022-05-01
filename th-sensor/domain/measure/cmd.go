@@ -6,13 +6,18 @@ import (
 
 const CMD_TOPIC = "th_sensor:measure"
 
-type Cmd struct{}
-
-func (c *Cmd) AggregateId() sdk.IIdentity {
-	//TODO implement me
-	panic("implement me")
+type Cmd struct {
+	aggregateId sdk.IIdentity
+	traceId     string
 }
 
-func NewCmd() *Cmd {
-	return &Cmd{}
+func (c *Cmd) AggregateId() sdk.IIdentity {
+	return c.aggregateId
+}
+
+func NewCmd(aggregateId sdk.IIdentity, traceId string) *Cmd {
+	return &Cmd{
+		aggregateId: aggregateId,
+		traceId:     traceId,
+	}
 }

@@ -1,7 +1,6 @@
 package measure
 
 import (
-	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
@@ -12,19 +11,19 @@ type Fbk struct {
 	status    model.SensorStatus
 }
 
-func (f Fbk) AggregateId() sdk.IIdentity {
-	return model.NewTHSensorId(f.sensorId)
+func (f *Fbk) AggregateId() string {
+	return f.sensorId
 }
 
-func (f Fbk) Status() int {
+func (f *Fbk) Status() int {
 	return int(f.status)
 }
 
-func (f Fbk) IsSuccess() bool {
+func (f *Fbk) IsSuccess() bool {
 	return f.isSuccess
 }
 
-func (f Fbk) TraceId() string {
+func (f *Fbk) TraceId() string {
 	return f.traceId
 }
 

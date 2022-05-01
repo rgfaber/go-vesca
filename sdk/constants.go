@@ -8,4 +8,5 @@ var (
 	NULL_UUID       = uuid.Nil.String()
 	TEST_PREFIX     = "test"
 	TEST_TRACE_ID   = "test_trace_id"
+	DEFAULT_PREFIX  = "id"
 )
