@@ -12,6 +12,18 @@ type Feature struct {
 	aggregate dec.IAggregate
 }
 
+func (f *Feature) Bus() dec.IDECBus {
+	return f.bus
+}
+
+func (f *Feature) Store() dec.IStore {
+	return f.Store()
+}
+
+func (f *Feature) Aggregate() dec.IAggregate {
+	return f.aggregate
+}
+
 func NewFeature(bus dec.IDECBus, store dec.IStore) *Feature {
 	return &Feature{
 		bus:       bus,
@@ -19,18 +31,11 @@ func NewFeature(bus dec.IDECBus, store dec.IStore) *Feature {
 	}
 }
 
-func (f *Feature) Listen() {
-	err := f.bus.Subscribe(initialize.EVT_TOPIC, func(evt initialize.Evt) {
-
-	})
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-	fmt.Printf("initialize.Feature -> Listening for [%+v]\n", initialize.EVT_TOPIC)
+func (f *Feature) StartListening() {
+	fmt.Printf("initialize.Feature -> not listening for any domain events")
 }
 
-func (f *Feature) Respond() {
+func (f *Feature) StartResponding() {
 	err := f.bus.Subscribe(initialize.CMD_TOPIC, func(cmd *initialize.Cmd) {
 		f.aggregate.Attempt(cmd)
 	})
@@ -42,7 +47,7 @@ func (f *Feature) Respond() {
 }
 
 func (f *Feature) Run() {
-	f.Listen()
-	f.Respond()
+	f.StartListening()
+	f.StartResponding()
 	fmt.Println("initialize.Feature is Up!")
 }

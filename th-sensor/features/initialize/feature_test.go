@@ -7,6 +7,7 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"github.com/rgfaber/go-vesca/th-sensor/envars"
 	"github.com/rgfaber/go-vesca/th-sensor/infra"
+	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
@@ -34,7 +35,7 @@ func TestNewFeature(t *testing.T) {
 	assert.NotNil(t, f, "Feature domain.Initialize could not be created.")
 }
 
-func TestFeature_Respond(t *testing.T) {
+func TestFeature_RespondToInitializeCmd(t *testing.T) {
 	// Given
 	setEnv()
 	f := NewFeature(TestBus, TestStore)
@@ -46,15 +47,18 @@ func TestFeature_Respond(t *testing.T) {
 	hum := 20.6
 	traceId := sdk.TEST_TRACE_ID
 	receivedEvent := false
+	aggregateId := model.NewTHSensorId(sensorId)
+	cmd := initialize.NewCmd(aggregateId, sensorName, greenhouseId, traceId, temp, hum)
 	// When
-	f.Respond()
+	f.StartResponding()
 	// And
 	TestBus.Subscribe(initialize.EVT_TOPIC, func(evt dec.IEvt) {
 		e := evt.(*initialize.Evt)
 		receivedEvent = e != nil
 	})
 	// And
-	TestBus.Publish(initialize.CMD_TOPIC, initialize.NewCmd(sensorId, sensorName, greenhouseId, traceId, temp, hum))
+
+	TestBus.Publish(initialize.CMD_TOPIC, cmd)
 	// Then
 	assert.True(t, receivedEvent)
 }
@@ -65,8 +69,7 @@ func TestImplementsIFeature(t *testing.T) {
 	s := infra.NewStore()
 	f := NewFeature(b, s)
 	// When
-	b := dec.ImplemmentsIFeature(f)
+	imp := dec.ImplemmentsIFeature(f)
 	// Then
-	assert.True(t, b)
-
-}c
+	assert.True(t, imp)
+}

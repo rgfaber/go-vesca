@@ -74,8 +74,8 @@ type IFeature interface {
 	Store() IStore
 	Aggregate() IAggregate
 	Run()
-	Listen()
-	Respond()
+	StartListening()
+	StartResponding()
 }
 
 func ImplemmentsIFeature(feature IFeature) bool {

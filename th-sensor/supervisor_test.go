@@ -6,7 +6,6 @@ import (
 	"github.com/rgfaber/go-vesca/th-sensor/envars"
 	"github.com/stretchr/testify/assert"
 	"os"
-	"strings"
 	"testing"
 )
 
@@ -16,9 +15,5 @@ func TestNewSupervisor(t *testing.T) {
 	cfg := config.NewConfig()
 	supervisor := NewSupervisor(cfg, MemBus, Features)
 	assert.NotNil(t, supervisor)
-	assert.NotNil(t, supervisor.state)
-	assert.NotNil(t, supervisor.state.ID)
-	assert.Equal(t, config.GO_VESCA_TH_SENSOR_PREFIX, supervisor.state.ID.Prefix)
-	ts := strings.Replace(cfg.SensorId(), "-", "", -1)
-	assert.Equal(t, ts, supervisor.state.ID.Value)
+	assert.NotNil(t, supervisor.bus)
 }

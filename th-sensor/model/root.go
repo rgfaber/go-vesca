@@ -16,9 +16,9 @@ type Root struct {
 	SprinklerStatus sprinkler_status.SprinklerStatus `json:"sprinkler_status"`
 }
 
-func NewRoot(sensorId string, sensorName string, greenhouseId string) *Root {
+func NewRoot(sensorId sdk.Identity, sensorName string, greenhouseId string) *Root {
 	return &Root{
-		SensorId:        *NewTHSensorId(sensorId),
+		SensorId:        sensorId,
 		Greenhouse:      *NewGreenhouse(greenhouseId),
 		Details:         *NewDetails(sensorName),
 		Measurement:     *NewMeasurement(15, 23),
