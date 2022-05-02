@@ -13,9 +13,20 @@ func TestNewStore(t *testing.T) {
 }
 
 func TestIfWeCanSaveAndLoadTheModel(t *testing.T) {
+	// Given
 	s := NewStore()
 	cfg := config.NewConfig()
-	mIn := model.NewGreenhouse(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
+	id := cfg.GreenhouseId()
+	name := cfg.GreenhouseName()
+	temp := 15.0
+	hum := 42.0
+	settings := model.NewSettings(temp, hum)
+	sensorId := cfg.SensorId()
+	sensorName := cfg.SensorName()
+	sensor := model.NewSensor(sensorId, sensorName)
+	fanId := cfg.FanId()
+	fan := model.NewFan()
+	mIn := model.NewGreenhouse(id, name, *settings, *sensor, fan, sprinkler)
 	mIn.Status = model.Initialized
 	s.Save(*mIn)
 	mIn.Status = model.Killed

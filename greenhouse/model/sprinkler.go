@@ -6,13 +6,13 @@ import (
 )
 
 type Sprinkler struct {
-	ID      sdk.Identity
-	Details Details
+	ID      *sdk.Identity `json:"id"`
+	Details *Details      `json:"details"`
 }
 
 func NewSprinkler(id string, name string) *Sprinkler {
 	return &Sprinkler{
-		ID:      *sdk.NewIdentityFrom(config.GO_VESCA_SPRINKLER_PREFIX, id),
-		Details: *NewDetails(name, ""),
+		ID:      sdk.NewIdentityFrom(config.GO_VESCA_SPRINKLER_PREFIX, id),
+		Details: NewDetails(name, ""),
 	}
 }

@@ -2,7 +2,8 @@ package config
 
 import (
 	"github.com/nats-io/nats.go"
-	"github.com/rgfaber/go-vesca/greenhouse/envars"
+	"github.com/rgfaber/go-vesca/sdk"
+	"github.com/rgfaber/go-vesca/th-sensor/envars"
 	"os"
 )
 
@@ -52,19 +53,11 @@ func (c *Config) SensorId() string {
 }
 
 func (c *Config) SensorName() string {
-	name := os.Getenv(envars.GO_VESCA_TH_SENSOR_NAME)
-	if name == "" {
-		return "Sensor 0"
-	}
-	return name
+	return os.Getenv(envars.GO_VESCA_TH_SENSOR_NAME)
 }
 
 func (c *Config) GreenhouseName() string {
-	name := os.Getenv(envars.GO_VESCA_GREENHOUSE_NAME)
-	if name == "" {
-		return "Sensor 0 - Tomatoes"
-	}
-	return name
+	return os.Getenv(envars.GO_VESCA_GREENHOUSE_NAME)
 }
 
 func (c *Config) GreenhouseId() string {
@@ -81,4 +74,20 @@ func (c *Config) SprinklerId() string {
 		return sdk.TEST_UUID
 	}
 	return id
+}
+
+func (c *Config) SprinklerName() string {
+	return os.Getenv(envars.GO_VESCA_SPRINKLER_NAME)
+}
+
+func (c *Config) FanId() string {
+	id := os.Getenv(envars.GO_VESCA_FAN_ID)
+	if id == "" {
+		return sdk.TEST_UUID
+	}
+	return id
+}
+
+func (c *Config) FanName() string {
+	return os.Getenv(envars.GO_VESCA_FAN_NAME)
 }

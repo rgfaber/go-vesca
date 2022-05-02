@@ -3,7 +3,7 @@ package initialize
 import (
 	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -12,6 +12,7 @@ func TestNewFact(t *testing.T) {
 	// Given
 	aggregateId := model.NewGreenhouseTestID().Id()
 	traceId := sdk.TEST_TRACE_ID
+	gh :=
 	// When
 	f := NewFact(aggregateId, traceId)
 	// Then
@@ -23,8 +24,8 @@ func TestNewFact(t *testing.T) {
 
 func TestIfFactImplementsIFact(t *testing.T) {
 	// Given
-	aggregateId := model.NewGreenhouseTestID().Id()
 	traceId := sdk.TEST_TRACE_ID
+	gh :=
 	f := NewFact(aggregateId, traceId)
 	// When
 	ok := dec.ImplementsIFact(f)
