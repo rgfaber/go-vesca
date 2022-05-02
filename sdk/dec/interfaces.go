@@ -54,6 +54,8 @@ type IFact interface {
 	AggregateId() string
 	TraceId() string
 	Payload() interface{}
+	Topic() string
+	AsJson() string
 }
 
 func ImplementsIFact(fact IFact) bool {
