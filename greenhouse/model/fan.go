@@ -1,7 +1,6 @@
 package model
 
 import (
-	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/th-sensor/config"
 )
 
