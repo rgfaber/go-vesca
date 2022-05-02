@@ -54,8 +54,6 @@ type IFact interface {
 	AggregateId() string
 	TraceId() string
 	Payload() interface{}
-	Topic() string
-	AsJson() string
 }
 
 func ImplementsIFact(fact IFact) bool {
@@ -88,6 +86,8 @@ func ImplemmentsIFeature(feature IFeature) bool {
 type IEmitter interface {
 	Emit(fact IFact)
 	Bus() IDECBus
+	Topic() string
+	AsJson(obj interface{}) string
 }
 
 func ImplementsIEmitter(emitter IEmitter) bool {
