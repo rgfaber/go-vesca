@@ -7,4 +7,4 @@ git add .
 git commit -m "$1" -a
 git tag "$2"
 git push origin "$2"
-GOPROXY=proxy.golang.org go list -m github.com/rgfaber/go-vesca/sdk@"$2"
+GOPROXY=proxy.golang.org go list -m github.com/rgfaber/go-vesca@"$2"
