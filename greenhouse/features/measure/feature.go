@@ -2,8 +2,8 @@ package measure
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/greenhouse/domain/measure"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
 	"log"
 )
 

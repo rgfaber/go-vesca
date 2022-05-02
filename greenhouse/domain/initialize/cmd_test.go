@@ -2,7 +2,7 @@ package initialize
 
 import (
 	"fmt"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

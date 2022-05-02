@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/greenhouse/config"
+	"github.com/rgfaber/go-vesca/greenhouse/domain/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/domain/measure"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/config"
-	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
-	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"time"
 )
 

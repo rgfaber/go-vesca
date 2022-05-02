@@ -1,10 +1,10 @@
 package measure
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/config"
+	"github.com/rgfaber/go-vesca/greenhouse/domain/measure"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/config"
-	"github.com/rgfaber/go-vesca/th-sensor/domain/measure"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

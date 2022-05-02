@@ -2,10 +2,10 @@ package initialize
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/greenhouse/domain"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/domain"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type Aggregate struct {

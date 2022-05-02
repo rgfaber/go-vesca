@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/config"
+	"github.com/rgfaber/go-vesca/greenhouse/features/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/infra"
+	initializeInfra "github.com/rgfaber/go-vesca/greenhouse/infra/initialize"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/config"
-	"github.com/rgfaber/go-vesca/th-sensor/features/initialize"
-	"github.com/rgfaber/go-vesca/th-sensor/infra"
-	initializeInfra "github.com/rgfaber/go-vesca/th-sensor/infra/initialize"
 )
 
 var (

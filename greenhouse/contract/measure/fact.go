@@ -1,6 +1,6 @@
 package measure
 
-import "github.com/rgfaber/go-vesca/th-sensor/model"
+import "github.com/rgfaber/go-vesca/greenhouse/model"
 
 type Fact struct {
 	sensorId    string

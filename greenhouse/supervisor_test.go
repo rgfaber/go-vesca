@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/config"
+	"github.com/rgfaber/go-vesca/greenhouse/envars"
 	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/th-sensor/config"
-	"github.com/rgfaber/go-vesca/th-sensor/envars"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"

@@ -1,8 +1,8 @@
 package initialize
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 const EVT_TOPIC = "th_sensor:initialized"

@@ -50,6 +50,8 @@ type IFact interface {
 	AggregateId() string
 	TraceId() string
 	Payload() interface{}
+	Serialize(fact IFact) string
+	Deserialize(s string) IFact
 }
 
 func ImplementsIFact(fact IFact) bool {
@@ -60,6 +62,8 @@ type IHope interface {
 	AggregateId() string
 	TraceId() string
 	Payload() interface{}
+	Serialize(hope IHope) string
+	Deserialize(s string) IHope
 }
 
 func ImplementsIHope(hope IHope) bool {
@@ -83,7 +87,6 @@ type IEmitter interface {
 	Emit(fact IFact)
 	Bus() IDECBus
 	Topic() string
-	AsJson(fact IFact) string
 }
 
 func ImplementsIEmitter(emitter IEmitter) bool {

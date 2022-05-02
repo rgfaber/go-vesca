@@ -1,13 +1,13 @@
 package initialize
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/config"
+	"github.com/rgfaber/go-vesca/greenhouse/domain/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/envars"
+	"github.com/rgfaber/go-vesca/greenhouse/infra"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/config"
-	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
-	"github.com/rgfaber/go-vesca/th-sensor/envars"
-	"github.com/rgfaber/go-vesca/th-sensor/infra"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"

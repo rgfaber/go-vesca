@@ -1,7 +1,7 @@
 package initialize
 
 import (
-	"github.com/rgfaber/go-vesca/th-sensor/model"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 )
 
 type Fbk struct {

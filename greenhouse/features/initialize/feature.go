@@ -2,8 +2,8 @@ package initialize
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/greenhouse/domain/initialize"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/domain/initialize"
 	"log"
 )
 

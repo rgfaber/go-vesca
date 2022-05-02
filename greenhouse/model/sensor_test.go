@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/rgfaber/go-vesca/th-sensor/config"
+	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

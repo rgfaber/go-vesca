@@ -1,6 +1,6 @@
 package initialize
 
-import "github.com/rgfaber/go-vesca/th-sensor/model"
+import "github.com/rgfaber/go-vesca/greenhouse/model"
 
 const FACT_TOPIC = "greenhouse.initialized"
 
@@ -10,24 +10,24 @@ type Fact struct {
 	payload     *model.Greenhouse `json:"payload"`
 }
 
-func (f Fact) Topic() string {
+func (f *Fact) Topic() string {
 	return FACT_TOPIC
 }
 
-func (f Fact) AggregateId() string {
+func (f *Fact) AggregateId() string {
 	return f.aggregateId
 }
 
-func (f Fact) TraceId() string {
+func (f *Fact) TraceId() string {
 	return f.traceId
 }
 
-func (f Fact) Payload() interface{} {
+func (f *Fact) Payload() interface{} {
 	return f.payload
 }
 
-func NewFact(aggregateId string, traceId string, greenhouse *model.Greenhouse) Fact {
-	return Fact{
+func NewFact(aggregateId string, traceId string, greenhouse *model.Greenhouse) *Fact {
+	return &Fact{
 		aggregateId: aggregateId,
 		traceId:     traceId,
 		payload:     greenhouse,

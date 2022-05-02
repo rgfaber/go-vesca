@@ -1,8 +1,8 @@
 package infra
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/th-sensor/model"
 )
 
 type Store struct {

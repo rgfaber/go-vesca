@@ -1,8 +1,8 @@
 package model
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/th-sensor/config"
 )
 
 func NewGreenhouseTestID() *sdk.Identity {
