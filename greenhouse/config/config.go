@@ -3,7 +3,6 @@ package config
 import (
 	"github.com/nats-io/nats.go"
 	"github.com/rgfaber/go-vesca/greenhouse/envars"
-	"github.com/rgfaber/go-vesca/sdk"
 	"os"
 )
 
