@@ -87,7 +87,7 @@ type IEmitter interface {
 	Emit(fact IFact)
 	Bus() IDECBus
 	Topic() string
-	AsJson(obj interface{}) string
+	AsJson(fact IFact) string
 }
 
 func ImplementsIEmitter(emitter IEmitter) bool {
