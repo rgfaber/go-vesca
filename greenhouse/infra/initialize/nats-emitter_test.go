@@ -3,6 +3,7 @@ package initialize
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -21,7 +22,8 @@ func TestIfEmitterImplementsIEmitter(t *testing.T) {
 	// Given
 	cfg := config.NewConfig()
 	bus := infra.NewNatsBus(cfg)
-	e := NewEmitter(bus)
+	memBus := sdk.NewDECBus()
+	e := NewEmitter(memBus, bus)
 	// When
 	ok := sdk.ImplementsIEmitter(e)
 	//

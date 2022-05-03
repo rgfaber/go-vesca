@@ -2,18 +2,25 @@ package initialize
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
+	"github.com/rgfaber/go-vesca/greenhouse/infra/contract/initialize"
 	"github.com/rgfaber/go-vesca/sdk"
 )
 
 const FACT_TOPIC = "go-vesca.greenhouse.initialized"
 
 type Emitter struct {
-	natsBus infra.INatsBus
-	memBus  sdk.IDECBus
+	natsBus    infra.INatsBus
+	memBus     sdk.IDECBus
+	Serializer Serializer
+}
+
+func (e *Emitter) Topic() string {
+	return FACT_TOPIC
 }
 
 func (e *Emitter) Emit(fact sdk.IFact) {
-	e.natsBus.Publish(FACT_TOPIC, e.Serialize(fact))
+	f := fact.(*initialize.Fact)
+	e.natsBus.Publish(e.Topic(), e.Serializer.Serialize(f))
 }
 
 func (e *Emitter) Bus() sdk.IDECBus {
@@ -23,7 +30,8 @@ func (e *Emitter) Bus() sdk.IDECBus {
 
 func NewEmitter(memBus sdk.IDECBus, natsBus infra.INatsBus) *Emitter {
 	return &Emitter{
-		natsBus: natsBus,
-		memBus:  memBus,
+		natsBus:    natsBus,
+		memBus:     memBus,
+		serializer: NewSerializer(),
 	}
 }
