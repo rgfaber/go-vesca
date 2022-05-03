@@ -1,4 +1,4 @@
-package initialize
+package nats
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
@@ -39,8 +39,8 @@ func (e *Emitter) Bus() sdk.IDECBus {
 	panic("implement me")
 }
 
-func NewEmitter(memBus sdk.IDECBus, natsBus infra.INatsBus) *Emitter {
-	return &Emitter{
+func NewEmitter(memBus sdk.IDECBus, natsBus infra.INatsBus) Emitter {
+	return Emitter{
 		natsBus:    natsBus,
 		memBus:     memBus,
 		Serializer: NewSerializer(),

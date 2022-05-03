@@ -1,8 +1,10 @@
-package initialize
+package nats
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
+	"github.com/rgfaber/go-vesca/greenhouse/infra/contract/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -29,4 +31,21 @@ func TestIfEmitterImplementsIEmitter(t *testing.T) {
 	ok := sdk.ImplementsIEmitter(e)
 	//
 	assert.True(t, ok)
+}
+
+func TestEmitter_Emit(t *testing.T) {
+	// Given
+	cfg := config.NewConfig()
+	natsBus := infra.NewNatsBus(cfg)
+	memBus := sdk.NewDECBus()
+	aggregateId := model.NewGreenhouseTestID().Id()
+	traceId := sdk.TEST_TRACE_ID
+	gh := model.NewTestGreenhouse()
+	e := NewEmitter(memBus, natsBus)
+	f := initialize.NewFact(aggregateId, traceId, gh)
+	// AND
+	natsBus.Subscribe(e.Topic(), func(fact initialize.Fact) {
+
+	})
+
 }

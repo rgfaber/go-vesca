@@ -1,4 +1,4 @@
-package initialize
+package nats
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/infra/contract/initialize"

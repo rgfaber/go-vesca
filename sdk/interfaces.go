@@ -65,27 +65,6 @@ func ImplemmentsIFeature(feature IFeature) bool {
 	return true
 }
 
-type IEmitter interface {
-	Emit(fact IFact)
-	Bus() IDECBus
-	Topic() string
-	Serialize(fact IFact) []byte
-	Deserialize(s []byte) IFact
-}
-
-func ImplementsIEmitter(emitter IEmitter) bool {
-	return true
-}
-
-type IResponder interface {
-	Respond(hope IHope) (IFbk, error)
-	Bus() IDECBus
-}
-
-func ImplementsIResponder(rsp IResponder) bool {
-	return true
-}
-
 type IIdentity interface {
 	Id() string
 }
@@ -99,5 +78,41 @@ type ITopic interface {
 }
 
 func ImplementsITopic(t ITopic) bool {
+	return true
+}
+
+type IListener interface {
+	Listen(func(fact IFact))
+	Topic() string
+}
+
+func ImplementsIListener(ls IListener) bool {
+	return true
+}
+
+type IResponder interface {
+	Respond(IHope) (IFbk, error)
+	Topic() string
+}
+
+func ImplementsIResponder(rsp IResponder) bool {
+	return true
+}
+
+type IEmitter interface {
+	Emit(fact IFact)
+	Topic() string
+}
+
+func ImplementsIEmitter(emitter IEmitter) bool {
+	return true
+}
+
+type IRequester interface {
+	Request(IHope) (IFbk, error)
+	Topic() string
+}
+
+func ImplementsIRequester(requester IRequester) bool {
 	return true
 }
