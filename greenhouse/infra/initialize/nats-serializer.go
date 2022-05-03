@@ -8,7 +8,7 @@ import (
 type Serializer struct{}
 
 func (ser Serializer) Serialize(fact *initialize.Fact) []byte {
-	s, err := json.Marshal(fact)
+	s, err := json.Marshal(*fact)
 	if err != nil {
 		panic(err)
 	}

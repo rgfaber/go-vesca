@@ -12,8 +12,9 @@ func TestNewEmitter(t *testing.T) {
 	// Given
 	cfg := config.NewConfig()
 	nats := infra.NewNatsBus(cfg)
+	bus := sdk.NewDECBus()
 	// When
-	emitter := NewEmitter(nats)
+	emitter := NewEmitter(bus, nats)
 	// Then
 	assert.NotNil(t, emitter)
 }

@@ -19,19 +19,13 @@ func ImplementsICmd(cmd ICmd) bool {
 
 type IEvt interface {
 	AggregateId() IIdentity
-	TraceId() string
 }
 
 func ImplementsIEvt(evt IEvt) bool {
 	return true
 }
 
-type IFbk interface {
-	AggregateId() string
-	Status() int
-	IsSuccess() bool
-	TraceId() string
-}
+type IFbk interface{}
 
 func ImplementsIFbk(fbk IFbk) bool {
 	return true
@@ -46,23 +40,13 @@ func ImplementsIAggregate(aggregate IAggregate) bool {
 	return true
 }
 
-type IFact interface {
-	AggregateId() string
-	TraceId() string
-	Payload() interface{}
-}
+type IFact interface{}
 
 func ImplementsIFact(fact IFact) bool {
 	return true
 }
 
-type IHope interface {
-	AggregateId() string
-	TraceId() string
-	Payload() interface{}
-	Serialize(hope IHope) string
-	Deserialize(s string) IHope
-}
+type IHope interface{}
 
 func ImplementsIHope(hope IHope) bool {
 	return true

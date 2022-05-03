@@ -14,6 +14,17 @@ type Emitter struct {
 	Serializer Serializer
 }
 
+func (e *Emitter) Serialize(fact sdk.IFact) []byte {
+	//TODO implement me
+	f := fact.(*initialize.Fact)
+	return e.Serialize(f)
+}
+
+func (e *Emitter) Deserialize(s []byte) sdk.IFact {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (e *Emitter) Topic() string {
 	return FACT_TOPIC
 }
@@ -32,6 +43,6 @@ func NewEmitter(memBus sdk.IDECBus, natsBus infra.INatsBus) *Emitter {
 	return &Emitter{
 		natsBus:    natsBus,
 		memBus:     memBus,
-		serializer: NewSerializer(),
+		Serializer: NewSerializer(),
 	}
 }

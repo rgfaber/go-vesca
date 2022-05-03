@@ -7,27 +7,15 @@ import (
 const FACT_TOPIC = "greenhouse.initialized"
 
 type Fact struct {
-	aggregateId string            `json:"aggregate_id"`
-	traceId     string            `json:"trace_id"`
-	payload     *model.Greenhouse `json:"payload"`
-}
-
-func (f *Fact) AggregateId() string {
-	return f.aggregateId
-}
-
-func (f *Fact) TraceId() string {
-	return f.traceId
-}
-
-func (f *Fact) Payload() interface{} {
-	return f.payload
+	AggregateId string            `json:"aggregate_id"`
+	TraceId     string            `json:"trace_id"`
+	Payload     *model.Greenhouse `json:"Payload"`
 }
 
 func NewFact(aggregateId string, traceId string, greenhouse *model.Greenhouse) *Fact {
 	return &Fact{
-		aggregateId: aggregateId,
-		traceId:     traceId,
-		payload:     greenhouse,
+		AggregateId: aggregateId,
+		TraceId:     traceId,
+		Payload:     greenhouse,
 	}
 }
