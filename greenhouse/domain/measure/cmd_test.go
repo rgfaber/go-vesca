@@ -23,7 +23,7 @@ func TestCmdImplementsICmd(t *testing.T) {
 	traceId := sdk.TEST_TRACE_ID
 	cmd := NewCmd(*id, traceId)
 	// When
-	b := dec.ImplementsICmd(cmd)
+	b := sdk.ImplementsICmd(cmd)
 	// Then
 	assert.True(t, b)
 }

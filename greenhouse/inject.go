@@ -10,10 +10,10 @@ import (
 var (
 	Config            = config.NewConfig()
 	MemStore          = infra.NewStore()
-	MemBus            = dec.NewDECBus()
+	MemBus            = sdk.NewDECBus()
 	NatsBus           = infra.NewNatsBus(Config)
 	InitializeEmitter = initializeInfra.NewEmitter(NatsBus)
-	Features          = []dec.IFeature{
+	Features          = []sdk.IFeature{
 		initialize.NewFeature(MemBus, MemStore, InitializeEmitter),
 		//kill.NewFeature(Root, MemBus),
 		//measure.NewFeature(MemBus, MemStore),

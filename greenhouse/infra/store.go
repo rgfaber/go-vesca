@@ -2,6 +2,7 @@ package infra
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/model"
+	"github.com/rgfaber/go-vesca/sdk"
 )
 
 type Store struct {
@@ -17,7 +18,7 @@ func (s *Store) Save(item interface{}) {
 	s.Items[i.ID.Id()] = i
 }
 
-func NewStore() dec.IStore {
+func NewStore() sdk.IStore {
 	return &Store{
 		Items: make(map[string]*model.Greenhouse),
 	}

@@ -10,7 +10,7 @@ import (
 )
 
 func TestNewAggregate(t *testing.T) {
-	bus := dec.NewDECBus()
+	bus := sdk.NewDECBus()
 	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	assert.NotNil(t, a)
@@ -19,7 +19,7 @@ func TestNewAggregate(t *testing.T) {
 
 func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing.T) {
 	// Given
-	bus := dec.NewDECBus()
+	bus := sdk.NewDECBus()
 	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	cfg := config.NewConfig()
@@ -37,11 +37,11 @@ func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing
 
 func TestAggregateImplementsIAggregate(t *testing.T) {
 	//Given
-	bus := dec.NewDECBus()
+	bus := sdk.NewDECBus()
 	store := infra.NewStore()
 	a := NewAggregate(store, bus)
 	// When
-	b := dec.ImplementsIAggregate(a)
+	b := sdk.ImplementsIAggregate(a)
 	// Then
 	assert.True(t, b)
 }

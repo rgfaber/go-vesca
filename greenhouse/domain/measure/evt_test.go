@@ -25,7 +25,7 @@ func TestNewEvt(t *testing.T) {
 	assert.Equal(t, humidity, evt.humidity)
 }
 
-func verifyIEvt(e dec.IEvt) bool {
+func verifyIEvt(e sdk.IEvt) bool {
 	return true
 }
 

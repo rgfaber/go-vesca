@@ -37,7 +37,7 @@ func TestIfFbkImplementsIFbk(t *testing.T) {
 	// Given
 	f := newTestFbk()
 	// When
-	b := dec.ImplementsIFbk(f)
+	b := sdk.ImplementsIFbk(f)
 	// Then
 	assert.True(t, b)
 }

@@ -18,7 +18,7 @@ func TestEvt_ImplementsIEvt(t *testing.T) {
 	aggregateId := model.NewGreenhouseTestID()
 	e := NewEvt(aggregateId, sdk.TEST_TRACE_ID, *model.NewSettings(15.0, 42.0))
 	// When
-	b := dec.ImplementsIEvt(e)
+	b := sdk.ImplementsIEvt(e)
 	// Then
 	assert.True(t, b)
 

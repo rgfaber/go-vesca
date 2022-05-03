@@ -17,7 +17,7 @@ func TestIfFbkImplementsIFbk(t *testing.T) {
 	id := model.NewGreenhouseTestID()
 	fbk := NewFbk(id.Id(), model.Initialized, true, "test")
 	// When
-	c, ok := interface{}(fbk).(dec.IFbk)
+	c, ok := interface{}(fbk).(sdk.IFbk)
 	// Then
 	assert.NotNil(t, c)
 	assert.True(t, ok)

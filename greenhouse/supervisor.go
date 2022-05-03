@@ -20,13 +20,13 @@ func ImplementsISuperviser(sup ISupervisor) bool {
 
 type Supervisor struct {
 	config   *config.Config
-	bus      dec.IDECBus
-	features []dec.IFeature
+	bus      sdk.IDECBus
+	features []sdk.IFeature
 }
 
 func NewSupervisor(cfg *config.Config,
-	bus dec.IDECBus,
-	features []dec.IFeature) *Supervisor {
+	bus sdk.IDECBus,
+	features []sdk.IFeature) *Supervisor {
 	return &Supervisor{
 		config: cfg,
 		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, Config.sensorId()),
@@ -35,8 +35,8 @@ func NewSupervisor(cfg *config.Config,
 	}
 }
 
-func (s *Supervisor) spawn(f dec.IFeature) {
-	go func(feature dec.IFeature) {
+func (s *Supervisor) spawn(f sdk.IFeature) {
+	go func(feature sdk.IFeature) {
 		feature.Run()
 	}(f)
 }

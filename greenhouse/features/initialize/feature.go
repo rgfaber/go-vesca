@@ -7,26 +7,26 @@ import (
 )
 
 type Feature struct {
-	bus       dec.IDECBus
-	aggregate dec.IAggregate
-	emitter   dec.IEmitter
+	bus       sdk.IDECBus
+	aggregate sdk.IAggregate
+	emitter   sdk.IEmitter
 }
 
-func (f *Feature) Bus() dec.IDECBus {
+func (f *Feature) Bus() sdk.IDECBus {
 	return f.bus
 }
 
-func (f *Feature) Store() dec.IStore {
+func (f *Feature) Store() sdk.IStore {
 	return f.Store()
 }
 
-func (f *Feature) Aggregate() dec.IAggregate {
+func (f *Feature) Aggregate() sdk.IAggregate {
 	return f.aggregate
 }
 
-func NewFeature(bus dec.IDECBus,
-	store dec.IStore,
-	emitter dec.IEmitter) *Feature {
+func NewFeature(bus sdk.IDECBus,
+	store sdk.IStore,
+	emitter sdk.IEmitter) *Feature {
 	return &Feature{
 		bus:       bus,
 		aggregate: initialize.NewAggregate(store, bus),

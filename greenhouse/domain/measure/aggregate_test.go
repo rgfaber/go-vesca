@@ -9,9 +9,9 @@ import (
 func TestNewAggregate(t *testing.T) {
 	// Given
 	s := infra.NewStore()
-	b := dec.NewDECBus()
+	b := sdk.NewDECBus()
 	// When
-	var a dec.IAggregate = NewAggregate(s, b)
+	var a sdk.IAggregate = NewAggregate(s, b)
 	// Then
 	assert.NotNil(t, a)
 }

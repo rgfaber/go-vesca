@@ -7,12 +7,12 @@ import (
 )
 
 type Aggregate struct {
-	bus   dec.IDECBus
-	store dec.IStore
+	bus   sdk.IDECBus
+	store sdk.IStore
 	state *model.Greenhouse
 }
 
-func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
+func (a *Aggregate) Attempt(cmd sdk.ICmd) (sdk.IFbk, error) {
 	if cmd == nil {
 		return nil, fmt.Errorf("command cannot be nil")
 	}
@@ -46,7 +46,7 @@ func raise(a *Aggregate, e *Evt) {
 	a.bus.Publish(EVT_TOPIC, e)
 }
 
-func (a *Aggregate) Apply(evt dec.IEvt) {
+func (a *Aggregate) Apply(evt sdk.IEvt) {
 	e := evt.(*Evt)
 	a.state = domain.LoadState(a.store, e.aggregateId.Id())
 	a.state.Settings.Temperature = e.temperature
@@ -55,7 +55,7 @@ func (a *Aggregate) Apply(evt dec.IEvt) {
 
 }
 
-func NewAggregate(store dec.IStore, bus dec.IDECBus) *Aggregate {
+func NewAggregate(store sdk.IStore, bus sdk.IDECBus) *Aggregate {
 	return &Aggregate{
 		bus:   bus,
 		store: store,

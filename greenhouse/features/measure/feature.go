@@ -7,9 +7,9 @@ import (
 )
 
 type Feature struct {
-	bus       dec.IDECBus
-	store     dec.IStore
-	aggregate dec.IAggregate
+	bus       sdk.IDECBus
+	store     sdk.IStore
+	aggregate sdk.IAggregate
 }
 
 func (f *Feature) Listen() {
@@ -17,7 +17,7 @@ func (f *Feature) Listen() {
 }
 
 func (f *Feature) Respond() {
-	err := f.bus.Subscribe(measure.CMD_TOPIC, func(cmd dec.ICmd) {
+	err := f.bus.Subscribe(measure.CMD_TOPIC, func(cmd sdk.ICmd) {
 		fmt.Printf("measure.Cmd  => responds to [%+v]", measure.CMD_TOPIC)
 		f.aggregate = measure.NewAggregate(f.store, f.bus)
 		f.aggregate.Attempt(cmd)
@@ -29,7 +29,7 @@ func (f *Feature) Respond() {
 	fmt.Printf("measure.Feature -> Responding to [%+v]\n", measure.CMD_TOPIC)
 }
 
-func NewFeature(bus dec.IDECBus, store dec.IStore) *Feature {
+func NewFeature(bus sdk.IDECBus, store sdk.IStore) *Feature {
 	return &Feature{
 		store: store,
 		bus:   bus,

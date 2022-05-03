@@ -23,7 +23,7 @@ func TestIfEmitterImplementsIEmitter(t *testing.T) {
 	bus := infra.NewNatsBus(cfg)
 	e := NewEmitter(bus)
 	// When
-	ok := dec.ImplementsIEmitter(e)
+	ok := sdk.ImplementsIEmitter(e)
 	//
 	assert.True(t, ok)
 }

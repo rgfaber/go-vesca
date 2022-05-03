@@ -7,12 +7,12 @@ import (
 )
 
 type Aggregate struct {
-	store dec.IStore
-	bus   dec.IDECBus
+	store sdk.IStore
+	bus   sdk.IDECBus
 	state *model.Greenhouse
 }
 
-func (a *Aggregate) Attempt(cmd dec.ICmd) (dec.IFbk, error) {
+func (a *Aggregate) Attempt(cmd sdk.ICmd) (sdk.IFbk, error) {
 	if &cmd == nil {
 		return nil, fmt.Errorf("initialize.Attempt requires an initialize.Cmd")
 	}
@@ -36,7 +36,7 @@ func (a *Aggregate) Raise(evt *Evt) {
 	domain.Publish(a.bus, EVT_TOPIC, evt)
 }
 
-func (a *Aggregate) Apply(evt dec.IEvt) {
+func (a *Aggregate) Apply(evt sdk.IEvt) {
 	e := evt.(*Evt)
 	a.state = domain.LoadState(a.store, e.AggregateId().Id())
 	a.state.Status = model.Initialized
@@ -44,7 +44,7 @@ func (a *Aggregate) Apply(evt dec.IEvt) {
 	a.store.Save(*a.state)
 }
 
-func NewAggregate(store dec.IStore, bus dec.IDECBus) *Aggregate {
+func NewAggregate(store sdk.IStore, bus sdk.IDECBus) *Aggregate {
 	return &Aggregate{
 		bus:   bus,
 		store: store,

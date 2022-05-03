@@ -2,8 +2,8 @@ package initialize
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
+	"github.com/rgfaber/go-vesca/greenhouse/config/envars"
 	"github.com/rgfaber/go-vesca/greenhouse/domain/initialize"
-	"github.com/rgfaber/go-vesca/greenhouse/envars"
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
@@ -14,7 +14,7 @@ import (
 
 var (
 	TestStore = infra.NewStore()
-	TestBus   = dec.NewDECBus()
+	TestBus   = sdk.NewDECBus()
 )
 
 func setEnv() {
@@ -51,7 +51,7 @@ func TestFeature_RespondToInitializeCmd(t *testing.T) {
 	// When
 	f.StartResponding()
 	// And
-	TestBus.Subscribe(initialize.EVT_TOPIC, func(evt dec.IEvt) {
+	TestBus.Subscribe(initialize.EVT_TOPIC, func(evt sdk.IEvt) {
 		e := evt.(*initialize.Evt)
 		receivedEvent = e != nil
 	})
@@ -64,11 +64,11 @@ func TestFeature_RespondToInitializeCmd(t *testing.T) {
 
 func TestImplementsIFeature(t *testing.T) {
 	// Given
-	b := dec.NewDECBus()
+	b := sdk.NewDECBus()
 	s := infra.NewStore()
 	f := NewFeature(b, s)
 	// When
-	imp := dec.ImplemmentsIFeature(f)
+	imp := sdk.ImplemmentsIFeature(f)
 	// Then
 	assert.True(t, imp)
 }

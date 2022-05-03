@@ -11,7 +11,7 @@ import (
 func TestNewFeature(t *testing.T) {
 	cfg := config.NewConfig()
 	state := model.NewGreenhouse(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
-	ft := NewFeature(state, dec.NewDECBus())
+	ft := NewFeature(state, sdk.NewDECBus())
 	assert.NotNil(t, ft)
 }
 
@@ -19,7 +19,7 @@ func TestMeasure(t *testing.T) {
 
 	cfg := config.NewConfig()
 	state := model.NewGreenhouse(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
-	ft := NewFeature(state, dec.NewDECBus())
+	ft := NewFeature(state, sdk.NewDECBus())
 	assert.NotNil(t, ft)
 	go ft.Respond()
 	ft.bus.Publish(measure.CMD_TOPIC, measure.NewCmd())

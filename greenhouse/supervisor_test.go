@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
-	"github.com/rgfaber/go-vesca/greenhouse/envars"
+	"github.com/rgfaber/go-vesca/greenhouse/config/envars"
 	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/stretchr/testify/assert"
 	"os"
