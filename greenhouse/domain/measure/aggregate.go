@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/greenhouse/domain"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/dec"
 )
 
 type Aggregate struct {

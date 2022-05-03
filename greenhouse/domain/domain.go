@@ -2,7 +2,6 @@ package domain
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/dec"
 )
 
 func LoadState(store dec.IStore, aggregateId string) *model.Greenhouse {

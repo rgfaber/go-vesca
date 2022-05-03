@@ -2,7 +2,6 @@ package initialize
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
-	"github.com/rgfaber/go-vesca/sdk/dec"
 )
 
 type Emitter struct {

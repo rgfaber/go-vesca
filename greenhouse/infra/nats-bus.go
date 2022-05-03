@@ -1,6 +1,7 @@
 package infra
 
 import (
+	"github.com/nats-io/nats.go"
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"log"
 )

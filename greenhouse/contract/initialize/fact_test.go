@@ -3,7 +3,6 @@ package initialize
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/sdk/dec"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -20,7 +19,7 @@ func TestNewFact(t *testing.T) {
 	assert.NotNil(t, f)
 	assert.Equal(t, aggregateId, f.aggregateId)
 	assert.Equal(t, traceId, f.traceId)
-	assert.Nil(t, f.payload)
+	assert.NotNil(t, f.payload)
 }
 
 func TestIfFactImplementsIFact(t *testing.T) {
@@ -30,7 +29,20 @@ func TestIfFactImplementsIFact(t *testing.T) {
 	gh := model.NewTestGreenhouse()
 	f := NewFact(aggregateId, traceId, gh)
 	// When
-	ok := dec.ImplementsIFact(f)
+	ok := sdk.ImplementsIFact(f)
 	// Then
 	assert.True(t, ok)
+}
+
+func TestFact_Serialize(t *testing.T) {
+	// Given
+	aggregateId := model.NewGreenhouseTestID().Id()
+	traceId := sdk.TEST_TRACE_ID
+	gh := model.NewTestGreenhouse()
+	f := NewFact(aggregateId, traceId, gh)
+	// When
+	s := f.Serialize(f)
+	// Then
+	assert.Equal(t, "", s)
+
 }

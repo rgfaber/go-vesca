@@ -5,7 +5,6 @@ import (
 	"github.com/rgfaber/go-vesca/greenhouse/features/initialize"
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
 	initializeInfra "github.com/rgfaber/go-vesca/greenhouse/infra/initialize"
-	"github.com/rgfaber/go-vesca/sdk/dec"
 )
 
 var (

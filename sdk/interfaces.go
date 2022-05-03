@@ -50,7 +50,7 @@ type IFact interface {
 	AggregateId() string
 	TraceId() string
 	Payload() interface{}
-	Serialize(fact IFact) string
+	Serialize() string
 	Deserialize(s string) IFact
 }
 
