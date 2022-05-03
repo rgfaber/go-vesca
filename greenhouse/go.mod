@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/nats-io/nats.go v1.14.0
-	github.com/rgfaber/go-vesca/sdk v0.0.0-20220503195633-daee9c2fff82
+	github.com/rgfaber/go-vesca/sdk v0.0.0-20220503201520-b8e99579425c
 	github.com/stretchr/testify v1.7.1
 )
 

@@ -88,8 +88,6 @@ func ImplementsIResponder(rsp IResponder) bool {
 
 type IIdentity interface {
 	Id() string
-	Value() string
-	Prefix() string
 }
 
 func ImplementsIIdentity(id IIdentity) bool {

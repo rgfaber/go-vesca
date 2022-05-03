@@ -25,6 +25,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220503195633-daee9c2fff82 h1:jdAavNTDtE8tx7Ucwr4j3o3ZlIbg/uHPxaQ0rygmn/Y=
 github.com/rgfaber/go-vesca/sdk v0.0.0-20220503195633-daee9c2fff82/go.mod h1:yiB4aBeFfkPTwJL6i2nQBYptRoxVFCIKeoJPu6PyhiM=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220503201520-b8e99579425c h1:RljULoSb1tE4HpFwDy3THgTQvH23u59kJPrL+akNlGM=
+github.com/rgfaber/go-vesca/sdk v0.0.0-20220503201520-b8e99579425c/go.mod h1:yiB4aBeFfkPTwJL6i2nQBYptRoxVFCIKeoJPu6PyhiM=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=

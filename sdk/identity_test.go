@@ -11,15 +11,15 @@ func TestNewIdentity(t *testing.T) {
 	if id == nil {
 		t.Errorf("id was not created")
 	}
-	if id.prefix != TEST_PREFIX {
-		t.Errorf("Identity has wrong prefix. Expected 'my' got %+v", id.prefix)
+	if id.Prefix != TEST_PREFIX {
+		t.Errorf("Identity has wrong Prefix. Expected 'my' got %+v", id.Prefix)
 	}
 }
 
 func TestNewDefaultIdentity(t *testing.T) {
 	id := NewIdentity("")
 	assert.NotNil(t, id)
-	assert.Equal(t, "id", id.prefix)
+	assert.Equal(t, "id", id.Prefix)
 }
 
 func TestNewIdentityFrom(t *testing.T) {
@@ -27,12 +27,12 @@ func TestNewIdentityFrom(t *testing.T) {
 	if id == nil {
 		t.Errorf("No Identity was created")
 	}
-	if id.prefix != TEST_PREFIX {
-		t.Errorf("Identity has an incorrect prefix. Expected [%+v] Got [%+v]", TEST_PREFIX, id.prefix)
+	if id.Prefix != TEST_PREFIX {
+		t.Errorf("Identity has an incorrect Prefix. Expected [%+v] Got [%+v]", TEST_PREFIX, id.Prefix)
 	}
 	seed := strings.Replace(TEST_UUID, "-", "", -1)
-	if id.value != seed {
-		t.Errorf("Identity has an incorrect value. Expected [%+v] Got [%+v]", seed, id.value)
+	if id.Value != seed {
+		t.Errorf("Identity has an incorrect Value. Expected [%+v] Got [%+v]", seed, id.Value)
 	}
 }
 
