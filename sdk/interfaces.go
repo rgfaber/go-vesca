@@ -40,13 +40,17 @@ func ImplementsIAggregate(aggregate IAggregate) bool {
 	return true
 }
 
-type IFact interface{}
+type IFact interface {
+	Topic()
+}
 
 func ImplementsIFact(fact IFact) bool {
 	return true
 }
 
-type IHope interface{}
+type IHope interface {
+	Topic() string
+}
 
 func ImplementsIHope(hope IHope) bool {
 	return true
@@ -73,17 +77,8 @@ func ImplementsIIdentity(id IIdentity) bool {
 	return true
 }
 
-type ITopic interface {
-	Topic() string
-}
-
-func ImplementsITopic(t ITopic) bool {
-	return true
-}
-
 type IListener interface {
 	Listen(func(fact IFact))
-	Topic() string
 }
 
 func ImplementsIListener(ls IListener) bool {
@@ -92,7 +87,6 @@ func ImplementsIListener(ls IListener) bool {
 
 type IResponder interface {
 	Respond(IHope) (IFbk, error)
-	Topic() string
 }
 
 func ImplementsIResponder(rsp IResponder) bool {
@@ -101,7 +95,6 @@ func ImplementsIResponder(rsp IResponder) bool {
 
 type IEmitter interface {
 	Emit(fact IFact)
-	Topic() string
 }
 
 func ImplementsIEmitter(emitter IEmitter) bool {
@@ -110,7 +103,6 @@ func ImplementsIEmitter(emitter IEmitter) bool {
 
 type IRequester interface {
 	Request(IHope) (IFbk, error)
-	Topic() string
 }
 
 func ImplementsIRequester(requester IRequester) bool {

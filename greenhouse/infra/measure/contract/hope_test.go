@@ -1,4 +1,4 @@
-package measure
+package contract
 
 import (
 	"github.com/stretchr/testify/assert"

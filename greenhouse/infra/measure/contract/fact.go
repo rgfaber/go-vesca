@@ -1,4 +1,4 @@
-package measure
+package contract
 
 import "github.com/rgfaber/go-vesca/greenhouse/model"
 

@@ -1,4 +1,4 @@
-package measure
+package contract
 
 type Hope struct{}
 
