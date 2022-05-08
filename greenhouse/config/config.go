@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/nats-io/nats.go"
 	"github.com/rgfaber/go-vesca/greenhouse/config/envars"
 	"github.com/rgfaber/go-vesca/sdk"
 	"os"
@@ -18,30 +17,6 @@ type Config struct{}
 
 func NewConfig() *Config {
 	return &Config{}
-}
-
-func (c *Config) NATSUrl() string {
-	url := os.Getenv(envars.GO_VESCA_NATS_URL)
-	if url == "" {
-		return nats.DefaultURL
-	}
-	return url
-}
-
-func (c *Config) NATSUser() string {
-	usr := os.Getenv(envars.GO_VESCA_NATS_USER)
-	if usr == "" {
-		return "a"
-	}
-	return usr
-}
-
-func (c *Config) NATSPwd() string {
-	pwd := os.Getenv(envars.GO_VESCA_NATS_PWD)
-	if pwd == "" {
-		return "a"
-	}
-	return pwd
 }
 
 func (c *Config) SensorId() string {

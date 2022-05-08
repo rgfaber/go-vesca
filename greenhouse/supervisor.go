@@ -3,12 +3,14 @@ package main
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/greenhouse/config"
-	"github.com/rgfaber/go-vesca/greenhouse/domain/initialize"
-	"github.com/rgfaber/go-vesca/greenhouse/domain/measure"
+	"github.com/rgfaber/go-vesca/greenhouse/features/initialize/domain"
+	domain2 "github.com/rgfaber/go-vesca/greenhouse/features/measure/domain"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk"
 	"time"
 )
+
+var TheSupervisor = NewSupervisor(Config, MemBus, Features)
 
 type ISupervisor interface {
 	Supervise()
@@ -29,7 +31,7 @@ func NewSupervisor(cfg *config.Config,
 	features []sdk.IFeature) *Supervisor {
 	return &Supervisor{
 		config: cfg,
-		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, Config.sensorId()),
+		//sensorId: sdk.NewIdentityFrom(config.GO_VESCA_TH_SENSOR_PREFIX, BogusConfig.sensorId()),
 		features: features,
 		bus:      bus,
 	}
@@ -51,10 +53,14 @@ func (s *Supervisor) Supervise() {
 }
 
 func (s *Supervisor) Initialize() {
-	id := model.NewGreenhouseID(s.config.SensorId())
+	id := model.NewGreenhouseID(s.config.GreenhouseId())
 	traceId, _ := sdk.NewUuid()
-	cmd := initialize.NewCmd(*id, s.config.SensorName(), s.config.GreenhouseId(), traceId, 15.0, 42.0)
-	s.bus.Publish(initialize.CMD_TOPIC, cmd)
+	settings := model.NewSettings(15.0, 42.0)
+	sensor := model.NewSensor(s.config.SensorId(), s.config.SensorName())
+	fan := model.NewFan(s.config.FanId(), s.config.FanName())
+	sprinkler := model.NewSprinkler(s.config.SprinklerId(), s.config.SprinklerName())
+	cmd := domain.NewCmd(id, traceId, s.config.GreenhouseName(), settings, sensor, fan, sprinkler)
+	s.bus.Publish(domain.CMD_TOPIC, cmd)
 }
 
 func (s *Supervisor) measure() {
@@ -63,7 +69,7 @@ func (s *Supervisor) measure() {
 		time.Sleep(2 * time.Second)
 		id := model.NewGreenhouseID(s.config.SensorId())
 		traceId, _ := sdk.NewUuid()
-		cmd := measure.NewCmd(*id, traceId)
-		s.bus.Publish(measure.CMD_TOPIC, cmd)
+		cmd := domain2.NewCmd(*id, traceId)
+		s.bus.Publish(domain2.CMD_TOPIC, cmd)
 	}
 }

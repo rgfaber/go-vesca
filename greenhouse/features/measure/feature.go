@@ -2,7 +2,8 @@ package measure
 
 import (
 	"fmt"
-	"github.com/rgfaber/go-vesca/greenhouse/domain/measure"
+	domain2 "github.com/rgfaber/go-vesca/greenhouse/features/measure/domain"
+	"github.com/rgfaber/go-vesca/sdk"
 	"log"
 )
 
@@ -17,16 +18,16 @@ func (f *Feature) Listen() {
 }
 
 func (f *Feature) Respond() {
-	err := f.bus.Subscribe(measure.CMD_TOPIC, func(cmd sdk.ICmd) {
-		fmt.Printf("measure.Cmd  => responds to [%+v]", measure.CMD_TOPIC)
-		f.aggregate = measure.NewAggregate(f.store, f.bus)
+	err := f.bus.Subscribe(domain2.CMD_TOPIC, func(cmd sdk.ICmd) {
+		fmt.Printf("measure.BogusCmd  => responds to [%+v]", domain2.CMD_TOPIC)
+		f.aggregate = domain2.NewAggregate(f.store, f.bus)
 		f.aggregate.Attempt(cmd)
 	})
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-	fmt.Printf("measure.Feature -> Responding to [%+v]\n", measure.CMD_TOPIC)
+	fmt.Printf("measure.Feature -> Responding to [%+v]\n", domain2.CMD_TOPIC)
 }
 
 func NewFeature(bus sdk.IDECBus, store sdk.IStore) *Feature {

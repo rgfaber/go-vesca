@@ -14,6 +14,6 @@ func TestNewSprinkler(t *testing.T) {
 	spr := NewSprinkler(id, sprinklerName)
 	// Then
 	assert.NotNil(t, spr)
-	assert.Equal(t, id, spr.ID.Value())
+	assert.Equal(t, sdk.CLEAN_TEST_UUID, spr.ID.Value)
 	assert.Equal(t, sprinklerName, spr.Details.Name)
 }

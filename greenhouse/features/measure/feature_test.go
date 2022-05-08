@@ -1,26 +1,20 @@
 package measure
 
 import (
-	"github.com/rgfaber/go-vesca/greenhouse/config"
-	"github.com/rgfaber/go-vesca/greenhouse/domain/measure"
-	"github.com/rgfaber/go-vesca/greenhouse/model"
+	"github.com/rgfaber/go-vesca/greenhouse/features/measure/domain"
+	"github.com/rgfaber/go-vesca/sdk"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewFeature(t *testing.T) {
-	cfg := config.NewConfig()
-	state := model.NewGreenhouse(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
-	ft := NewFeature(state, sdk.NewDECBus())
+	ft := NewFeature(sdk.NewDECBus(), sdk.NewStore())
 	assert.NotNil(t, ft)
 }
 
 func TestMeasure(t *testing.T) {
-
-	cfg := config.NewConfig()
-	state := model.NewGreenhouse(cfg.SensorId(), cfg.SensorName(), cfg.GreenhouseId())
-	ft := NewFeature(state, sdk.NewDECBus())
+	ft := NewFeature(sdk.NewDECBus(), sdk.NewStore())
 	assert.NotNil(t, ft)
 	go ft.Respond()
-	ft.bus.Publish(measure.CMD_TOPIC, measure.NewCmd())
+	ft.bus.Publish(domain.CMD_TOPIC, domain.NewCmd())
 }

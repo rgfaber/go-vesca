@@ -1,21 +1,23 @@
 package model
 
-import "github.com/rgfaber/go-vesca/sdk"
+import (
+	"github.com/rgfaber/go-vesca/greenhouse/config"
+)
+
+var (
+	BogusConfig       = config.NewConfig()
+	BogusGreenhouseID = NewGreenhouseTestID()
+	BogusGreenhouse   = NewTestGreenhouse()
+	BogusTemp         = 20.0
+	BogusHumidity     = 42.0
+	BogusSettings     = NewSettings(BogusTemp, BogusHumidity)
+	BogusSensor       = NewSensor(BogusConfig.SensorId(), BogusConfig.SensorName())
+	BogusFan          = NewFan(BogusConfig.FanId(), BogusConfig.FanName())
+	BogusSprinkler    = NewSprinkler(BogusConfig.SprinklerId(), BogusConfig.SprinklerName())
+)
 
 func NewTestGreenhouse() *Greenhouse {
-	id := NewGreenhouseTestID().Value()
-	name := "Test Greenhouse"
-	temp := 20.0
-	hum := 42.0
-	settings := NewSettings(temp, hum)
-	sensorId := sdk.TEST_UUID
-	sensorName := "Test Sensor"
-	sensor := NewSensor(sensorId, sensorName)
-	fanId := sdk.TEST_UUID
-	fanName := "Test Fan"
-	fan := NewFan(fanId, fanName)
-	sprinklerId := sdk.TEST_UUID
-	sprinklerName := "Test Sprinkler"
-	sprinkler := NewSprinkler(sprinklerId, sprinklerName)
-	return NewGreenhouse(id, name, settings, sensor, fan, sprinkler)
+	id := BogusGreenhouseID.Value
+	name := BogusConfig.GreenhouseName()
+	return NewGreenhouse(id, name, BogusSettings, BogusSensor, BogusFan, BogusSprinkler)
 }

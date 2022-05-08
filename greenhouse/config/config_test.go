@@ -9,5 +9,6 @@ import (
 func TestNewConfig(t *testing.T) {
 	cfg := NewConfig()
 	assert.NotNil(t, cfg, "Could not create infra.Config")
-	fmt.Println("Config |> NATS url:", cfg.NATSUrl())
+	fmt.Println("Config |> GreenhouseId", cfg.GreenhouseId())
+	fmt.Println("Config |> GreenhouseName", cfg.GreenhouseName())
 }

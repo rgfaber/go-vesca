@@ -15,6 +15,6 @@ func TestNewFan(t *testing.T) {
 	// Then
 	assert.NotNil(t, fan)
 	assert.NotNil(t, fan.Details)
-	assert.Equal(t, id, fan.ID.Value())
+	assert.Equal(t, sdk.CLEAN_TEST_UUID, fan.ID.Value)
 	assert.Equal(t, name, fan.Details.Name)
 }
