@@ -1,9 +1,13 @@
 package interfaces
 
 type IHopeResponder interface {
-	Respond([]byte) []byte
+	Activate()
 }
 
 func ImplementsIHopeResponder(rsp IHopeResponder) bool {
 	return true
+}
+
+func BuildResponders(responders ...IHopeResponder) []IHopeResponder {
+	return responders
 }

@@ -1,16 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"github.com/rgfaber/go-vesca/greenhouse/features/initialize"
 )
 
 func main() {
-	if TheSupervisor == nil {
-		err := fmt.Errorf("Could not create Supervisor.")
-		fmt.Println("Error:", err)
-		os.Exit(-1)
-	}
-	go TheSupervisor.Supervise()
+	sup := NewSupervisor(initialize.Feature)
+	go sup.Supervise()
 	select {}
 }

@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/rgfaber/go-vesca/sdk"
+	testing2 "github.com/rgfaber/go-vesca/sdk/core/test"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -9,12 +9,12 @@ import (
 func TestNewFan(t *testing.T) {
 	// Given
 	name := "fan 0"
-	id := sdk.TEST_UUID
+	id := testing2.TEST_UUID
 	// When
 	fan := NewFan(id, name)
 	// Then
 	assert.NotNil(t, fan)
 	assert.NotNil(t, fan.Details)
-	assert.Equal(t, sdk.CLEAN_TEST_UUID, fan.ID.Value)
+	assert.Equal(t, testing2.CLEAN_TEST_UUID, fan.ID.Value)
 	assert.Equal(t, name, fan.Details.Name)
 }

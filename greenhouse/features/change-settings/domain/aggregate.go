@@ -3,11 +3,12 @@ package domain
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
 	"github.com/rgfaber/go-vesca/sdk"
+	infra2 "github.com/rgfaber/go-vesca/sdk/infra"
 )
 
 type Aggregate struct {
-	Store  sdk.IStore
-	MemBus sdk.IDECBus
+	Store  infra2.IStore
+	MemBus infra2.IDECBus
 }
 
 func (a Aggregate) Attempt(cmd sdk.ICmd) (sdk.IFbk, error) {
@@ -24,7 +25,7 @@ func (a Aggregate) Apply(evt sdk.IEvt) {
 	panic("implement me")
 }
 
-func NewAggregate(memBus sdk.IDECBus, store sdk.IStore) *Aggregate {
+func NewAggregate(memBus infra2.IDECBus, store infra2.IStore) *Aggregate {
 	return &Aggregate{
 		Store:  store,
 		MemBus: memBus,

@@ -1,7 +1,7 @@
 package interfaces
 
 type IFactEmitter interface {
-	Emit(fact IFact)
+	Activate()
 }
 
 func ImplementsIFactEmitter(emitter IFactEmitter) bool {

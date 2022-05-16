@@ -2,13 +2,14 @@ package model
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
-	"github.com/rgfaber/go-vesca/sdk"
+	"github.com/rgfaber/go-vesca/sdk/core"
+	"github.com/rgfaber/go-vesca/sdk/core/test"
 )
 
-func NewGreenhouseTestID() *sdk.Identity {
-	return sdk.NewIdentityFrom(config.GO_VESCA_GREENHOUSE_PREFIX, sdk.TEST_UUID)
+func NewGreenhouseTestID() *core.Identity {
+	return core.NewIdentityFrom(config.GO_VESCA_GREENHOUSE_PREFIX, test.TEST_UUID)
 }
 
-func NewGreenhouseID(id string) *sdk.Identity {
-	return sdk.NewIdentityFrom(config.GO_VESCA_GREENHOUSE_PREFIX, id)
+func NewGreenhouseID(id string) *core.Identity {
+	return core.NewIdentityFrom(config.GO_VESCA_GREENHOUSE_PREFIX, id)
 }

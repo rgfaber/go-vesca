@@ -1,9 +1,13 @@
 package interfaces
 
 type IFactListener interface {
-	Listen(func(fact IFact))
+	Activate()
 }
 
 func ImplementsIListener(ls IFactListener) bool {
 	return true
+}
+
+func BuildListeners(listeners ...IFactListener) []IFactListener {
+	return listeners
 }

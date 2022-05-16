@@ -2,7 +2,7 @@ package model
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
-	"github.com/rgfaber/go-vesca/sdk"
+	testing2 "github.com/rgfaber/go-vesca/sdk/core/test"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -15,5 +15,5 @@ func TestNewSensor(t *testing.T) {
 	sensor := NewSensor(id, cfg.SensorName())
 	// Then
 	assert.NotNil(t, sensor)
-	assert.Equal(t, sdk.CLEAN_TEST_UUID, sensor.ID.Value)
+	assert.Equal(t, testing2.CLEAN_TEST_UUID, sensor.ID.Value)
 }
