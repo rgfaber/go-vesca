@@ -1,4 +1,4 @@
-package initialize
+package domain
 
 import (
 	bogus_model "github.com/rgfaber/go-vesca/greenhouse/model"

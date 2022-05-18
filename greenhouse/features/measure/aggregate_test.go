@@ -10,7 +10,7 @@ import (
 
 func TestNewAggregate(t *testing.T) {
 	// Given
-	s := store.NewStore()
+	s := store.SingletonStore()
 	b := mediator.SingletonDECBus()
 	// When
 	var a sdk.IAggregate = NewAggregate(s, b)

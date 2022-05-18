@@ -3,6 +3,7 @@ package bogus
 import (
 	"encoding/json"
 	"github.com/rgfaber/go-vesca/sdk/interfaces"
+	"log"
 )
 
 var MyFactFromJson = func(data []byte) interfaces.IFact {
@@ -11,9 +12,14 @@ var MyFactFromJson = func(data []byte) interfaces.IFact {
 	return &res
 }
 
-var MyFactToJson = func(fct interfaces.IFact) ([]byte, error) {
+var MyFactToJson = func(fct interfaces.IFact) []byte {
 	//	f := fct.(*BogusFact)
-	return json.Marshal(fct)
+	res, e := json.Marshal(fct)
+	if e != nil {
+		log.Fatal(e)
+		return nil
+	}
+	return res
 }
 
 type BogusFact struct {

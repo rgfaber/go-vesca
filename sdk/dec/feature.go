@@ -12,13 +12,13 @@ type Feature struct {
 
 func (f *Feature) Run() {
 	for _, responder := range f.Responders {
-		go responder.Activate()
+		responder.Activate()
 	}
 	for _, listener := range f.Listeners {
-		go listener.Activate()
+		listener.Activate()
 	}
 	for _, handler := range f.Handlers {
-		go handler.Activate()
+		handler.Activate()
 	}
 }
 

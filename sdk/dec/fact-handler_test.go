@@ -1,4 +1,4 @@
-package contract
+package dec
 
 import (
 	"github.com/rgfaber/go-vesca/sdk/bogus"
@@ -9,9 +9,8 @@ import (
 
 func TestNewFactHandler(t *testing.T) {
 	// Given
-	fs := NewFactDeserializer(bogus.MyFactFromJson)
 	// When
-	fh := NewFactHandler(fs, nil)
+	fh := NewFactHandler(nil, nil)
 	// Then
 	assert.NotNil(t, fh)
 }
@@ -19,14 +18,13 @@ func TestNewFactHandler(t *testing.T) {
 func TestFactHandler_Handle(t *testing.T) {
 	// Given
 	factHandled := false
-	fn := func(fact interfaces.IFact) {
+	handler := func(fact interfaces.IFact) {
 		factHandled = true
 	}
-	fd := NewFactDeserializer(bogus.MyFactFromJson)
-	fh := NewFactHandler(fd, fn)
+	fh := NewFactHandler(handler, bogus.MyFactFromJson)
 	fct := bogus.NewBogusFact("aggregate", "trace")
-	fs := NewFactSerializer(bogus.MyFactToJson)
-	data, _ := fs.Serialize(fct)
+
+	data, _ := bogus.MyFactToJson(fct)
 	// When
 
 	fh.Handle(data)

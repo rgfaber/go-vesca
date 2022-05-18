@@ -19,7 +19,7 @@ func (a *Aggregate) Attempt(cmd interfaces2.ICmd) (interfaces2.IFbk, error) {
 		return nil, fmt.Errorf("command cannot be nil")
 	}
 	c := cmd.(*Cmd)
-	a.state = infra.LoadGreenhouse(c.AggregateId().Id())
+	a.state = infra.LoadGreenhouse(a.store, c.AggregateId().Id())
 	if a.state == nil {
 		return nil, fmt.Errorf("aggregate [%+v] not found", c.AggregateId().Id())
 	}
@@ -40,7 +40,7 @@ func (a *Aggregate) Attempt(cmd interfaces2.ICmd) (interfaces2.IFbk, error) {
 	}
 	evt := NewEvt(c.AggregateId(), c.traceId, temp, hum)
 	raise(a, evt)
-	return NewFbk(c.AggregateId().Id(), c.traceId, true, a.state.Status), nil
+	return NewFbk(c.AggregateId().Id(), c.traceId, a.state.Status, ""), nil
 }
 
 func raise(a *Aggregate, e *Evt) {
@@ -57,7 +57,7 @@ func (a *Aggregate) Apply(evt interfaces2.IEvt) {
 
 }
 
-func NewAggregate(store infra2.IStore, bus infra2.IDECBus) *Aggregate {
+func NewAggregate(store interfaces.IStore, bus interfaces.IDECBus) *Aggregate {
 	return &Aggregate{
 		bus:   bus,
 		store: store,

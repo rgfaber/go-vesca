@@ -1,18 +1,23 @@
 package nats
 
 import (
+	"fmt"
 	"github.com/nats-io/nats.go"
 	"github.com/rgfaber/go-vesca/sdk/infra/nats/config"
-	interfaces2 "github.com/rgfaber/go-vesca/sdk/interfaces"
 	"log"
+	"sync"
 	"time"
 )
+
+var lock = &sync.Mutex{}
+
+var singleNats *NatsBus
 
 type INatsBus interface {
 	Close()
 	Publish(topic string, data []byte)
-	Listen(topic string, handler interfaces2.IFactHandler)
-	Respond(topic string, handler interfaces2.IHopeHandler)
+	Listen(topic string, facts chan []byte)
+	Respond(topic string, hopes chan *nats.Msg)
 	Request(topic string, data []byte, timeout time.Duration) []byte
 }
 
@@ -25,31 +30,55 @@ type NatsBus struct {
 }
 
 func (b *NatsBus) Publish(topic string, data []byte) {
-	b.conn.Publish(topic, data)
+	err := b.conn.Publish(topic, data)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = b.conn.Flush()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
-func (b *NatsBus) Listen(topic string, handler interfaces2.IFactHandler) {
-	b.conn.Subscribe(topic, func(msg *nats.Msg) {
-		handler.Handle(msg.Data)
-	})
-}
-
-func (b *NatsBus) Respond(topic string, handler interfaces2.IHopeHandler) {
-	b.conn.Subscribe(topic, func(msg *nats.Msg) {
-		fbk := handler.Handle(msg.Data)
-		err := msg.Respond(fbk)
+func (b *NatsBus) Listen(topic string, facts chan []byte) {
+	go func(f chan []byte) {
+		sub, err := b.conn.Subscribe(topic,
+			func(msg *nats.Msg) {
+				f <- msg.Data
+			})
 		if err != nil {
 			log.Fatal(err)
 		}
-	})
+		err = b.conn.Flush()
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("Listening for NATS topic [%s]\n", sub.Subject)
+		select {}
+	}(facts)
+}
+
+func (b *NatsBus) Respond(topic string, hopes chan *nats.Msg) {
+	go func(c chan *nats.Msg) {
+		sub, e := b.conn.Subscribe(topic, func(msg *nats.Msg) {
+			c <- msg
+		})
+		if e != nil {
+			log.Fatal(e)
+		}
+		err := b.conn.Flush()
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("Responding to NATS Topic [%s]\n", sub.Subject)
+	}(hopes)
 }
 
 func (b *NatsBus) Request(topic string, data []byte, timeout time.Duration) []byte {
 	msg, err := b.conn.Request(topic, data, timeout)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	defer b.conn.Close()
 	return msg.Data
 }
 
@@ -57,14 +86,35 @@ func (b *NatsBus) Connection() *nats.Conn {
 	return b.conn
 }
 
-func NewNatsBus(cfg config.INatsConfig) *NatsBus {
+func SingletonNatsBus(cfg config.INatsConfig) INatsBus {
+	if singleNats == nil {
+		lock.Lock()
+		defer lock.Unlock()
+		conn, err := nats.Connect(
+			cfg.NATSUrl(),
+			nats.UserInfo(cfg.NATSUser(), cfg.NATSPwd()))
+		if err != nil {
+			log.Fatal(err)
+			defer conn.Close()
+		}
+		if conn == nil {
+			panic(err)
+		}
+		singleNats = &NatsBus{
+			conn: conn,
+		}
+	}
+	return singleNats
+}
+
+func TransientNatsBus(cfg config.INatsConfig) INatsBus {
 	conn, err := nats.Connect(
 		cfg.NATSUrl(),
 		nats.UserInfo(cfg.NATSUser(), cfg.NATSPwd()))
 	if err != nil {
 		log.Fatal(err)
+		defer conn.Close()
 	}
-	defer conn.Close()
 	if conn == nil {
 		panic(err)
 	}

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/rgfaber/go-vesca/greenhouse/features/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/initialize"
 )
 
 func main() {
-	sup := NewSupervisor(initialize.Feature)
-	go sup.Supervise()
+	sup := SingletonSupervisor(initialize.Feature)
+	sup.Supervise()
 	select {}
 }

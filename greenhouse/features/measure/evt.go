@@ -13,9 +13,12 @@ type Evt struct {
 	humidity    float64
 }
 
+func (e *Evt) TraceId() string {
+	return e.traceId
+}
+
 func (e *Evt) AggregateId() interfaces.IIdentity {
 	return e.aggregateId
-
 }
 
 func NewEvt(aggregateId interfaces.IIdentity, traceId string, temperature float64, humidity float64) *Evt {

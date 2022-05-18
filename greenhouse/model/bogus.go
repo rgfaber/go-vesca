@@ -14,6 +14,7 @@ var (
 	BogusSensor       = NewSensor(BogusConfig.SensorId(), BogusConfig.SensorName())
 	BogusFan          = NewFan(BogusConfig.FanId(), BogusConfig.FanName())
 	BogusSprinkler    = NewSprinkler(BogusConfig.SprinklerId(), BogusConfig.SprinklerName())
+	BogusDetails      = NewDetails(BogusConfig.GreenhouseName(), "")
 )
 
 func NewTestGreenhouse() *Greenhouse {

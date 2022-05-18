@@ -10,7 +10,7 @@ import (
 func TestNewStore(t *testing.T) {
 	// Given
 	// When
-	s := NewStore()
+	s := SingletonStore()
 	// Then
 	assert.NotNil(t, s)
 }
@@ -18,7 +18,7 @@ func TestNewStore(t *testing.T) {
 func TestIfWeCanSaveAndLoadTheModel(t *testing.T) {
 
 	// Given
-	s := NewStore()
+	s := SingletonStore()
 	m := bogus.NewBogusModel(testing2.TEST_UUID)
 	bogus.SaveBogusState(s, m)
 	m.Status = bogus.Started

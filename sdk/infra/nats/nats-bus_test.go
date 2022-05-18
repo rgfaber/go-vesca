@@ -10,7 +10,7 @@ func TestNewBus(t *testing.T) {
 	// Given
 	cfg := config.NewNatsConfig()
 	// When
-	b := NewNatsBus(cfg)
+	b := SingletonNatsBus(cfg)
 	// Then
 	assert.NotNil(t, b, "Could not create initialize.NatsBus")
 }
@@ -18,7 +18,7 @@ func TestNewBus(t *testing.T) {
 func TestNatsBusImplementsINatsBus(t *testing.T) {
 	// Given
 	cfg := config.NewNatsConfig()
-	b := NewNatsBus(cfg)
+	b := SingletonNatsBus(cfg)
 	// When
 	ok := ImplementsINatsBus(b)
 	// Then

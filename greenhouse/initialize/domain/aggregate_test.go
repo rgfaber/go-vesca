@@ -1,8 +1,9 @@
-package initialize
+package domain
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/greenhouse/helpers/infra"
+	"github.com/rgfaber/go-vesca/greenhouse/initialize/test"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
 	"github.com/rgfaber/go-vesca/sdk/infra/memory/store"
@@ -18,7 +19,7 @@ var (
 
 func TestNewAggregate(t *testing.T) {
 	bus := mediator.SingletonDECBus()
-	store := store.NewStore()
+	store := store.SingletonStore()
 	a := NewAggregate(store, bus)
 	assert.NotNil(t, a)
 	assert.Nil(t, a.state)
@@ -27,10 +28,10 @@ func TestNewAggregate(t *testing.T) {
 func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing.T) {
 	// Given
 	bus := mediator.SingletonDECBus()
-	store := store.NewStore()
+	store := store.SingletonStore()
 	a := NewAggregate(store, bus)
 	id := model.BogusGreenhouseID
-	cmd := BogusCmd
+	cmd := test.BogusCmd
 	// And
 	infra.SaveGreenhouse(store, model.BogusGreenhouse)
 	// When
@@ -46,7 +47,7 @@ func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing
 func TestAggregateImplementsIAggregate(t *testing.T) {
 	//Given
 	bus := mediator.SingletonDECBus()
-	store := store.NewStore()
+	store := store.SingletonStore()
 	a := NewAggregate(store, bus)
 	// When
 	b := interfaces.ImplementsIAggregate(a)

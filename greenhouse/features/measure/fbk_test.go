@@ -20,10 +20,10 @@ func TestNewFbk(t *testing.T) {
 	f := NewFbk(sensorId, traceId, isSuccess, status)
 	// Then
 	assert.NotNil(t, f)
-	assert.Equal(t, sensorId, f.sensorId)
-	assert.Equal(t, traceId, f.traceId)
+	assert.Equal(t, sensorId, f.Aggregate_Id)
+	assert.Equal(t, traceId, f.Trace_Id)
 	assert.Equal(t, isSuccess, f.isSuccess)
-	assert.Equal(t, status, f.status)
+	assert.Equal(t, status, f.Greenhouse_Status)
 }
 
 func newTestFbk() *Fbk {

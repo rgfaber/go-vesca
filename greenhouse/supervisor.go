@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/rgfaber/go-vesca/greenhouse/config"
-	"github.com/rgfaber/go-vesca/greenhouse/features/initialize"
 	"github.com/rgfaber/go-vesca/greenhouse/features/measure"
+	"github.com/rgfaber/go-vesca/greenhouse/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/initialize/domain"
+	"github.com/rgfaber/go-vesca/greenhouse/initialize/topics"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk/core"
 	memory_mediator "github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
@@ -16,10 +18,10 @@ import (
 var (
 	cfg           = config.NewConfig()
 	mediator      = memory_mediator.SingletonDECBus()
-	TheSupervisor = NewSupervisor(initialize.Feature)
+	TheSupervisor = SingletonSupervisor(initialize.Feature)
 )
 
-var lock = &sync.Mutex{}
+var supMutex = &sync.Mutex{}
 
 var singleSup *Supervisor
 
@@ -35,10 +37,10 @@ type Supervisor struct {
 	features []sdk_interfaces.IFeature
 }
 
-func NewSupervisor(features ...sdk_interfaces.IFeature) *Supervisor {
+func SingletonSupervisor(features ...sdk_interfaces.IFeature) *Supervisor {
 	if singleSup == nil {
-		lock.Lock()
-		defer lock.Unlock()
+		supMutex.Lock()
+		defer supMutex.Unlock()
 		singleSup = &Supervisor{
 			features: features,
 		}
@@ -69,8 +71,8 @@ func (s *Supervisor) Initialize() {
 	fan := model.NewFan(cfg.FanId(), cfg.FanName())
 	sprinkler := model.NewSprinkler(cfg.SprinklerId(), cfg.SprinklerName())
 	details := model.NewDetails(cfg.GreenhouseName(), "")
-	cmd := initialize.NewCmd(id, traceId, details, settings, sensor, fan, sprinkler)
-	mediator.Publish(initialize.CMD_TOPIC, cmd)
+	cmd := domain.NewCmd(id, traceId, details, settings, sensor, fan, sprinkler)
+	mediator.Publish(topics.CMD_TOPIC, cmd)
 }
 
 func (s *Supervisor) measure() {

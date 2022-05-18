@@ -11,7 +11,7 @@ import (
 func TestNewResponder(t *testing.T) {
 	// Given
 	cfg := config.NewNatsConfig()
-	natsBus := NewNatsBus(cfg)
+	natsBus := SingletonNatsBus(cfg)
 	hopeHandler := mocks2.NewIHopeHandler(t)
 	// When
 	rsp := NewNatsResponder(natsBus, "", hopeHandler)
@@ -31,7 +31,7 @@ func TestResponder_ImplementsIResponder(t *testing.T) {
 func TestResponder_Respond(t *testing.T) {
 	//// Given
 	//cfg := config.NewNatsConfig()
-	//natsBus := NewNatsBus(cfg)
+	//natsBus := SingletonNatsBus(cfg)
 	//store := memory2.NewStore()
 	//decBus := mediator.SingletonDECBus()
 	//aggregate := domain.NewAggregate(store, decBus)

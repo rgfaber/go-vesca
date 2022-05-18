@@ -10,7 +10,7 @@ import (
 
 func TestNewAggregate(t *testing.T) {
 	// Given
-	store := store.NewStore()
+	store := store.SingletonStore()
 	memBus := mediator.SingletonDECBus()
 	// When
 	agg := NewAggregate(memBus, store)
@@ -20,7 +20,7 @@ func TestNewAggregate(t *testing.T) {
 
 func TestAggregate_ImplementsIAggregate(t *testing.T) {
 	// Given
-	store := store.NewStore()
+	store := store.SingletonStore()
 	memBus := mediator.SingletonDECBus()
 	agg := NewAggregate(memBus, store)
 	// When

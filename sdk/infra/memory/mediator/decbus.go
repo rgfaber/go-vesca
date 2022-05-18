@@ -2,6 +2,7 @@ package mediator
 
 import (
 	"github.com/asaskevich/EventBus"
+	"github.com/rgfaber/go-vesca/sdk/infra/memory/interfaces"
 	"sync"
 )
 
@@ -13,7 +14,7 @@ type DECBus struct {
 
 var singleDecBus *DECBus
 
-func SingletonDECBus() *DECBus {
+func SingletonDECBus() interfaces.IDECBus {
 	if singleDecBus == nil {
 		lock.Lock()
 		defer lock.Unlock()
@@ -22,7 +23,7 @@ func SingletonDECBus() *DECBus {
 	return singleDecBus
 }
 
-func TransientDECBus() *DECBus {
+func TransientDECBus() interfaces.IDECBus {
 	return &DECBus{bus: EventBus.New()}
 }
 

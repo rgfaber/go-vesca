@@ -13,7 +13,7 @@ func Test_New_NatsEmitter(t *testing.T) {
 	nats := nats.NewINatsBus(t)
 	eh := mocks_interfaces.NewIEventHandler(t)
 	// When
-	fe := NewNatsEmitter(nats, "me", eh, nil, nil)
+	fe := NewNatsEmitter(nats, "me", eh)
 	// Then
 	assert.NotNil(t, fe)
 }

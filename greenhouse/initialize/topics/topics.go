@@ -1,4 +1,4 @@
-package initialize
+package topics
 
 const (
 	NATS_HOPE_TOPIC = "govesca.greenhouse.initialize"

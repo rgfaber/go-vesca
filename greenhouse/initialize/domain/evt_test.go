@@ -1,6 +1,7 @@
-package initialize
+package domain
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/initialize/test"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
 	testing2 "github.com/rgfaber/go-vesca/sdk/core/test"
 	"github.com/rgfaber/go-vesca/sdk/interfaces"
@@ -19,7 +20,7 @@ func TestNewEvt(t *testing.T) {
 
 func TestEvt_ImplementsIEvt(t *testing.T) {
 	// Given
-	e := BogusEvt
+	e := test.BogusEvt
 	// When
 	b := interfaces.ImplementsIEvt(e)
 	// Then

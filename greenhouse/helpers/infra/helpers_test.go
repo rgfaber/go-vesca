@@ -9,7 +9,7 @@ import (
 
 func TestSaveGreenhouse(t *testing.T) {
 	// Given
-	store := store.NewStore()
+	store := store.SingletonStore()
 	state := model.NewTestGreenhouse()
 	// And
 	id := state.ID

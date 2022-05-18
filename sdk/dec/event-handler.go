@@ -16,6 +16,12 @@ func (h *EventHandler) Activate() {
 	h.MemBus.WaitAsync()
 }
 
+func (h *EventHandler) Subscribe(events chan sdk_interfaces.IEvt, transactional bool) {
+	h.MemBus.SubscribeAsync(h.Topic, func(evt sdk_interfaces.IEvt) {
+		events <- evt
+	}, transactional)
+}
+
 func NewEventHandler(memBus interfaces.IDECBus, topic string, handle func(evt sdk_interfaces.IEvt)) *EventHandler {
 	return &EventHandler{
 		MemBus: memBus,

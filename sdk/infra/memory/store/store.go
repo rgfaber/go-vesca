@@ -1,6 +1,9 @@
 package store
 
-import "sync"
+import (
+	"github.com/rgfaber/go-vesca/sdk/infra/memory/interfaces"
+	"sync"
+)
 
 var lock = &sync.Mutex{}
 
@@ -18,7 +21,7 @@ func (s *Store) Save(id string, item interface{}) {
 	s.Items[id] = item
 }
 
-func NewStore() *Store {
+func SingletonStore() interfaces.IStore {
 	if singleStore == nil {
 		lock.Lock()
 		defer lock.Unlock()
@@ -27,4 +30,10 @@ func NewStore() *Store {
 		}
 	}
 	return singleStore
+}
+
+func TransientStore() interfaces.IStore {
+	return &Store{
+		Items: make(map[string]interface{}),
+	}
 }

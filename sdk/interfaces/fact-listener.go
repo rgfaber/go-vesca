@@ -4,7 +4,7 @@ type IFactListener interface {
 	Activate()
 }
 
-func ImplementsIListener(ls IFactListener) bool {
+func ImplementsIFactListener(ls IFactListener) bool {
 	return true
 }
 
