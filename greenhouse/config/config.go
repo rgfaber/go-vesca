@@ -1,8 +1,8 @@
 package config
 
 import (
+	"github.com/rgfaber/go-vesca/go-scream/core/test"
 	"github.com/rgfaber/go-vesca/greenhouse/config/envars"
-	"github.com/rgfaber/go-vesca/sdk/core/test"
 	"os"
 )
 

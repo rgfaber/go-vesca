@@ -1,8 +1,8 @@
 package infra
 
 import (
+	"github.com/rgfaber/go-vesca/go-scream/infra/memory/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/infra/memory/interfaces"
 )
 
 func LoadGreenhouse(store interfaces.IStore, aggregateId string) *model.Greenhouse {

@@ -1,14 +1,14 @@
 package domain
 
 import (
+	"github.com/rgfaber/go-vesca/go-scream/core"
+	mem_interfaces "github.com/rgfaber/go-vesca/go-scream/infra/memory/interfaces"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/helpers/domain"
 	"github.com/rgfaber/go-vesca/greenhouse/helpers/infra"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/infra/memory"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/topics"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/core"
-	mem_interfaces "github.com/rgfaber/go-vesca/sdk/infra/memory/interfaces"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
 )
 
 type Aggregate struct {

@@ -2,29 +2,34 @@ package contract
 
 import (
 	"encoding/json"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"log"
 )
 
 var (
 	Hope2Json = func(hope interfaces.IHope) []byte {
 		h := hope.(*Hope)
-		res, e := json.Marshal(h)
-		if e != nil {
+		res, err := json.Marshal(h)
+		if err != nil {
+			log.Fatal(err)
 			return nil
 		}
 		return res
 	}
 	Json2Hope = func(data []byte) interfaces.IHope {
 		var hp Hope
-		json.Unmarshal(data, &hp)
+		err := json.Unmarshal(data, &hp)
+		if err != nil {
+			log.Fatal(err)
+			return nil
+		}
 		return &hp
 	}
 	Fact2Json = func(fact interfaces.IFact) []byte {
 		f := fact.(*Fact)
-		res, e := json.Marshal(f)
-		if e != nil {
-			log.Fatal(e)
+		res, err := json.Marshal(f)
+		if err != nil {
+			log.Fatal(err)
 			return nil
 		}
 		return res

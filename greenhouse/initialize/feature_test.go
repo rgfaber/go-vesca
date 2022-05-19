@@ -2,6 +2,10 @@ package initialize
 
 import (
 	"fmt"
+	core_test "github.com/rgfaber/go-vesca/go-scream/core/test"
+	"github.com/rgfaber/go-vesca/go-scream/dec"
+	"github.com/rgfaber/go-vesca/go-scream/infra/nats"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/config/envars"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/contract"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/domain"
@@ -9,10 +13,6 @@ import (
 	initialize_nats "github.com/rgfaber/go-vesca/greenhouse/initialize/infra/nats"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/topics"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	core_test "github.com/rgfaber/go-vesca/sdk/core/test"
-	"github.com/rgfaber/go-vesca/sdk/dec"
-	"github.com/rgfaber/go-vesca/sdk/infra/nats"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"sync"

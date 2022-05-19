@@ -1,8 +1,8 @@
 package memory
 
 import (
-	memory_mediator "github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
-	memory_store "github.com/rgfaber/go-vesca/sdk/infra/memory/store"
+	memory_mediator "github.com/rgfaber/go-vesca/go-scream/infra/memory/mediator"
+	memory_store "github.com/rgfaber/go-vesca/go-scream/infra/memory/store"
 )
 
 var (

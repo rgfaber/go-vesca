@@ -1,8 +1,7 @@
 package domain
 
 import (
-	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk"
+	"github.com/rgfaber/go-vesca/go-scream"
 )
 
 const EVT_TOPIC = "greenhouse:settings-changed"

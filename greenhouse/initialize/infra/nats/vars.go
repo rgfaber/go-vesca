@@ -2,13 +2,14 @@ package nats
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/go-scream/dec"
+	sdk_nats "github.com/rgfaber/go-vesca/go-scream/infra/nats"
+	"github.com/rgfaber/go-vesca/go-scream/infra/nats/config"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/contract"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/domain"
+	"github.com/rgfaber/go-vesca/greenhouse/initialize/infra/memory"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/topics"
-	"github.com/rgfaber/go-vesca/sdk/dec"
-	sdk_nats "github.com/rgfaber/go-vesca/sdk/infra/nats"
-	"github.com/rgfaber/go-vesca/sdk/infra/nats/config"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
 	"time"
 )
 
@@ -28,6 +29,12 @@ var (
 		data := Bus.Request(topics.NATS_HOPE_TOPIC, contract.Hope2Json(hope), 5*60*time.Second)
 		return domain.Json2Fbk(data)
 	}
+
+	hopeHandler = dec.NewHopeHandler(domain.Root, domain.Hope2Cmd, contract.Json2Hope, domain.Fbk2Json)
+
+	Responder = sdk_nats.NewNatsResponder(Bus, topics.NATS_HOPE_TOPIC, hopeHandler)
+
+	Emitter = dec.NewEventHandler(memory.Mediator, topics.EVT_TOPIC, Emit2Nats)
 
 	OwnFactHandler = func(fact interfaces.IFact) {
 		fmt.Printf("Received fact [%+v]", fact)

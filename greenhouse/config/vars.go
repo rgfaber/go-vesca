@@ -1,8 +1,8 @@
 package config
 
 import (
-	"github.com/rgfaber/go-vesca/sdk/infra/nats"
-	"github.com/rgfaber/go-vesca/sdk/infra/nats/config"
+	"github.com/rgfaber/go-vesca/go-scream/infra/nats"
+	"github.com/rgfaber/go-vesca/go-scream/infra/nats/config"
 )
 
 var (

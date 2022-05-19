@@ -1,9 +1,8 @@
 package domain
 
 import (
+	infra2 "github.com/rgfaber/go-vesca/go-scream/infra"
 	"github.com/rgfaber/go-vesca/greenhouse/infra"
-	"github.com/rgfaber/go-vesca/sdk"
-	infra2 "github.com/rgfaber/go-vesca/sdk/infra"
 )
 
 type Aggregate struct {

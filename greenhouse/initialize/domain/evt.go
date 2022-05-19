@@ -1,8 +1,8 @@
 package domain
 
 import (
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
 )
 
 type Evt struct {

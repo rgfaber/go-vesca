@@ -1,7 +1,7 @@
 package measure
 
 import (
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 )
 
 const EVT_TOPIC = "th_sensor:measured"

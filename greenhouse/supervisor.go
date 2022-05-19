@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/go-scream/core"
+	memory_mediator "github.com/rgfaber/go-vesca/go-scream/infra/memory/mediator"
+	sdk_interfaces "github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/greenhouse/features/measure"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/domain"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/topics"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/core"
-	memory_mediator "github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
-	sdk_interfaces "github.com/rgfaber/go-vesca/sdk/interfaces"
 	"sync"
 	"time"
 )

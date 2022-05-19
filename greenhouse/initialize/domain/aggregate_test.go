@@ -1,13 +1,13 @@
 package domain
 
 import (
+	"github.com/rgfaber/go-vesca/go-scream/infra/memory/mediator"
+	"github.com/rgfaber/go-vesca/go-scream/infra/memory/store"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/greenhouse/helpers/infra"
 	"github.com/rgfaber/go-vesca/greenhouse/initialize/test"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
-	"github.com/rgfaber/go-vesca/sdk/infra/memory/store"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

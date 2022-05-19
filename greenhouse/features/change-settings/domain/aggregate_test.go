@@ -1,9 +1,8 @@
 package domain
 
 import (
-	"github.com/rgfaber/go-vesca/sdk"
-	"github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
-	"github.com/rgfaber/go-vesca/sdk/infra/memory/store"
+	"github.com/rgfaber/go-vesca/go-scream/infra/memory/mediator"
+	"github.com/rgfaber/go-vesca/go-scream/infra/memory/store"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

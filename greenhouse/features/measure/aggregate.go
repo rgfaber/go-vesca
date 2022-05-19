@@ -2,10 +2,10 @@ package measure
 
 import (
 	"fmt"
+	"github.com/rgfaber/go-vesca/go-scream/infra/memory/interfaces"
+	interfaces2 "github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/helpers/infra"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk/infra/memory/interfaces"
-	interfaces2 "github.com/rgfaber/go-vesca/sdk/interfaces"
 )
 
 type Aggregate struct {

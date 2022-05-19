@@ -1,9 +1,9 @@
 package contract
 
 import (
+	testing2 "github.com/rgfaber/go-vesca/go-scream/core/test"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	testing2 "github.com/rgfaber/go-vesca/sdk/core/test"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

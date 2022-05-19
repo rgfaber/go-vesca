@@ -2,7 +2,6 @@ package domain
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/sdk"
 )
 
 const CMD_TOPIC = "greenhouse:change-settings"

@@ -1,8 +1,8 @@
 package measure
 
 import (
-	"github.com/rgfaber/go-vesca/sdk/core"
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
+	"github.com/rgfaber/go-vesca/go-scream/core"
+	"github.com/rgfaber/go-vesca/go-scream/interfaces"
 )
 
 const CMD_TOPIC = "th_sensor:measure"
