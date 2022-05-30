@@ -1,27 +1,32 @@
 package domain
 
 import (
-	"github.com/rgfaber/go-vesca/sdk/interfaces"
+	"github.com/rgfaber/go-vesca/sdk/core"
 )
 
 const EVT_TOPIC = "th_sensor:measured"
 
 type Evt struct {
-	aggregateId interfaces.IIdentity
+	aggregateId core.IIdentity
 	traceId     string
 	temperature float64
 	humidity    float64
+}
+
+func (e *Evt) Order() int {
+	//TODO implement me
+	panic("implement me")
 }
 
 func (e *Evt) TraceId() string {
 	return e.traceId
 }
 
-func (e *Evt) AggregateId() interfaces.IIdentity {
+func (e *Evt) AggregateId() core.IIdentity {
 	return e.aggregateId
 }
 
-func NewEvt(aggregateId interfaces.IIdentity, traceId string, temperature float64, humidity float64) *Evt {
+func NewEvt(aggregateId core.IIdentity, traceId string, temperature float64, humidity float64) *Evt {
 	return &Evt{
 		aggregateId: aggregateId,
 		traceId:     traceId,

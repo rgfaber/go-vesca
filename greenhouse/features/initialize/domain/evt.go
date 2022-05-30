@@ -11,6 +11,11 @@ type Evt struct {
 	Greenhouse  *model.Greenhouse
 }
 
+func (e *Evt) Order() int {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (e *Evt) TraceId() string {
 	return e.traceId
 }

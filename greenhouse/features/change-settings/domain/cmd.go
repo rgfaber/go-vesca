@@ -2,20 +2,21 @@ package domain
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/model"
+	"github.com/rgfaber/go-vesca/sdk/core"
 )
 
 const CMD_TOPIC = "greenhouse:change-settings"
 
 type Cmd struct {
-	aggregateId sdk.IIdentity
+	aggregateId core.IIdentity
 	Settings    *model.Settings
 }
 
-func (c *Cmd) AggregateId() sdk.IIdentity {
+func (c *Cmd) AggregateId() core.IIdentity {
 	return c.aggregateId
 }
 
-func NewCmd(aggregateId sdk.IIdentity, settings *model.Settings) *Cmd {
+func NewCmd(aggregateId core.IIdentity, settings *model.Settings) *Cmd {
 	return &Cmd{
 		aggregateId: aggregateId,
 		Settings:    settings,

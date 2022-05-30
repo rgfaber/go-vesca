@@ -37,7 +37,7 @@ func (m EventStream) AppendEvent(aggregateId core.IIdentity, evt domain.IEvt) {
 	panic("implement me")
 }
 
-func NewMemEvents(mediator memory_mediator.IDECBus, reader event_store.IPlayer) IEventStream {
+func NewMemEvents(mediator memory_mediator.IDECBus, reader event_store.IPlayer) domain.IEventStream {
 	return &EventStream{
 		Events:   make(map[string]domain.IEvt),
 		Mediator: mediator,

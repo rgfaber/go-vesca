@@ -18,6 +18,16 @@ type Aggregate struct {
 	state *model.Greenhouse
 }
 
+func (a *Aggregate) LoadEvents(aggregateId core.IIdentity) []sdk_domain.IEvt {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (a *Aggregate) AppendEvent(evt sdk_domain.IEvt) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (a *Aggregate) Attempt(cmd sdk_domain.ICmd) sdk_domain.IFbk {
 	fbk := NewFbk("", model.Error, "", "")
 	if &cmd == nil {

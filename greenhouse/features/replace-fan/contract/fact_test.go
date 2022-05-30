@@ -13,10 +13,11 @@ func TestNewFact(t *testing.T) {
 	// Given
 	aggregateId := bogus.BogusGreenhouseID.Id()
 	traceId := testing2.TEST_TRACE_ID
-	gh := bogus.BogusGreenhouse
+
+	fan := bogus.BogusFan
 
 	// When
-	f := NewFact(aggregateId, traceId, gh)
+	f := NewFact(aggregateId, traceId, fan)
 	// Then
 	assert.NotNil(t, f)
 	assert.Equal(t, aggregateId, f.AggregateId())
@@ -28,8 +29,8 @@ func TestIfFactImplementsIFact(t *testing.T) {
 	// Given
 	aggregateId := model.NewGreenhouseTestID().Id()
 	traceId := testing2.TEST_TRACE_ID
-	gh := bogus.NewTestGreenhouse()
-	f := NewFact(aggregateId, traceId, gh)
+	fan := bogus.BogusFan
+	f := NewFact(aggregateId, traceId, fan)
 	// When
 	ok := domain.ImplementsIFact(f)
 	// Then

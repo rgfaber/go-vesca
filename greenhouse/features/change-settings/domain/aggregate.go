@@ -2,16 +2,17 @@ package domain
 
 import (
 	"github.com/rgfaber/go-vesca/greenhouse/helpers/infra"
-	sdk_infra "github.com/rgfaber/go-vesca/sdk/infra"
-	"github.com/rgfaber/go-vesca/sdk/infra/memory/interfaces"
+	"github.com/rgfaber/go-vesca/sdk/domain"
+	"github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
+	"github.com/rgfaber/go-vesca/sdk/infra/memory/store"
 )
 
 type Aggregate struct {
-	Store  interfaces.IStore
-	MemBus sdk_infra.IDECBus
+	Store  store.IStore
+	MemBus mediator.IDECBus
 }
 
-func (a Aggregate) Attempt(cmd sdk.ICmd) (sdk.IFbk, error) {
+func (a Aggregate) Attempt(cmd domain.ICmd) (domain.IFbk, error) {
 	if cmd == nil {
 		return nil, nil
 	}
@@ -20,12 +21,12 @@ func (a Aggregate) Attempt(cmd sdk.ICmd) (sdk.IFbk, error) {
 
 }
 
-func (a Aggregate) Apply(evt sdk.IEvt) {
+func (a Aggregate) Apply(evt domain.IEvt) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func NewAggregate(memBus sdk_infra.IDECBus, store sdk_infra.IStore) *Aggregate {
+func NewAggregate(memBus mediator.IDECBus, store store.IStore) *Aggregate {
 	return &Aggregate{
 		Store:  store,
 		MemBus: memBus,
