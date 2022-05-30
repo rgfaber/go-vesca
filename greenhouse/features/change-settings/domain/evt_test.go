@@ -1,9 +1,5 @@
 package domain
 
-import (
-	"github.com/rgfaber/go-vesca/go-scream"
-)
-
 const EVT_TOPIC = "greenhouse:settings-changed"
 
 type Evt struct {

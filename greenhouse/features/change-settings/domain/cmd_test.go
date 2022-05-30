@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"github.com/rgfaber/go-vesca/go-scream"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

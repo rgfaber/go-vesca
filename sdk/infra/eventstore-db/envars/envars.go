@@ -1,0 +1,6 @@
+package envars
+
+const (
+	ESDB_CONNECTION_STRING = "ESDB_CONNECTION_STRING"
+)
+

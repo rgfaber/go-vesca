@@ -11,6 +11,9 @@ const (
 	Initialized        GreenhouseStatus = 4
 	FanActivated       GreenhouseStatus = 8
 	SprinklerActivated GreenhouseStatus = 16
+	FanReplaced        GreenhouseStatus = 32
+	SensorReplaced     GreenhouseStatus = 64
+	SprinklerReplaced  GreenhouseStatus = 128
 )
 
 func (s GreenhouseStatus) HasFlag(flag GreenhouseStatus) bool {

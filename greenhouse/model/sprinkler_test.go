@@ -1,7 +1,7 @@
 package model
 
 import (
-	testing2 "github.com/rgfaber/go-vesca/go-scream/core/test"
+	testing2 "github.com/rgfaber/go-vesca/sdk/core/mocks"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

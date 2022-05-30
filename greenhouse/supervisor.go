@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/rgfaber/go-vesca/go-scream/core"
-	memory_mediator "github.com/rgfaber/go-vesca/go-scream/infra/memory/mediator"
-	sdk_interfaces "github.com/rgfaber/go-vesca/go-scream/interfaces"
 	"github.com/rgfaber/go-vesca/greenhouse/config"
-	"github.com/rgfaber/go-vesca/greenhouse/features/measure"
-	"github.com/rgfaber/go-vesca/greenhouse/initialize"
-	"github.com/rgfaber/go-vesca/greenhouse/initialize/domain"
-	"github.com/rgfaber/go-vesca/greenhouse/initialize/topics"
+	"github.com/rgfaber/go-vesca/greenhouse/features/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/features/initialize/domain"
+	"github.com/rgfaber/go-vesca/greenhouse/features/initialize/topics"
+	domain2 "github.com/rgfaber/go-vesca/greenhouse/features/measure-th/domain"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
+	"github.com/rgfaber/go-vesca/sdk/core"
+	sdk_interfaces "github.com/rgfaber/go-vesca/sdk/features"
+	memory_mediator "github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
 	"sync"
 	"time"
 )
@@ -81,7 +81,7 @@ func (s *Supervisor) measure() {
 		time.Sleep(2 * time.Second)
 		id := model.NewGreenhouseID(cfg.SensorId())
 		traceId, _ := core.NewUuid()
-		cmd := measure.NewCmd(*id, traceId)
-		mediator.Publish(measure.CMD_TOPIC, cmd)
+		cmd := domain2.NewCmd(*id, traceId)
+		mediator.Publish(domain2.CMD_TOPIC, cmd)
 	}
 }

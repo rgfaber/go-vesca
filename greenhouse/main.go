@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rgfaber/go-vesca/greenhouse/initialize"
+	"github.com/rgfaber/go-vesca/greenhouse/features/initialize"
 )
 
 func main() {

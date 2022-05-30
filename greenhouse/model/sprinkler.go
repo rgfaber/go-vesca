@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/rgfaber/go-vesca/go-scream/core"
 	"github.com/rgfaber/go-vesca/greenhouse/config"
+	"github.com/rgfaber/go-vesca/sdk/core"
 )
 
 type Sprinkler struct {
