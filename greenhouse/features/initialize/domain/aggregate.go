@@ -12,6 +12,10 @@ import (
 	"github.com/rgfaber/go-vesca/sdk/infra/memory/store"
 )
 
+var (
+	Root = NewAggregate(memory.Store, memory.Mediator)
+)
+
 type Aggregate struct {
 	store store.IStore
 	bus   mediator.IDECBus
@@ -61,7 +65,7 @@ func (a *Aggregate) Apply(evt sdk_domain.IEvt) {
 	infra.SaveGreenhouse(a.store, a.state)
 }
 
-func NewAggregate(store store.IStore, bus mediator.IDECBus) *Aggregate {
+func NewAggregate(store store.IStore, bus mediator.IDECBus) sdk_domain.IAggregate {
 	return &Aggregate{
 		bus:   bus,
 		store: store,

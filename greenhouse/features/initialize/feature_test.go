@@ -105,7 +105,7 @@ func Test_Hope2Cmd(t *testing.T) {
 		bogus.BogusFan,
 		bogus.BogusSprinkler)
 	// When
-	cmd := initialize_domain.Hope2Cmd(hope)
+	cmd := initialize_contract.Hope2Cmd(hope)
 	c := cmd.(*initialize_domain.Cmd)
 	// Then
 	assert.NotNil(t, cmd)
@@ -164,7 +164,7 @@ func Test_Respond2Hope(t *testing.T) {
 	// Given
 	id := bogus.BogusGreenhouseID.Id()
 	hope := initialize_contract.NewHope(id, core_mocks.TEST_TRACE_ID, bogus.BogusDetails, bogus.BogusSettings, bogus.BogusSensor, bogus.BogusFan, bogus.BogusSprinkler)
-	hopeHandler := infra.NewHopeHandler(initialize_domain.Root, initialize_domain.Hope2Cmd, initialize_contract.Json2Hope, initialize_domain.Fbk2Json)
+	hopeHandler := infra.NewHopeHandler(initialize_domain.Root, initialize_contract.Hope2Cmd, initialize_contract.Json2Hope, initialize_contract.Fbk2Json)
 	natsResponder := nats.NewNatsResponder(initialize_nats.Bus, topics.NATS_HOPE_TOPIC, hopeHandler)
 	// And
 	natsResponder.Activate()

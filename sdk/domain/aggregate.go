@@ -5,21 +5,6 @@ import (
 	"github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
 )
 
-type IEventStream interface {
-	LoadEvents(aggregateId core.IIdentity) error
-}
-
-type IAggregate interface {
-	Attempt(cmd ICmd) IFbk
-	Apply(evt IEvt)
-	LoadEvents(aggregateId core.IIdentity) []IEvt
-	AppendEvent(evt IEvt)
-}
-
-func ImplementsIAggregate(aggregate IAggregate) bool {
-	return true
-}
-
 type AggregateBase struct {
 	EventStream IEventStream
 	Mediator    mediator.IDECBus

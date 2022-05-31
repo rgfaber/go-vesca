@@ -8,7 +8,7 @@ import (
 func Test_NewMemEventStream(t *testing.T) {
 	// Given
 	// When
-	es := NewMemEvents
+	es := NewEventStream
 	// Then
 	assert.NotNil(t, es)
 }

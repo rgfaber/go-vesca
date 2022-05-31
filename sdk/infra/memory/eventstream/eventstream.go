@@ -15,11 +15,21 @@ const (
 type EventStream struct {
 	Mediator memory_mediator.IDECBus
 	Events   map[string]domain.IEvt
-	Reader   event_store.IPlayer
+	Player   event_store.IPlayer
+}
+
+func (m EventStream) AppendEvent(aggregateId core.IIdentity) error {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (m EventStream) Broadcast(events []domain.IEvt) error {
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m EventStream) LoadEvents(aggregateId core.IIdentity) error {
-	events, err := m.Reader.Replay(aggregateId.Id())
+	events, err := m.Player.Replay(aggregateId.Id())
 	sort.SliceStable(events, func(i, j int) bool {
 		return events[i].Order() < events[j].Order()
 	})
@@ -32,15 +42,10 @@ func (m EventStream) LoadEvents(aggregateId core.IIdentity) error {
 	return nil
 }
 
-func (m EventStream) AppendEvent(aggregateId core.IIdentity, evt domain.IEvt) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func NewMemEvents(mediator memory_mediator.IDECBus, reader event_store.IPlayer) domain.IEventStream {
+func NewEventStream(mediator memory_mediator.IDECBus, reader event_store.IPlayer) domain.IEventStream {
 	return &EventStream{
 		Events:   make(map[string]domain.IEvt),
 		Mediator: mediator,
-		Reader:   reader,
+		Player:   reader,
 	}
 }
