@@ -18,26 +18,36 @@ type Aggregate struct {
 	state *model.Greenhouse
 }
 
-func (a *Aggregate) Attempt(cmd sdk_domain.ICmd) sdk_domain.IFbk {
+func (a *Aggregate) LoadEvents(aggregateId core.IIdentity) []sdk_domain.IEvt {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (a *Aggregate) AppendEvent(evt sdk_domain.IEvt) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (a *Aggregate) Attempt(cmd sdk_domain.ICmd) (sdk_domain.IFbk, error) {
 	fbk := NewFbk("", model.Error, "", "")
 	if &cmd == nil {
 		fbk.Err = "cmd cannot be nil"
-		return fbk
+		return fbk, nil
 	}
 	c := cmd.(*Cmd)
 	id := c.AggregateId().(*core.Identity)
 	a.state = infra.LoadGreenhouse(memory.Store, id.Id())
 	if a.state == nil {
 		fbk.Err = "Greenhouse [%+v] not found."
-		return fbk
+		return fbk, nil
 	}
 	if !a.state.Status.HasFlag(model.Initialized) {
 		fbk.Err = "Greenhouse [%+v] not Initialized."
-		return fbk
+		return fbk, nil
 	}
 	evt := NewEvt(id, c.TraceId(), c.Fan)
 	a.Raise(evt)
-	return fbk
+	return fbk, nil
 }
 
 func (a *Aggregate) Raise(evt *Evt) {

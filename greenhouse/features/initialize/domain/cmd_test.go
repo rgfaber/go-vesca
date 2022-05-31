@@ -1,8 +1,8 @@
 package domain
 
 import (
+	bogus "github.com/rgfaber/go-vesca/greenhouse/model"
 	bogus_model "github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/greenhouse/model/bogus"
 	testing2 "github.com/rgfaber/go-vesca/sdk/core/mocks"
 	"github.com/rgfaber/go-vesca/sdk/domain"
 	"github.com/stretchr/testify/assert"

@@ -4,7 +4,7 @@ import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/greenhouse/helpers/infra"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	bogus2 "github.com/rgfaber/go-vesca/greenhouse/model/bogus"
+	bogus2 "github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk/domain"
 	"github.com/rgfaber/go-vesca/sdk/infra/memory/mediator"
 	"github.com/rgfaber/go-vesca/sdk/infra/memory/store"
@@ -22,7 +22,6 @@ func TestNewAggregate(t *testing.T) {
 	store := store.SingletonStore()
 	a := NewAggregate(store, bus)
 	assert.NotNil(t, a)
-	assert.Nil(t, a.state)
 }
 
 func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing.T) {
@@ -35,7 +34,7 @@ func TestAggregate_AttemptInitializeCmdShouldResultInInitializedState(t *testing
 	// And
 	infra.SaveGreenhouse(store, bogus2.BogusGreenhouse)
 	// When
-	fbk := a.Attempt(cmd)
+	fbk, _ := a.Attempt(cmd)
 	// Then
 	assert.NotNil(t, fbk)
 	assert.True(t, fbk.IsSuccess())

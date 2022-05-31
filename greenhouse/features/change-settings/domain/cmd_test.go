@@ -1,6 +1,8 @@
 package domain
 
 import (
+	"github.com/rgfaber/go-vesca/greenhouse/model"
+	"github.com/rgfaber/go-vesca/sdk/domain"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -21,7 +23,7 @@ func TestCmd_ImplementsICmd(t *testing.T) {
 	// Given
 	cmd := NewCmd(nil, nil)
 	// When
-	ok := sdk.ImplementsICmd(cmd)
+	ok := domain.ImplementsICmd(cmd)
 	// Then
 	assert.True(t, ok)
 

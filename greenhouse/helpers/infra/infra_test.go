@@ -1,7 +1,7 @@
 package infra
 
 import (
-	"github.com/rgfaber/go-vesca/greenhouse/model/bogus"
+	bogus "github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk/infra/memory/store"
 	"github.com/stretchr/testify/assert"
 	"testing"

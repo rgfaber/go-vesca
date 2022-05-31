@@ -4,6 +4,7 @@ import (
 	"github.com/rgfaber/go-vesca/greenhouse/config"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
 	testing2 "github.com/rgfaber/go-vesca/sdk/core/mocks"
+	"github.com/rgfaber/go-vesca/sdk/domain"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -25,7 +26,7 @@ func TestNewEvt(t *testing.T) {
 	assert.Equal(t, humidity, evt.humidity)
 }
 
-func verifyIEvt(e sdk.IEvt) bool {
+func verifyIEvt(e domain.IEvt) bool {
 	return true
 }
 

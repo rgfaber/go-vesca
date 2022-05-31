@@ -1,7 +1,7 @@
 package contract
 
 import (
-	"github.com/rgfaber/go-vesca/greenhouse/model/bogus"
+	bogus "github.com/rgfaber/go-vesca/greenhouse/model"
 	"github.com/rgfaber/go-vesca/sdk/contract"
 	testing2 "github.com/rgfaber/go-vesca/sdk/core/mocks"
 	"github.com/stretchr/testify/assert"

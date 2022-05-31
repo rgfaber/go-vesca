@@ -32,11 +32,11 @@ func (a *Aggregate) AppendEvent(evt sdk_domain.IEvt) {
 	panic("implement me")
 }
 
-func (a *Aggregate) Attempt(cmd sdk_domain.ICmd) sdk_domain.IFbk {
+func (a *Aggregate) Attempt(cmd sdk_domain.ICmd) (sdk_domain.IFbk, error) {
 	fbk := NewFbk("", model.Error, "", "")
 	if &cmd == nil {
 		fbk.Err = "cmd cannot be nil"
-		return fbk
+		return fbk, nil
 	}
 	c := cmd.(*Cmd)
 	id := c.AggregateId().(*core.Identity)
@@ -50,7 +50,7 @@ func (a *Aggregate) Attempt(cmd sdk_domain.ICmd) sdk_domain.IFbk {
 		a.Raise(evt)
 		fbk = NewFbk(c.AggregateId().Id(), a.state.Status, c.TraceId(), "")
 	}
-	return fbk
+	return fbk, nil
 }
 
 func (a *Aggregate) Raise(evt *Evt) {

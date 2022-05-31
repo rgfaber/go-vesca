@@ -9,7 +9,7 @@ type IEventStream interface {
 }
 
 type IAggregate interface {
-	Attempt(cmd ICmd) IFbk
+	Attempt(cmd ICmd) (IFbk, error)
 	Apply(evt IEvt)
 	LoadEvents(aggregateId core.IIdentity) []IEvt
 	AppendEvent(evt IEvt)

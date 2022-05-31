@@ -12,6 +12,11 @@ type Cmd struct {
 	Settings    *model.Settings
 }
 
+func (c *Cmd) TraceId() string {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (c *Cmd) AggregateId() core.IIdentity {
 	return c.aggregateId
 }

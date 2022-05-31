@@ -6,13 +6,9 @@ import (
 )
 
 type Cmd struct {
-	ID        *core.Identity
-	traceId   string
-	Details   *model.Details
-	Settings  *model.Settings
-	Sensor    *model.Sensor
-	Fan       *model.Fan
-	Sprinkler *model.Sprinkler
+	ID      *core.Identity
+	traceId string
+	Fan     *model.Fan
 }
 
 func (c *Cmd) TraceId() string {
@@ -20,19 +16,11 @@ func (c *Cmd) TraceId() string {
 }
 
 func NewCmd(id *core.Identity, traceId string,
-	details *model.Details,
-	settings *model.Settings,
-	sensor *model.Sensor,
-	fan *model.Fan,
-	sprinkler *model.Sprinkler) *Cmd {
+	fan *model.Fan) *Cmd {
 	return &Cmd{
-		ID:        id,
-		Details:   details,
-		traceId:   traceId,
-		Settings:  settings,
-		Sensor:    sensor,
-		Fan:       fan,
-		Sprinkler: sprinkler,
+		ID:      id,
+		traceId: traceId,
+		Fan:     fan,
 	}
 }
 

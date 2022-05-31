@@ -9,7 +9,7 @@ import (
 	initialize_nats "github.com/rgfaber/go-vesca/greenhouse/features/initialize/infra/nats"
 	"github.com/rgfaber/go-vesca/greenhouse/features/initialize/topics"
 	"github.com/rgfaber/go-vesca/greenhouse/model"
-	"github.com/rgfaber/go-vesca/greenhouse/model/bogus"
+	bogus "github.com/rgfaber/go-vesca/greenhouse/model"
 	core_mocks "github.com/rgfaber/go-vesca/sdk/core/mocks"
 	"github.com/rgfaber/go-vesca/sdk/domain"
 	"github.com/rgfaber/go-vesca/sdk/features"
@@ -56,7 +56,7 @@ func TestFeature_RespondToInitializeCmd(t *testing.T) {
 		receivedEvent = e != nil
 	})
 	// And
-	fbk := aggregate.Attempt(cmd)
+	fbk, _ := aggregate.Attempt(cmd)
 	// then
 	assert.NotNil(t, fbk)
 	assert.True(t, receivedEvent)

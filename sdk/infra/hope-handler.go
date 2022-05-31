@@ -35,6 +35,6 @@ func NewHopeHandler(aggregate domain.IAggregate,
 func (h *HopeHandler) Handle(data []byte) []byte {
 	hp := h.Str2Hope(data)
 	cmd := h.Hope2Cmd(hp)
-	fbk := h.Aggregate.Attempt(cmd)
+	fbk, _ := h.Aggregate.Attempt(cmd)
 	return h.Fbk2String(fbk)
 }

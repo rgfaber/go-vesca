@@ -16,7 +16,7 @@ func (a *AggregateBase) LoadEvents(aggregateId core.IIdentity) []IEvt {
 	panic("implement me")
 }
 
-func (a *AggregateBase) Attempt(cmd ICmd) IFbk {
+func (a *AggregateBase) Attempt(cmd ICmd) (IFbk, error) {
 	//TODO implement me
 	panic("implement me")
 }
